@@ -3,3 +3,5 @@ client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/te
 db = client['proiectip']
 
 restaurantsCollection = db['restaurants']
+customersCollection = db['customers']
+reviewsCollection = db['reviews']

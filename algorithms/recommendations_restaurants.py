@@ -1,9 +1,3 @@
-from pymongo import MongoClient
-
-client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
-db = client['proiectip']
-
-
 def get_preffered_restaurants(customer, reviews):
     preferences = []
     for review in reviews:
@@ -55,10 +49,10 @@ def final(customer, reviews, customers, restaurants):
                 break
     return reccomendations_names
 
-restaurantsCollection = db['restaurants']
-restaurants = list(restaurantsCollection.find())
-customersCollection = db['customers']
-customers = list(customersCollection.find())
-reviewsCollection = db['reviews']
-reviews = list(reviewsCollection.find())
-print(final(customers[0], reviews, customers, restaurants))
+#
+# print()restaurantsCollection = db['restaurants']
+# restaurants = list(restaurantsCollection.find())
+# customersCollection = db['customers']
+# customers = list(customersCollection.find())
+# reviewsCollection = db['reviews']
+# reviews = list(reviewsCollection.find())

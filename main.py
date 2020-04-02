@@ -1,5 +1,4 @@
 import flask
-
 from controllers import SearchController, RecommendationController
 
 app = flask.Flask(__name__)
