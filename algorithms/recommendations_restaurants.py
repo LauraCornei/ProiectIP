@@ -1,4 +1,4 @@
-def get_preffered_restaurants(customer, reviews):
+def get_preferred_restaurants(customer, reviews):
     preferences = []
     for review in reviews:
         if review["customer_id"] == customer and review["score"] > 3.5:
@@ -9,7 +9,7 @@ def get_preffered_restaurants(customer, reviews):
 def get_cluster_top(customer_cluster, reviews):
     top = {}
     for customer in customer_cluster:
-        preferences = get_preffered_restaurants(customer, reviews)
+        preferences = get_preferred_restaurants(customer, reviews)
         for restaurant in preferences:
             if restaurant not in top:
                 top[restaurant] = 1
@@ -20,16 +20,16 @@ def get_cluster_top(customer_cluster, reviews):
     return top
 
 
-def get_reccomendations(customer, customer_clusters, tops):
-    reccomendations = []
+def get_recommendations(customer, customer_clusters, tops):
+    recommendations = []
     for customer_cluster in customer_clusters:
         if customer in customer_cluster:
             top = tops[customer_clusters.index(customer_cluster)]
-            reccomendations.append(list(top.keys())[-1])
-    return reccomendations
+            recommendations.append(list(top.keys())[-1])
+    return recommendations
 
 
-def final(customer, reviews, customers, restaurants):
+def final(customer, reviews, restaurants):
     tops = []
     customer_clusters = []
     for restaurant in restaurants:
@@ -40,19 +40,4 @@ def final(customer, reviews, customers, restaurants):
         customer_clusters.append(customer_cluster)
         top = get_cluster_top(customer_cluster, reviews)
         tops.append(top)
-    reccomendations = get_reccomendations(customer["_id"], customer_clusters, tops)
-    reccomendations_names = []
-    for rec in reccomendations:
-        for restaurant in restaurants:
-            if restaurant["_id"] == rec:
-                reccomendations_names.append(restaurant["name"])
-                break
-    return reccomendations_names
-
-#
-# print()restaurantsCollection = db['restaurants']
-# restaurants = list(restaurantsCollection.find())
-# customersCollection = db['customers']
-# customers = list(customersCollection.find())
-# reviewsCollection = db['reviews']
-# reviews = list(reviewsCollection.find())
+    return get_recommendations(customer["_id"], customer_clusters, tops)
