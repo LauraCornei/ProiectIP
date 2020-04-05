@@ -6,5 +6,6 @@ class Customers(object):
     @staticmethod
     def all():
         return list(customersCollection.find())
-    def byId(id):
-        return customersCollection.find_one({ "_id": ObjectId(id)})
+
+    def by_id(id):
+        return customersCollection.find_one({"_id": ObjectId(id)})
