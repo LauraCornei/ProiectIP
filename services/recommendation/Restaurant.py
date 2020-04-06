@@ -1,6 +1,6 @@
 from algorithms.recommendations_restaurants import final
 from models.Customers import Customers
-from models.Restaurant import Restaurant
+from models.Restaurants import Restaurant
 from models.Reviews import Reviews
 
 

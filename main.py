@@ -1,5 +1,6 @@
 import flask
-from controllers import SearchController, RecommendationController
+from controllers.RecommendationController import RecommendationController
+from controllers.SearchController import SearchController
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -11,8 +12,8 @@ def func(response):
     return response
 
 
-RecommendationController.RecommendationController.register(app, route_base='/recommendation')
-SearchController.SearchController.register(app, route_base='/search')
+RecommendationController.register(app, route_base='/recommendations')
+SearchController.register(app, route_base='/search')
 
 
 @app.route('/', methods=['GET'])

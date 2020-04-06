@@ -1,4 +1,4 @@
-from models.Restaurant import Restaurant
+from models.Restaurants import Restaurant
 
 def main():
     return Restaurant.all()
