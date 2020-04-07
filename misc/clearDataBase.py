@@ -12,3 +12,4 @@ def clear_all():
     clear_collection("restaurants")
     clear_collection("reviews")
     clear_collection("customers")
+    clear_collection("orders")
