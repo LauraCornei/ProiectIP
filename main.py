@@ -1,9 +1,11 @@
 import flask
+from flask_cors import CORS
 from controllers.RecommendationController import RecommendationController
 from controllers.SearchController import SearchController
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+CORS(app)
 
 
 @app.after_request
