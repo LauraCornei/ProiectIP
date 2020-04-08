@@ -2,11 +2,11 @@ from pymongo import MongoClient
 import json
 import clearDataBase
 import random as rnd
+import db
+import datetime
 
-RANDOM_SEED = 324324;
+RANDOM_SEED = 324324
 rnd.seed(RANDOM_SEED)
-client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
-db = client['proiectip']
 
 
 # shuffle first k elements of the array with any other elements
@@ -20,7 +20,7 @@ def fast_shuffle_first_k(my_array, k):
 
 def add_customers():
     clearDataBase.clear_collection("customers")
-    customers = db["customers"]
+    customers = db.customersCollection
 
     with open('resources/customers.json') as json_file:
         data = json.load(json_file)
@@ -30,22 +30,48 @@ def add_customers():
 
 def add_restaurants():
     clearDataBase.clear_collection("restaurants")
-    restaurants = db["restaurants"]
+    restaurants = db.restaurantsCollection
 
     with open('resources/restaurants.json') as json_file:
         data = json.load(json_file)
-        restaurants.insert_many(data)
+        restaurants_data = []
+        for restaurant_name in data:
+            restaurant = dict()
+            restaurant["name"] = restaurant_name["name"]
+            restaurant["image"] = "https://loremflickr.com/320/240"
+            restaurants_data.append(restaurant)
+
+        restaurants.insert_many(restaurants_data)
         print("Restaurants added: " + str(restaurants.count()))
+
+
+def add_foods():
+    clearDataBase.clear_collection("foods")
+    foods = db.foodsCollection
+    restaurants = list(db.restaurantsCollection.find())
+
+    with open('resources/foods.json') as json_file:
+        data = json.load(json_file)
+        foods_data = []
+        for food_name in data:
+            food = dict()
+            food["name"] = food_name["name"]
+            food["restaurant_id"] = restaurants[rnd.randint(0, len(restaurants) - 1)]["_id"]
+            food["serving_size"] = rnd.randint(100, 999)
+            foods_data.append(food)
+
+        foods.insert_many(foods_data)
+        print("Foods added: " + str(foods.count()))
 
 
 def add_reviews():
     clearDataBase.clear_collection("reviews")
     REVIEWS_PER_CUSTOMERS = 5
 
-    restaurants = list(db["restaurants"].find())
-    customers = list(db["customers"].find())
+    restaurants = list(db.restaurantsCollection.find())
+    customers = list(db.customersCollection.find())
     reviews_data = []
-    reviews = db["reviews"]
+    reviews = db.reviewsCollection
 
     restaurants_count = len(restaurants)
     restaurants_indices = list(range(restaurants_count))
@@ -65,14 +91,16 @@ def add_reviews():
     reviews.insert_many(reviews_data)
     print("Reviews added: " + str(reviews.count()))
 
+
 def add_orders():
     clearDataBase.clear_collection("orders")
     MAX_ORDERS_PER_CLIENT = 30
 
-    restaurants = list(db["restaurants"].find())
-    customers = list(db["customers"].find())
+    restaurants = list(db.restaurantsCollection.find())
+    customers = list(db.customersCollection.find())
+    foods = list(db.foodsCollection.find())
     orders_data = []
-    orders = db["orders"]
+    orders = db.ordersCollection
 
     restaurants_count = len(restaurants)
     for customer in customers:
@@ -82,12 +110,16 @@ def add_orders():
             order = dict()
             order["restaurant_id"] = restaurant["_id"]
             order["customer_id"] = customer["_id"]
+            order["food_id"] = foods[rnd.randint(0, len(foods) - 1)]["_id"]
             order["order_date"] = rnd.randint(1, 100)  # just for test
             orders_data.append(order)
+
     orders.insert_many(orders_data)
     print("Orders added: " + str(orders.count()))
 
+
 add_restaurants()
 add_customers()
+add_foods()
 add_reviews()
 add_orders()
