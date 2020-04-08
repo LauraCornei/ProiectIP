@@ -4,7 +4,7 @@ class TrieNode:
         self.children = [None] * 26
         self.score =None
         self.restaurant_id=None
-        self.isEndOfWord = False
+        self.end_of_word = False
 
 class Trie:
 
@@ -74,20 +74,3 @@ class Trie:
 
         return None
 
-'''def main():
-    keys = ["ana", "anul", "anual", "there"]
-
-    t = Trie()
-
-
-    t.insert(keys[0], 5, 5)
-    t.insert(keys[1], 2, 2)
-    t.insert(keys[2], 3, 3)
-    t.insert(keys[3], 4, 4)
-
-    print(t.special_search("anu"))
-
-
-
-if __name__ == '__main__':
-    main()'''

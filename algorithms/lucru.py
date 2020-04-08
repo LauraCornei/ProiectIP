@@ -29,10 +29,12 @@ def integrand(x):
     return (20/math.log(x+10))
 
 
-def calculate_score (review_score, nb_of_orders, latest_order, ):
-    first_integral= integrate.quad(integrand(nb_of_orders), 0, nb_of_orders)
-    word_score = (review_score/5+1.1) *first_integral *1/20+ 20 / math.log(latest_order+10)
+def calculate_score (review_score, nb_of_orders, latest_order):
+    first_integral = integrate.quad(integrand , 0, nb_of_orders)
+    #print(first_integral[0])
+    word_score = (review_score/5+1.1) *first_integral[0] *1/20+ 20 / math.log(latest_order+10)
     return word_score
+
 
 
 def get_restaurant_name(restaurants, restaurant_id):
@@ -65,12 +67,56 @@ def update_trie(t, restaurants , reviews, orders, customer_id):
     return
 
 
-def final(customer, reviews, restaurants, customer_id, restaurant_prefix):
+def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
 
+    '''restaurants=[
+        {
+            "name": "ana",
+            "restaurant_id": 1
+        },
+        {
+            "name": "anul",
+            "restaurant_id": 2
+        },
+        {
+            "name": "anual",
+            "restaurant_id": 3
+        }
+    ]
+    reviews=[
+        {
+            "restaurant_id":1,
+            "customer_id":1,
+            "score":3
+        },
+        {
+            "restaurant_id": 1,
+            "customer_id": 2,
+            "score": 5
+        } ,
+        {
+            "restaurant_id": 3,
+            "customer_id": 1,
+            "score": 4
+        }
+    ]
+    orders=[
+        {
+            "restaurant_id": 1,
+            "customer_id": 2,
+            "order_date":10
+        },
+        {
+            "restaurant_id": 2,
+            "customer_id": 1,
+            "order_date": 15
+        }
+    ]'''
     t = trie.Trie()
     update_trie(t, restaurants , reviews, orders,  customer_id)
     recommendations = []
-    restaurant_id=get_recommended_restaurant_from_trie(t, restaurant_prefix)
-    recommendations.append(restaurants, restaurant_id);
+    restaurant_id=get_recommended_restaurant_from_trie(t,  restaurant_prefix)
+    recommendations.append(get_restaurant_name(restaurants, restaurant_id));
+    print(recommendations)
     return recommendations
 
