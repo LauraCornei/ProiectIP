@@ -114,9 +114,13 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
     ]'''
     t = trie.Trie()
     update_trie(t, restaurants , reviews, orders,  customer_id)
-    recommendations = []
+   # recommendations = []
     restaurant_id=get_recommended_restaurant_from_trie(t,  restaurant_prefix)
-    recommendations.append(get_restaurant_name(restaurants, restaurant_id));
-    print(recommendations)
+   # recommendations.append(get_restaurant_name(restaurants, restaurant_id));
+   # print(recommendations)
+    #return recommendations
+    recommendations={
+        "name_recommended_restaurant": get_restaurant_name(restaurants, restaurant_id)
+    }
     return recommendations
 
