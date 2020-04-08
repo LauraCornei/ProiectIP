@@ -72,5 +72,5 @@ class Trie:
         if p != None:
             return self.get_max_from_subtree(p)
 
-        return None
+        return ""
 

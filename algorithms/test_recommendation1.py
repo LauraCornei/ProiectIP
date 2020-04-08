@@ -71,6 +71,8 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
 def get_recommended_restaurant_from_trie(t, restaurant_prefix):
     recommended_restaurant_id=t.special_search(restaurant_prefix)
     #print(recommended_restaurant_id)
+    if recommended_restaurant_id == False:
+        return False
     return recommended_restaurant_id["restaurant_id"]
 
 def update_trie(t, restaurants , reviews, orders, customer_id):
@@ -97,16 +99,23 @@ def final():#reviews, restaurants, orders, customer_id, restaurant_prefix):
     customerCollection = db['customers']
     customer = list(customerCollection.find())
 
+
     customer_id = customer[1]["_id"]
-    restaurant_prefix = "Ferry"
+    restaurant_prefix = "D"
+
+    print(type(customer_id))
 
     t = Trie()
     update_trie(t, restaurants , reviews, orders,  customer_id)
     restaurant_id=get_recommended_restaurant_from_trie(t,  restaurant_prefix)
-    #print( restaurant_id)
+
+    if restaurant_id == False:
+        value="Recommendation starting with given prefix not found"
+    else:
+        value=get_restaurant_name(restaurants, restaurant_id)
     recommendations={
-        "name_recommended_restaurant": get_restaurant_name(restaurants, restaurant_id)
+        "name_recommended_restaurant": value
     }
-    print( recommendations)
+    #print( recommendations)
 
 final()
