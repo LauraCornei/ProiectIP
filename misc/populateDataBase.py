@@ -47,18 +47,23 @@ def add_restaurants():
 
 def add_foods():
     clearDataBase.clear_collection("foods")
+    MIN_FOODS_PER_RESTAURANT = 3
+    MAX_FOODS_PRE_RESTAURANT = 20
     foods = db.foodsCollection
     restaurants = list(db.restaurantsCollection.find())
 
     with open('resources/foods.json') as json_file:
         data = json.load(json_file)
         foods_data = []
-        for food_name in data:
-            food = dict()
-            food["name"] = food_name["name"]
-            food["restaurant_id"] = restaurants[rnd.randint(0, len(restaurants) - 1)]["_id"]
-            food["serving_size"] = rnd.randint(100, 999)
-            foods_data.append(food)
+        for restaurant in restaurants:
+            food_count = rnd.randint(MIN_FOODS_PER_RESTAURANT, MAX_FOODS_PRE_RESTAURANT)
+
+            for i in range(0, food_count):
+                food = dict()
+                food["name"] = data[rnd.randint(0, len(data)-1)]["name"]
+                food["restaurant_id"] = restaurant["_id"]
+                food["serving_size"] = rnd.randint(100, 999)
+                foods_data.append(food)
 
         foods.insert_many(foods_data)
         print("Foods added: " + str(foods.count()))
@@ -95,6 +100,9 @@ def add_reviews():
 def add_orders():
     clearDataBase.clear_collection("orders")
     MAX_ORDERS_PER_CLIENT = 30
+    START_DATE = datetime.date(2005, 1, 1)
+    END_DATE = datetime.date.today()
+    delta_date = (END_DATE - START_DATE).days
 
     restaurants = list(db.restaurantsCollection.find())
     customers = list(db.customersCollection.find())
@@ -104,14 +112,20 @@ def add_orders():
 
     restaurants_count = len(restaurants)
     for customer in customers:
-        current_customer_orders_count = rnd.randint(0, MAX_ORDERS_PER_CLIENT)
+        current_customer_orders_count = rnd.randint(1, MAX_ORDERS_PER_CLIENT)
         for i in range(0, current_customer_orders_count):
             restaurant = restaurants[rnd.randint(0, restaurants_count - 1)]
             order = dict()
             order["restaurant_id"] = restaurant["_id"]
             order["customer_id"] = customer["_id"]
             order["food_id"] = foods[rnd.randint(0, len(foods) - 1)]["_id"]
-            order["order_date"] = rnd.randint(1, 100)  # just for test
+
+            random_days_number = rnd.randrange(delta_date)
+            order["order_date"] = str(START_DATE + datetime.timedelta(days=random_days_number))
+            # print(START_DATE + datetime.timedelta(days=random_days_number))
+
+            # order["order_date"] = rnd.randint(1, 100)  # just for test
+
             orders_data.append(order)
 
     orders.insert_many(orders_data)
@@ -123,3 +137,5 @@ add_customers()
 add_foods()
 add_reviews()
 add_orders()
+
+

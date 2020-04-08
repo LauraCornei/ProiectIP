@@ -1,6 +1,7 @@
 import math
 from algorithms.trie import Trie
 import scipy.integrate as integrate
+import datetime
 
 def get_nb_of_orders(orders, customer_id, restaurant_id):
     nb_of_orders =0
@@ -18,10 +19,12 @@ def get_review_score(reviews, customer_id, restaurant_id):
 
 def get_latest_order(orders, customer_id, restaurant_id):
     latest_order= math.inf
+    current_date= datetime.date.today
+
     for order in orders:
         if customer_id == order["customer_id"] and restaurant_id == order["restaurant_id"]:
-            if(latest_order> order["order_date"]):
-                latest_order=order["order_date"]
+            if(latest_order> (current_date-order["order_date"]).days):
+                latest_order=(current_date-order["order_date"]).days
     return latest_order
 
 
@@ -40,7 +43,7 @@ def calculate_score (review_score, nb_of_orders, latest_order):
 def get_restaurant_name(restaurants, restaurant_id):
 
     for restaurant in restaurants:
-        if restaurant_id == restaurant["restaurant_id"]:
+        if restaurant_id == restaurant["_id"]:
             return restaurant["name"]
 
 
@@ -68,51 +71,9 @@ def update_trie(t, restaurants , reviews, orders, customer_id):
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
-
-    '''restaurants=[
-        {
-            "name": "ana",
-            "restaurant_id": 1
-        },
-        {
-            "name": "anul",
-            "restaurant_id": 2
-        },
-        {
-            "name": "anual",
-            "restaurant_id": 3
-        }
-    ]
-    reviews=[
-        {
-            "restaurant_id":1,
-            "customer_id":1,
-            "score":3
-        },
-        {
-            "restaurant_id": 1,
-            "customer_id": 2,
-            "score": 5
-        } ,
-        {
-            "restaurant_id": 3,
-            "customer_id": 1,
-            "score": 4
-        }
-    ]
-    orders=[
-        {
-            "restaurant_id": 1,
-            "customer_id": 2,
-            "order_date":10
-        },
-        {
-            "restaurant_id": 2,
-            "customer_id": 1,
-            "order_date": 15
-        }
-    ]'''
-    t = trie.Trie()
+    print(customer_id)
+    print(restaurant_prefix)
+    t = Trie()
     update_trie(t, restaurants , reviews, orders,  customer_id)
    # recommendations = []
     restaurant_id=get_recommended_restaurant_from_trie(t,  restaurant_prefix)
@@ -122,5 +83,6 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
     recommendations={
         "name_recommended_restaurant": get_restaurant_name(restaurants, restaurant_id)
     }
+    print('aici')
     return recommendations
 
