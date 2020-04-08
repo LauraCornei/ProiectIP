@@ -1,5 +1,5 @@
 import math
-import trie
+from algorithms.trie import Trie
 import scipy.integrate as integrate
 
 def get_nb_of_orders(orders, customer_id, restaurant_id):
