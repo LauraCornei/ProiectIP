@@ -1,7 +1,7 @@
 
 class TrieNode:
     def __init__(self):
-        self.children = [None] * 26
+        self.children = [None] * 127
         self.score =None
         self.restaurant_id=None
         self.end_of_word = False
@@ -15,7 +15,7 @@ class Trie:
         return TrieNode()
 
     def to_index(self, ch):
-        return ord(ch) - ord('a')
+        return ord(ch) #- ord('a')
 
     def insert(self, key, score, restaurant_id):
         p = self.root
