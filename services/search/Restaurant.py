@@ -7,5 +7,6 @@ from models.Reviews import Reviews
 
 def main(customer_id, restaurant_prefix):
     restaurants_data=final(Reviews.all(), Restaurant.all(), Orders.all(), customer_id, restaurant_prefix)
-
+    print('data')
+    print(restaurants_data)
     return restaurants_data

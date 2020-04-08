@@ -50,7 +50,7 @@ class Trie:
             "score": p.score,
             "restaurant_id": p.restaurant_id
         })
-        for index in range(0 , 25):
+        for index in range(0 , 127):
             if p.children[index]:
                 child_answer=self.get_max_from_subtree(p.children[index])
                 child_score= child_answer["score"]
@@ -70,7 +70,7 @@ class Trie:
             p = p.children[index]
 
         if p != None:
-            return self.get_max_from_subtree(p)["restaurant_id"]
+            return self.get_max_from_subtree(p)
 
         return None
 

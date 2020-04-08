@@ -81,8 +81,9 @@ def update_trie(t, restaurants , reviews, orders, customer_id):
    return
 
 
-def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
-
+def final():#reviews, restaurants, orders, customer_id, restaurant_prefix):
+    #print(customer_id)
+    #print(restaurant_prefix)
     client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
     db = client['proiectip']
 
@@ -107,7 +108,5 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
         "name_recommended_restaurant": get_restaurant_name(restaurants, restaurant_id)
     }
     print( recommendations)
-    return recommendations
 
-
-
+final()
