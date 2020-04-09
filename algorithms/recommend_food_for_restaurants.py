@@ -28,10 +28,10 @@ def get_customer_other_foods(customer_id, orders, foods, restaurant_menu):
         if order['customer_id'] == customer_id:
             food = get_food_by_id(order['food_id'], foods)
             if food['name'] not in restaurant_menu:
-                if food['name'] not in customer_other_foods:
-                    customer_other_foods[food['name']] = 1
+                if food['_id'] not in customer_other_foods:
+                    customer_other_foods[food['_id']] = 1
                 else:
-                    customer_other_foods[food['name']] += 1
+                    customer_other_foods[food['_id']] += 1
     return customer_other_foods
 
 
@@ -60,7 +60,7 @@ def final(restaurant, orders, foods):
                 recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[customer_id]
 
     result = {k: v for k, v in sorted(recommendations.items(), key=lambda item: item[1], reverse=True)}
-    return result.keys()
+    return list(result.keys())[:10]
     # return recommendations
 
 

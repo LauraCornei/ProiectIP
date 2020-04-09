@@ -12,6 +12,6 @@ class RecommendationController(FlaskView):
         return Food.main()
        
     @route('food/<restaurant_id>')
-    def restaurant(self, restaurant_id):
-        return dumps(FoodForRestaurant.main(customer_id))
+    def food_for_restaurant(self, restaurant_id):
+        return dumps(FoodForRestaurant.main(restaurant_id))
 

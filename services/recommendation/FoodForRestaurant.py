@@ -2,8 +2,9 @@ from algorithms.recommend_food_for_restaurants import final
 from models.Restaurants import Restaurant
 from models.Reviews import Reviews
 from models.Foods import Foods
+from models.Orders import Orders
 
 def main(restaurant_id):
-    restaurants_id = final(Restaurants.by_id(restaurant_id), Orders.all(), Foods.all())
-    restaurants_data = map(lambda e: Restaurant.by_id(e), restaurants_id)
-    return restaurants_data
+    foods_id = final(Restaurant.by_id(restaurant_id), Orders.all(), Foods.all())
+    foods_data = map(lambda e: Foods.by_id(e), foods_id)
+    return foods_data
