@@ -1,0 +1,97 @@
+:root{
+    --color-palette-black: rgba(43, 38, 51, 1);
+    --color-palette-green: rgba(56, 97, 80, 1);
+    --color-palette-mocasin: rgba(247, 231, 217, 1);
+    --color-palette-orange: rgba(255, 142, 114, 1);
+    --color-palette-red: rgba(167, 29, 49, 1);
+
+    --color-palette-light-black: rgba(69, 61, 82, 1);
+    --color-palette-light-green: rgba(69, 120, 99, 1);
+    --color-palette-light-mocasin: rgba(241, 231, 223, 1);
+    --color-palette-light-orange: rgba(255, 177, 158, 1);
+    --color-palette-light-red: rgba(218, 47, 73, 1);    
+
+    --carousel-controllers-color: var(--color-palette-green);
+    --carousel-controllers-color-hover: var(--color-palette-light-green);
+    --card-background-color: var(--color-palette-black);
+    --card-button-color: var(--color-palette-red);
+    --card-button-color-hover: var(--color-palette-light-red);
+}
+
+.carousel-style {
+    width: 100%;
+    text-shadow: 1px 1px 2px #333;
+}
+
+.carousel-control-next, .carousel-control-prev{
+    width: 4%;
+    opacity: 0.8;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    width: 30px;
+    height: 30px;
+    background-color: var(--carousel-controllers-color);
+    border-radius: 50%;
+    border: 5px solid var(--carousel-controllers-color);
+}
+
+.carousel-control-prev-icon:hover, .carousel-control-next-icon:hover{
+    background-color: var(--carousel-controllers-color-hover);
+    border-radius: 50%;
+    border: 5px solid var(--carousel-controllers-color-hover);
+}
+
+.card-style{
+    width: 28%;
+    display: inline-block;
+    margin-left: 4.0%;
+}
+
+.card{
+    text-align: center;
+    background-color: var(--card-background-color);
+}
+
+.btn-secondary{
+    background-color: var(--card-button-color);
+    border: var(--card-button-color);
+    color: white;
+}
+
+.btn-secondary:hover{
+    background-color: var(--card-button-color-hover);
+}
+
+@media screen and (min-width: 1500px) {
+    .card-style {
+        width: 20%;
+        margin-left: 4.0%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .card-style {
+        width: 43%;
+        margin-left: 4.5% ;
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .card-style {
+        width: 87%;
+        margin-left: 6%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        display: none;
+    }
+
+}
+
