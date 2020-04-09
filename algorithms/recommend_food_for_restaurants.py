@@ -28,10 +28,10 @@ def get_customer_other_foods(customer_id, orders, foods, restaurant_menu):
         if order['customer_id'] == customer_id:
             food = get_food_by_id(order['food_id'], foods)
             if food['name'] not in restaurant_menu:
-                if food['_id'] not in customer_other_foods:
-                    customer_other_foods[food['_id']] = 1
+                if food['name'] not in customer_other_foods:
+                    customer_other_foods[food['name']] = 1
                 else:
-                    customer_other_foods[food['_id']] += 1
+                    customer_other_foods[food['name']] += 1
     return customer_other_foods
 
 

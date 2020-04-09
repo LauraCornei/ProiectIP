@@ -5,6 +5,6 @@ from models.Foods import Foods
 from models.Orders import Orders
 
 def main(restaurant_id):
-    foods_id = final(Restaurant.by_id(restaurant_id), Orders.all(), Foods.all())
-    foods_data = map(lambda e: Foods.by_id(e), foods_id)
-    return foods_data
+    foods_names = final(Restaurant.by_id(restaurant_id), Orders.all(), Foods.all())
+    #foods_data = map(lambda e: Foods.by_id(e), foods_id)
+    return foods_names
