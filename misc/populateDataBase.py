@@ -18,13 +18,43 @@ def fast_shuffle_first_k(my_array, k):
         my_array[j] = aux
 
 
+def add_ingredients():
+    clearDataBase.clear_collection("ingredients")
+    ingredients = db.ingredientsCollection
+
+    with open('resources/ingredients.json') as json_file:
+        data = json.load(json_file)
+        ingredients.insert_many(data)
+        print("Ingredients added: " + str(ingredients.count()))
+
+
 def add_customers():
     clearDataBase.clear_collection("customers")
     customers = db.customersCollection
+    MIN_ALLERGIES_PER_CUSTOMER = 0
+    MAX_ALLERGIES_PER_CUSTOMER = 3
+    ingredients = list(db.ingredientsCollection.find())
+
+    ingredients_indices = list(range(len(ingredients)))
 
     with open('resources/customers.json') as json_file:
         data = json.load(json_file)
-        customers.insert_many(data)
+        customers_data = []
+        for customer_name in data:
+            customer = dict()
+            customer["first_name"] = customer_name["first_name"]
+            customer["last_name"] = customer_name["last_name"]
+            allergies_number = rnd.randint(MIN_ALLERGIES_PER_CUSTOMER, MAX_ALLERGIES_PER_CUSTOMER)
+            fast_shuffle_first_k(ingredients_indices, allergies_number)
+            allergies = []
+            for i in range(allergies_number):
+                allergies.append(ingredients[ingredients_indices[i]]["_id"])
+
+            customer["allergies"] = allergies
+
+            customers_data.append(customer)
+
+        customers.insert_many(customers_data)
         print("Customers added: " + str(customers.count()))
 
 
@@ -48,21 +78,34 @@ def add_restaurants():
 def add_foods():
     clearDataBase.clear_collection("foods")
     MIN_FOODS_PER_RESTAURANT = 3
-    MAX_FOODS_PRE_RESTAURANT = 20
+    MAX_FOODS_PER_RESTAURANT = 20
+    MIN_INGREDIENTS_PER_FOOD = 3
+    MAX_INGREDIENTS_PER_FOOD = 10
     foods = db.foodsCollection
     restaurants = list(db.restaurantsCollection.find())
+    ingredients = list(db.ingredientsCollection.find())
 
+    ingredients_indices = list(range(len(ingredients)))
     with open('resources/foods.json') as json_file:
         data = json.load(json_file)
         foods_data = []
         for restaurant in restaurants:
-            food_count = rnd.randint(MIN_FOODS_PER_RESTAURANT, MAX_FOODS_PRE_RESTAURANT)
+            food_count = rnd.randint(MIN_FOODS_PER_RESTAURANT, MAX_FOODS_PER_RESTAURANT)
 
             for i in range(0, food_count):
                 food = dict()
-                food["name"] = data[rnd.randint(0, len(data)-1)]["name"]
+                food["name"] = data[rnd.randint(0, len(data) - 1)]["name"]
                 food["restaurant_id"] = restaurant["_id"]
                 food["serving_size"] = rnd.randint(100, 999)
+                food["price"] = rnd.randint(10, 100)
+
+                ingredients_number = rnd.randint(MIN_INGREDIENTS_PER_FOOD, MAX_INGREDIENTS_PER_FOOD)
+                fast_shuffle_first_k(ingredients_indices, ingredients_number)
+                food_ingredients = []
+                for i in range(ingredients_number):
+                    food_ingredients.append(ingredients[ingredients_indices[i]]["_id"])
+
+                food["ingredients"] = food_ingredients
                 foods_data.append(food)
 
         foods.insert_many(foods_data)
@@ -98,11 +141,9 @@ def add_reviews():
 
 
 def add_orders():
+    from generateRandomDatetime import gen_datetime
     clearDataBase.clear_collection("orders")
     MAX_ORDERS_PER_CLIENT = 30
-    START_DATE = datetime.date(2005, 1, 1)
-    END_DATE = datetime.date.today()
-    delta_date = (END_DATE - START_DATE).days
 
     restaurants = list(db.restaurantsCollection.find())
     customers = list(db.customersCollection.find())
@@ -119,12 +160,7 @@ def add_orders():
             order["restaurant_id"] = restaurant["_id"]
             order["customer_id"] = customer["_id"]
             order["food_id"] = foods[rnd.randint(0, len(foods) - 1)]["_id"]
-
-            random_days_number = rnd.randrange(delta_date)
-            order["order_date"] = str(START_DATE + datetime.timedelta(days=random_days_number))
-            # print(START_DATE + datetime.timedelta(days=random_days_number))
-
-            # order["order_date"] = rnd.randint(1, 100)  # just for test
+            order["order_date"] = str(gen_datetime())
 
             orders_data.append(order)
 
@@ -134,8 +170,7 @@ def add_orders():
 
 add_restaurants()
 add_customers()
+add_ingredients()
 add_foods()
 add_reviews()
 add_orders()
-
-
