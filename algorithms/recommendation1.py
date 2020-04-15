@@ -1,9 +1,12 @@
 import math
+
+from bson import ObjectId
+
 from algorithms.trie import Trie
 import scipy.integrate as integrate
 import datetime
 from pymongo import MongoClient
-
+from bson import ObjectId
 
 def get_nb_of_orders(orders, customer_id, restaurant_id):
     nb_of_orders =0
@@ -21,7 +24,7 @@ def get_review_score(reviews, customer_id, restaurant_id):
 
 def get_latest_order(orders, customer_id, restaurant_id):
     latest_order=math.inf
-    current_date=   datetime.date.today()
+    current_date=datetime.date.today()
     for order in orders:
 
         order_date= datetime.datetime.strptime(order["order_date"], '%Y-%m-%d').date()
@@ -60,7 +63,6 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
     name = get_restaurant_name(restaurants, restaurant_id)
 
     if name:
-       #print(name)
        t.insert(name, word_score, restaurant_id)
     return
 
@@ -83,20 +85,9 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
     client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
     db = client['proiectip']
 
+    customer_id = ObjectId(customer_id)
 
-    restaurantsCollection = db['restaurants']
-    restaurants = list(restaurantsCollection.find())
-    ordersCollection = db['orders']
-    orders = list(ordersCollection.find())
-    reviewsCollection = db['reviews']
-    reviews = list(reviewsCollection.find())
-    customerCollection = db['customers']
-    customer = list(customerCollection.find())
 
-    print(customer_id)
-    customer_id = customer[1]["_id"]
-    print(customer_id)
-    #restaurant_prefix = "Ferry"
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Dietrich-Ho
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Gut
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Ferry
