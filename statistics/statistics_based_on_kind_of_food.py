@@ -40,19 +40,17 @@ def create_barh_plot(food_label, quantity):
     plt.show()
 
 
-def get_statistics_per_restaurant(restaurant_id):
-    from db import ordersCollection
-    from db import foodsCollection
+def get_statistics_per_restaurant(restaurant_id, foods, orders):
 
     food_dict = {}
     tick_label = []
     height = []
 
-    for food in list(foodsCollection.find()):
+    for food in foods:
         if food["restaurant_id"] == restaurant_id:
             food_dict[food["_id"]] = {"name": food["name"], "quantity": 0}
 
-    for order in list(ordersCollection.find()):
+    for order in orders:
         if order["restaurant_id"] == restaurant_id:
             food_dict[order["food_id"]]["quantity"] += 1
 
