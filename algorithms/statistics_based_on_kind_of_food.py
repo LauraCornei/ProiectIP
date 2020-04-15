@@ -1,9 +1,10 @@
-
 def create_barh_plot(food_label, quantity):
     import os
     import numpy as np
     import matplotlib.pyplot as plt
 
+    print(food_label)
+    print(quantity)
     x = food_label
     y = quantity
     color_1 = "#a71d31"  # red
@@ -34,10 +35,7 @@ def create_barh_plot(food_label, quantity):
     ax.grid(which='major', axis='x', linestyle='dashed')
     ax.set_axisbelow(True)
     plt.box(False)
-
-    plt.savefig("test.svg", format="svg")
-
-    plt.show()
+    return fig
 
 
 def get_statistics_per_restaurant(restaurant_id, foods, orders):
@@ -45,7 +43,7 @@ def get_statistics_per_restaurant(restaurant_id, foods, orders):
     food_dict = {}
     tick_label = []
     height = []
-
+    restaurant_id = restaurant_id["_id"]
     for food in foods:
         if food["restaurant_id"] == restaurant_id:
             food_dict[food["_id"]] = {"name": food["name"], "quantity": 0}
@@ -58,9 +56,7 @@ def get_statistics_per_restaurant(restaurant_id, foods, orders):
         tick_label.append(food_dict[food]["name"])
         height.append(food_dict[food]["quantity"])
 
-    create_barh_plot(tick_label, height)
+    return create_barh_plot(tick_label, height)
 
 
-from db import restaurantsCollection
 
-get_statistics_per_restaurant(restaurantsCollection.find()[53]["_id"])

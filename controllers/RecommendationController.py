@@ -1,4 +1,4 @@
-from services.recommendation import Food, Restaurant, FoodForRestaurant, RestaurantByFood, Stat10
+from services.recommendation import Food, Restaurant, FoodForRestaurant, RestaurantByFood, Stat10, Statistics12
 from flask_classful import FlaskView, route
 from hooks.json_response import output_json
 from flask import Response
@@ -25,3 +25,7 @@ class RecommendationController(FlaskView):
     @route('stats/customers_per_hours')
     def plot_svg(self):
         return Response(Stat10.main(), mimetype="image/svg+xml")
+
+    @route('stats/food_per_restaurant/<restaurant_id>')
+    def food_per_restaurant(self, restaurant_id):
+        return Response(Statistics12.main(restaurant_id), mimetype="image/svg+xml")

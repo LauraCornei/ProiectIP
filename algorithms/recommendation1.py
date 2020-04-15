@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 
 def get_nb_of_orders(orders, customer_id, restaurant_id):
-    nb_of_orders =0
+    nb_of_orders = 0
     for order in orders:
         if customer_id == order["customer_id"] and restaurant_id == order["restaurant_id"]:
             nb_of_orders=nb_of_orders +1
