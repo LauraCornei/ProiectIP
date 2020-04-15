@@ -1,7 +1,7 @@
 from models.Customers import Customers
 from models.Reviews import Reviews
 from models.Foods import Foods
-from models.Restaurants import Restaurant
+from models.Restaurants import Restaurants
 
 
 def get_fav_res(customer, reviews):

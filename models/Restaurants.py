@@ -3,7 +3,7 @@ from db import restaurantsCollection
 from bson import ObjectId
 
 
-class Restaurant(object):
+class Restaurants(object):
     @staticmethod
     def all():
         return list(restaurantsCollection.find())
