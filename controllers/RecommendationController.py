@@ -11,13 +11,16 @@ class RecommendationController(FlaskView):
     def restaurant(self, customer_id):
         return Restaurant.main(customer_id)
 
-    def food(self):
-        return Food.main()
-       
+    @route('asd/<restaurant_id>/<customer_id>')
+    def food(self, restaurant_id, customer_id):
+        return Food.recommendForRestaurant(restaurant_id, customer_id)
+
+    # recomanda mancaruri pt un restaurant
     @route('food/<restaurant_id>')
     def food_for_restaurant(self, restaurant_id):
         return FoodForRestaurant.main(restaurant_id)
 
+    # ??? todo add comment
     @route('restaurant_by_food/<customer_id>')
     def restaurant_by_food(self, customer_id):
         return RestaurantByFood.main(customer_id)
