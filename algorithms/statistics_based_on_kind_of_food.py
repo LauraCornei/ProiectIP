@@ -1,10 +1,11 @@
+
+# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
+
+
 def create_barh_plot(food_label, quantity):
-    import os
     import numpy as np
     import matplotlib.pyplot as plt
 
-    print(food_label)
-    print(quantity)
     x = food_label
     y = quantity
     color_1 = "#a71d31"  # red
@@ -38,23 +39,37 @@ def create_barh_plot(food_label, quantity):
     return fig
 
 
-def get_statistics_per_restaurant(restaurant_id, foods, orders):
-
+def get_statistics_per_restaurant(restaurant_id, foods, orders, sort_order, show_count):
+    food_name_by_id = {}
     food_dict = {}
     tick_label = []
     height = []
-    restaurant_id = restaurant_id["_id"]
     for food in foods:
-        if food["restaurant_id"] == restaurant_id:
-            food_dict[food["_id"]] = {"name": food["name"], "quantity": 0}
+        if restaurant_id == 0 or food["restaurant_id"] == restaurant_id:
+            food_dict[food["name"]] = 0
+            food_name_by_id[food["_id"]] = food["name"]
 
     for order in orders:
-        if order["restaurant_id"] == restaurant_id:
-            food_dict[order["food_id"]]["quantity"] += 1
+        if restaurant_id == 0 or order["restaurant_id"] == restaurant_id:
+            food_dict[food_name_by_id[order["food_id"]]] += 1
 
-    for food in food_dict:
-        tick_label.append(food_dict[food]["name"])
-        height.append(food_dict[food]["quantity"])
+    sorted_food_dict = {}
+    if sort_order == "asc":
+        sorted_food_dict = sorted(food_dict.items(), key=lambda kv: kv[1])
+    elif sort_order == "desc":
+        sorted_food_dict = sorted(food_dict.items(), key=lambda kv: kv[1], reverse=True)
+
+    if show_count == -1:
+        print_count = 20
+    else:
+        print_count = show_count
+
+    for food in sorted_food_dict:
+        tick_label.append(food[0])
+        height.append(food[1])
+        print_count -= 1
+        if print_count == 0:
+            break
 
     return create_barh_plot(tick_label, height)
 

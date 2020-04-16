@@ -29,6 +29,9 @@ class RecommendationController(FlaskView):
     def plot_svg(self):
         return Response(Stat10.main(), mimetype="image/svg+xml")
 
-    @route('stats/food_per_restaurant/<restaurant_id>')
-    def food_per_restaurant(self, restaurant_id):
-        return Response(Statistics12.main(restaurant_id), mimetype="image/svg+xml")
+    # order = "asc"/"desc"
+    # if all_restaurants is true, restaurant_id value doesn't matter
+    # if show_count == -1 then all results will be printed (but maximum 20)
+    @route('stats/food_per_restaurant/<restaurant_id>/<order>/<all_restaurants>/<show_count>')
+    def food_per_restaurant(self, restaurant_id, order, all_restaurants, show_count):
+        return Response(Statistics12.main(restaurant_id, order, all_restaurants, show_count), mimetype="image/svg+xml")

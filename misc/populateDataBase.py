@@ -3,7 +3,6 @@ import json
 import clearDataBase
 import random as rnd
 import db
-import datetime
 
 RANDOM_SEED = 324324
 rnd.seed(RANDOM_SEED)
@@ -140,6 +139,15 @@ def add_reviews():
     print("Reviews added: " + str(reviews.count()))
 
 
+def get_food_per_restaurant(foods):
+    food_per_restaurant = dict()
+    for food in foods:
+        if food["restaurant_id"] not in food_per_restaurant:
+            food_per_restaurant[food["restaurant_id"]] = []
+        food_per_restaurant[food["restaurant_id"]].append(food)
+    return food_per_restaurant
+
+
 def add_orders():
     from generateRandomDatetime import gen_datetime
     clearDataBase.clear_collection("orders")
@@ -152,6 +160,8 @@ def add_orders():
     orders = db.ordersCollection
 
     restaurants_count = len(restaurants)
+    super_restaurant = restaurants[0]
+    foods_per_restaurant = get_food_per_restaurant(foods)
     for customer in customers:
         current_customer_orders_count = rnd.randint(1, MAX_ORDERS_PER_CLIENT)
         for i in range(0, current_customer_orders_count):
@@ -159,11 +169,27 @@ def add_orders():
             order = dict()
             order["restaurant_id"] = restaurant["_id"]
             order["customer_id"] = customer["_id"]
-            order["food_id"] = foods[rnd.randint(0, len(foods) - 1)]["_id"]
+
+            specific_food = foods_per_restaurant[restaurant["_id"]]
+            order["food_id"] = specific_food[rnd.randint(0, len(specific_food) - 1)]["_id"]
             order["order_date"] = str(gen_datetime())
 
             orders_data.append(order)
 
+        # just for test
+        for i in range(0, 40):
+            restaurant = super_restaurant
+            order = dict()
+            order["restaurant_id"] = restaurant["_id"]
+            order["customer_id"] = customer["_id"]
+
+            specific_food = foods_per_restaurant[restaurant["_id"]]
+            order["food_id"] = specific_food[rnd.randint(0, len(specific_food) - 1)]["_id"]
+            order["order_date"] = str(gen_datetime())
+
+            orders_data.append(order)
+
+    print("Restaurant id: " + str(super_restaurant["_id"]))
     orders.insert_many(orders_data)
     print("Orders added: " + str(orders.count()))
 
