@@ -1,7 +1,9 @@
-from services.recommendation import Food, Restaurant, FoodForRestaurant, RestaurantByFood, Stat10, Statistics12
+from services.recommendation import Food, Restaurant, FoodForRestaurant, RestaurantByFood, Stat10
+from services.stats import food_per_restaurant, food_all_restaurants
 from flask_classful import FlaskView, route
 from hooks.json_response import output_json
 from flask import Response
+from flask import request
 
 
 class RecommendationController(FlaskView):
@@ -29,9 +31,29 @@ class RecommendationController(FlaskView):
     def plot_svg(self):
         return Response(Stat10.main(), mimetype="image/svg+xml")
 
+    # parameters:
     # order = "asc"/"desc"
-    # if all_restaurants is true, restaurant_id value doesn't matter
-    # if show_count == -1 then all results will be printed (but maximum 20)
-    @route('stats/food_per_restaurant/<restaurant_id>/<order>/<all_restaurants>/<show_count>')
-    def food_per_restaurant(self, restaurant_id, order, all_restaurants, show_count):
-        return Response(Statistics12.main(restaurant_id, order, all_restaurants, show_count), mimetype="image/svg+xml")
+    # show_count = number of shows
+
+    @route('stats/food_per_restaurant/<restaurant_id>')
+    def food_per_restaurant(self, restaurant_id):
+        show_count = -1
+        if 'show_count' in request.args:
+            show_count = request.args.get('show_count')
+        order = "asc"
+        if 'order' in request.args:
+            order = request.args.get('order')
+        return Response(food_per_restaurant.main(restaurant_id, order, show_count), mimetype="image/svg+xml")
+
+    # parameters:
+    # order = "asc"/"desc"
+    # show_count = number of shows
+    @route('stats/food_all_restaurants')
+    def food_all_restaurants(self):
+        show_count = -1
+        if 'show_count' in request.args:
+            show_count = request.args.get('show_count')
+        order = "asc"
+        if 'order' in request.args:
+            order = request.args.get('order')
+        return Response(food_all_restaurants.main(order, show_count), mimetype="image/svg+xml")
