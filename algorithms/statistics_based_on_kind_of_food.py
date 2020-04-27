@@ -12,6 +12,7 @@ def create_barh_plot(food_label, quantity):
     color_2 = "#386150"  # green
     color_3 = "#2b2633"  # black
     color_4 = "#453d52"  # light-black
+    color_5 = "#dbdbdb"
 
     fig, ax = plt.subplots(figsize=(14, 8))
     plt.title('Food per restaurant statistic', fontsize=18, fontweight='bold')
@@ -23,22 +24,12 @@ def create_barh_plot(food_label, quantity):
     ax.set_yticks(ind + width / 2)
     ax.set_yticklabels(x, minor=False)
 
-    min_value = 1e9
-    max_value = 0
-    PRAG = 6000
-    for i,v in enumerate(y):
-        max_value = max(v, max_value)
-        min_value = min(v, min_value)
-
     for i, v in enumerate(y):
-        if max_value - min_value < PRAG: 
-            ax.text(v + 0.5, i - 0.08, str(v), color='black', fontweight='bold')
-        else:
-            ax.text(v + 500, i - 0.08, str(v), color='black', fontweight='bold')
-
+        ax.text(max(v + 0.5, 1000), i - 0.08, str(v), color='black', fontweight='bold')
+        
 
     for i, v in enumerate(x):
-        ax.text(0.2, i - 0.08, v, color='white', fontweight='bold')
+        ax.text(0.2, i - 0.08, v, color=color_5, fontweight='bold')
 
     ax.xaxis.set_ticks_position('bottom')
     ax.tick_params(axis='x', colors=color_4, labelsize=8)
