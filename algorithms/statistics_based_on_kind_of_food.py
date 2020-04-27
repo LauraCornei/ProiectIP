@@ -1,8 +1,9 @@
 
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
+# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce8b/asc/false/-1
 
 
-def create_barh_plot(food_label, quantity):
+def create_bar_plot(food_label, quantity):
     import numpy as np
     import matplotlib.pyplot as plt
 
@@ -29,7 +30,6 @@ def create_barh_plot(food_label, quantity):
         vmax = max(vmax, v)
     for i, v in enumerate(y):
         ax.text(max(v + 0.5, vmax / 5), i - 0.08, str(v), color='black', fontweight='bold')
-
 
     for i, v in enumerate(x):
         ax.text(0.2, i - 0.08, v, color= color_5, fontweight='bold')
@@ -73,10 +73,10 @@ def get_statistics_per_restaurant(restaurant_id, foods, orders, sort_order, show
         tick_label.append(food[0])
         height.append(food[1])
         print_count -= 1
-        if print_count == 0:
+        if print_count <= 0:
             break
 
-    return create_barh_plot(tick_label, height)
+    return create_bar_plot(tick_label, height)
 
 
 
