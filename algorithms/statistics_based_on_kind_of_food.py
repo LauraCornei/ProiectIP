@@ -23,8 +23,19 @@ def create_barh_plot(food_label, quantity):
     ax.set_yticks(ind + width / 2)
     ax.set_yticklabels(x, minor=False)
 
+    min_value = 1e9
+    max_value = 0
+    PRAG = 6000
+    for i,v in enumerate(y):
+        max_value = max(v, max_value)
+        min_value = min(v, min_value)
+
     for i, v in enumerate(y):
-        ax.text(v + 0.02, i - 0.08, str(v), color='black', fontweight='bold')
+        if max_value - min_value < PRAG: 
+            ax.text(v + 0.5, i - 0.08, str(v), color='black', fontweight='bold')
+        else:
+            ax.text(v + 500, i - 0.08, str(v), color='black', fontweight='bold')
+
 
     for i, v in enumerate(x):
         ax.text(0.2, i - 0.08, v, color='white', fontweight='bold')
