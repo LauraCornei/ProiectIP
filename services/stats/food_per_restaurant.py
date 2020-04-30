@@ -9,8 +9,8 @@ from algorithms.statistics_based_on_kind_of_food import get_statistics_per_resta
 
 
 def main(restaurant, order, show_count):
-    restaurant_id = Restaurants.by_id(restaurant)["_id"]
-    fig = get_statistics_per_restaurant(restaurant_id, Foods.all(), Orders.all(), order, int(show_count))
+    restaurant_id = restaurant
+    fig = get_statistics_per_restaurant(restaurant_id, Orders.all(), order, int(show_count))
     output = io.BytesIO()
     FigureCanvasSVG(fig).print_svg(output)
     return output.getvalue()
