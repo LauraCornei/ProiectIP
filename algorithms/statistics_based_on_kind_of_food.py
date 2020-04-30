@@ -1,6 +1,6 @@
 
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
-# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce8b/asc/false/-1
+# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce8b?asc/false/-1
 
 
 def create_bar_plot(food_label, quantity):
@@ -13,7 +13,7 @@ def create_bar_plot(food_label, quantity):
     color_2 = "#386150"  # green
     color_3 = "#2b2633"  # black
     color_4 = "#453d52"  # light-black
-    color_5 = "#d1d1d1"  # gray
+    color_5 = "#dbdbdb"
 
     fig, ax = plt.subplots(figsize=(14, 8))
     plt.title('Food per restaurant statistic', fontsize=18, fontweight='bold')
@@ -32,7 +32,7 @@ def create_bar_plot(food_label, quantity):
         ax.text(max(v + 0.5, vmax / 5), i - 0.08, str(v), color='black', fontweight='bold')
 
     for i, v in enumerate(x):
-        ax.text(0.2, i - 0.08, v, color= color_5, fontweight='bold')
+        ax.text(0.2, i - 0.08, v, color=color_5, fontweight='bold')
 
     ax.xaxis.set_ticks_position('bottom')
     ax.tick_params(axis='x', colors=color_4, labelsize=8)
@@ -44,19 +44,21 @@ def create_bar_plot(food_label, quantity):
     return fig
 
 
-def get_statistics_per_restaurant(restaurant_id, foods, orders, sort_order, show_count):
+def get_statistics_per_restaurant(restaurant_id, orders, sort_order, show_count):
     food_name_by_id = {}
     food_dict = {}
     tick_label = []
     height = []
-    for food in foods:
-        if restaurant_id == 0 or food["restaurant_id"] == restaurant_id:
-            food_dict[food["name"]] = 0
-            food_name_by_id[food["_id"]] = food["name"]
+    for order in orders:
+        for item in order['items']:
+            if restaurant_id == 0 or order["restaurantId"] == restaurant_id:
+                food_dict[item['item']["product"]] = 0
+                food_name_by_id[item['item']["product"]] = item['item']["product"]
 
     for order in orders:
-        if restaurant_id == 0 or order["restaurant_id"] == restaurant_id:
-            food_dict[food_name_by_id[order["food_id"]]] += 1
+        for item in order['items']:
+            if restaurant_id == 0 or order["restaurantId"] == restaurant_id:
+                food_dict[food_name_by_id[item['item']["product"]]] += item['item']["quantity"]
 
     sorted_food_dict = {}
     if sort_order == "asc":
