@@ -42,6 +42,10 @@
     border: 5px solid var(--carousel-controllers-color-hover);
 }
 
+.card-body{
+    height: 150px;
+}
+
 .card-style{
     width: 28%;
     display: inline-block;
