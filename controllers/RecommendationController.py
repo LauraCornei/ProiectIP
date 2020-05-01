@@ -37,23 +37,25 @@ class RecommendationController(FlaskView):
 
     @route('stats/food_per_restaurant/<restaurant_id>')
     def food_per_restaurant(self, restaurant_id):
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')
         order = "asc"
         if 'order' in request.args:
             order = request.args.get('order')
-        return Response(food_per_restaurant.main(restaurant_id, order, show_count), mimetype="image/svg+xml")
+        return Response(food_per_restaurant.main(restaurant_id, order, show_count, token), mimetype="image/svg+xml")
 
     # parameters:
     # order = "asc"/"desc"
     # show_count = number of shows
     @route('stats/food_all_restaurants')
     def food_all_restaurants(self):
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')
         order = "asc"
         if 'order' in request.args:
             order = request.args.get('order')
-        return Response(food_all_restaurants.main(order, show_count), mimetype="image/svg+xml")
+        return Response(food_all_restaurants.main(order, show_count, token), mimetype="image/svg+xml")

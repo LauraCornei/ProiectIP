@@ -1,6 +1,6 @@
 
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
-# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce8b?asc/false/-1
+# http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce8b?order=asc
 
 
 def create_bar_plot(food_label, quantity):
