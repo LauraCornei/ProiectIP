@@ -9,7 +9,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 
 def get_nb_of_orders(orders, customer_id, restaurant_id):
-    nb_of_orders = 0
+    nb_of_orders =0
     for order in orders:
         if customer_id == order["customer_id"] and restaurant_id == order["restaurant_id"]:
             nb_of_orders=nb_of_orders +1
@@ -61,7 +61,7 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
     latest_order = get_latest_order(orders, customer_id, restaurant_id)
     word_score = calculate_score(review_score, nb_of_orders, latest_order)
     name = get_restaurant_name(restaurants, restaurant_id)
-
+    print(name)
     if name:
        t.insert(name, word_score, restaurant_id)
     return
@@ -86,7 +86,6 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
     db = client['proiectip']
 
     customer_id = ObjectId(customer_id)
-
 
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Dietrich-Ho
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Gut

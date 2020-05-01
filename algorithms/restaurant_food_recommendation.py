@@ -5,12 +5,13 @@
 
 NUMBER_OF_CUSTOMERS = 10
 NUMBER_OF_FOODS = 10
+from bson import ObjectId
 
 
 def filter_orders(orders, restaurant_id):
     restaurant_orders = []
     for order in orders:
-        if order['restaurant_id'] == restaurant_id:
+        if order['restaurantId'] == restaurant_id:
             restaurant_orders.append(order)
     return restaurant_orders
 
@@ -18,11 +19,18 @@ def filter_orders(orders, restaurant_id):
 def get_customer_food_dict(customer_id, orders):
     customer_foods = {}
     for order in orders:
-        if order['customer_id'] == customer_id:
-            if order['food_id'] not in customer_foods:
-                customer_foods[order['food_id']] = 1
-            else:
-                customer_foods[order['food_id']] += 1
+        if 'userId' not in order:
+            continue
+
+        if order['userId'] == customer_id:
+            if 'items' not in order:
+                continue
+            for item in order['items']:
+                #speram ca am ales id bun items (2 optiuni: _id, id)
+                if item["_id"] not in customer_foods:
+                    customer_foods[item["_id"]] = 1
+                else:
+                  customer_foods[item["_id"]] += 1
     return customer_foods
 
 
@@ -63,14 +71,25 @@ def get_recommended_foods(similar_customers_foods, similar_customers_ordered):
 
 
 def final(customer_id, restaurant_id, orders):
+    print(orders)
+    # print(len(orders))
+    # customer_id = ObjectId(customer_id)
+    # restaurant_id= ObjectId(restaurant_id)
     restaurant_orders = filter_orders(orders, restaurant_id)
     # original_customer_foods = get_customer_food_dict(customer_id, restaurant_id, restaurant_orders)
     customers_orders = {}
     for order in restaurant_orders:
-        if order['customer_id'] not in customers_orders:
-            customers_orders[order['customer_id']] = get_customer_food_dict(order['customer_id'],
-                                                                            restaurant_orders)
+        if 'userId' not in order:
+            continue
+        if order['userId'] not in customers_orders:
+            customers_orders[order['userId']] = get_customer_food_dict(order['userId'],
+                                                                       restaurant_orders)
     customers_similarities = {}
+    #print(type(customers_orders))
+    #print(type(customer_id))
+    if customer_id not in customers_orders:
+        print('nu apare')
+        return []
     for customer2_id in customers_orders:
         customers_similarities[customer2_id] = get_similarity(customers_orders[customer_id],
                                                               customers_orders[customer2_id])
@@ -81,7 +100,7 @@ def final(customer_id, restaurant_id, orders):
     similar_customers_foods = {}
     for customer_id in first_similar_customers:
         similar_customers_foods[customer_id[0]] = customers_orders[customer_id[0]]
-
+    print(get_recommended_foods(similar_customers_foods, similar_customers_ordered))
     return get_recommended_foods(similar_customers_foods, similar_customers_ordered)
 
 # orders_collection = db['orders']
@@ -93,3 +112,6 @@ def final(customer_id, restaurant_id, orders):
 #
 # recommended_foods = final(customers[0]['_id'], restaurants[0]['_id'], orders)
 # print(recommended_foods)
+
+
+#http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299?fbclid=IwAR049KUTYzhpsVbNreLIQwyyk3AL_YMqm9a5O2cynEwO0o0eq4bqCitD5EI
