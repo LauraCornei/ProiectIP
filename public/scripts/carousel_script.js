@@ -96,7 +96,7 @@ window.app = new Vue({
 
         getRecommedations(userId) {
             return fetch(
-                `${API_URL}recommendations/restaurant/${userId}`
+                `${API_URL}recommendations/restaurant_by_food/${userId}`
             ).then((res) => res.json());
         },
 
