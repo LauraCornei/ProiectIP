@@ -1,5 +1,5 @@
-REWIEVER_ID = "reviewerId"
-PROVIDER_ID = "providerId"
+REWIEVER_ID = "reviewer.userID"
+PROVIDER_ID = "providerID"
 SCORE = "score" 
 ID = "_id" 
 
@@ -40,6 +40,7 @@ def final(customer, reviews, restaurants):
     for restaurant in restaurants:
         customer_cluster = []
         for review in reviews:
+            print(review)
             if review[SCORE] > 3.5 and review[PROVIDER_ID] == restaurant[ID]:
                 customer_cluster.append(review[REWIEVER_ID])
         customer_clusters.append(customer_cluster)
