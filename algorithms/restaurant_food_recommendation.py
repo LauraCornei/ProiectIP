@@ -110,4 +110,4 @@ def final(customer_id, restaurant_id, orders):
 # print(recommended_foods)
 
 
-#http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299?fbclid=IwAR049KUTYzhpsVbNreLIQwyyk3AL_YMqm9a5O2cynEwO0o0eq4bqCitD5EI
+#http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299

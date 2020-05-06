@@ -11,14 +11,14 @@ from bson import ObjectId
 def get_nb_of_orders(orders, customer_id, restaurant_id):
     nb_of_orders =0
     for order in orders:
-        if customer_id == order["customer_id"] and restaurant_id == order["restaurant_id"]:
+        if customer_id == order["userId"] and restaurant_id == order["restaurantId"]:
             nb_of_orders=nb_of_orders +1
     return nb_of_orders
 
 def get_review_score(reviews, customer_id, restaurant_id):
     score = 3
     for review in reviews:
-      if customer_id == review["customer_id"] and restaurant_id == review["restaurant_id"]:
+      if customer_id == review["userId"] and restaurant_id == review["restaurantId"]:
          score= review["score"]
     return score
 
@@ -29,7 +29,7 @@ def get_latest_order(orders, customer_id, restaurant_id):
 
         order_date= datetime.datetime.strptime(order["order_date"], '%Y-%m-%d').date()
 
-        if customer_id == order["customer_id"] and restaurant_id == order["restaurant_id"]:
+        if customer_id == order["userId"] and restaurant_id == order["restaurantId"]:
             if(latest_order> (current_date-order_date).days):
                 latest_order=(current_date-order_date).days
     return latest_order
@@ -70,20 +70,20 @@ def get_recommended_restaurant_from_trie(t, restaurant_prefix):
     recommended_restaurant_id=t.special_search(restaurant_prefix)
     if recommended_restaurant_id == False:
         return False
-    return recommended_restaurant_id["restaurant_id"]
+    return recommended_restaurant_id["restaurantId"]
 
 def update_trie(t, restaurants , reviews, orders, customer_id):
 
    for order in orders:
-        if customer_id == order["customer_id"]:
-            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order["restaurant_id"])
+        if customer_id == order["userId"]:
+            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order["restaurantId"])
    return
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
 
-    client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
-    db = client['proiectip']
+    #client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
+    #db = client['proiectip']
 
     customer_id = ObjectId(customer_id)
 
