@@ -11,8 +11,9 @@ class Restaurants(object):
         restaurantsCollection = restaurantsCollection['data']['users']
         return restaurantsCollection
 
+    @staticmethod
     def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/users' + id
+        url = 'http://159.65.247.164:3002/api/users/' + id
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
         restaurantsCollection = restaurantsCollection['data']['user']
