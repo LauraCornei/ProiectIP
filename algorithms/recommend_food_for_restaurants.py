@@ -39,11 +39,11 @@ def get_customer_other_foods(customer_id, orders, foods, restaurant_menu):
 def get_restaurant_clients(restaurant, orders):
     clients = {}
     for order in orders:
-        if order['restaurant_id'] == restaurant['_id']:
-            if order['customer_id'] not in clients:
-                clients[order['customer_id']] = 1
+        if order['restaurantId'] == restaurant['_id']:
+            if order['userId'] not in clients:
+                clients[order['userId']] = 1
             else:
-                clients[order['customer_id']] += 1
+                clients[order['userId']] += 1
     return clients
 
 

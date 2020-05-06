@@ -72,11 +72,7 @@ def get_recommended_foods(similar_customers_foods, similar_customers_ordered):
 
 def final(customer_id, restaurant_id, orders):
     print(orders)
-    # print(len(orders))
-    # customer_id = ObjectId(customer_id)
-    # restaurant_id= ObjectId(restaurant_id)
     restaurant_orders = filter_orders(orders, restaurant_id)
-    # original_customer_foods = get_customer_food_dict(customer_id, restaurant_id, restaurant_orders)
     customers_orders = {}
     for order in restaurant_orders:
         if 'userId' not in order:
