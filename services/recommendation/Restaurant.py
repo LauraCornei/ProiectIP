@@ -4,7 +4,7 @@ from models.Restaurants import Restaurants
 from models.Reviews import Reviews
 from models.Orders import Orders
 
-def main(customer_id):
-    restaurants_id = final(Customers.by_id(customer_id), Reviews.all(), Restaurants.all())
-    restaurants_data = map(lambda e: Restaurants.by_id(e), restaurants_id)
+def main(customer_id, token):
+    restaurants_id = final(Customers.by_id(customer_id, token), Reviews.all(), Restaurants.all())
+    restaurants_data = map(lambda e: Restaurants.by_id(e, token), restaurants_id)
     return restaurants_data

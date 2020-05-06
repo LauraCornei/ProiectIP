@@ -11,7 +11,8 @@ class RecommendationController(FlaskView):
 
     @route('restaurant/<customer_id>')
     def restaurant(self, customer_id):
-        return Restaurant.main(customer_id)
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
+        return Restaurant.main(customer_id, token)
 
     @route('asd/<restaurant_id>/<customer_id>')
     def food(self, restaurant_id, customer_id):
