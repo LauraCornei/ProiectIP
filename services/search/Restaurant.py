@@ -7,7 +7,7 @@ from models.Reviews import Reviews
 #    return Restaurant.all()
 
 def main(customer_id, restaurant_prefix, token):
-    restaurants_data=final(Reviews.by_provider_id('5eb16d673a637d28884dc226', 'token'),
+    restaurants_data=final(Reviews.by_customer_id('5eb16d673a637d28884dc226', 'token'),
                            Restaurants.all(token), Orders.all(token), customer_id, restaurant_prefix)
     print('data')
     print(restaurants_data)

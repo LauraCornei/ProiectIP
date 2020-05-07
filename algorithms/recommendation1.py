@@ -81,10 +81,6 @@ def update_trie(t, restaurants , reviews, orders, customer_id):
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
-
-    #client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
-    #db = client['proiectip']
-
     customer_id = ObjectId(customer_id)
 
     #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Dietrich-Ho
