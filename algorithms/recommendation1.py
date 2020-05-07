@@ -1,7 +1,7 @@
 import math
 
 from bson import ObjectId
-
+from models.Restaurants import Restaurants
 from algorithms.trie import Trie
 import scipy.integrate as integrate
 import datetime
@@ -27,7 +27,8 @@ def get_latest_order(orders, customer_id, restaurant_id):
     current_date=datetime.date.today()
     for order in orders:
 
-        order_date= datetime.datetime.strptime(order["order_date"], '%Y-%m-%d').date()
+        print(order["orderDate"])
+        order_date= datetime.datetime.strptime("2008-09-03T20:56:35.450686Z", "%Y-%m-%dT%H:%M:%S.%fZ").date()
 
         if customer_id == order["userId"] and restaurant_id == order["restaurantId"]:
             if(latest_order> (current_date-order_date).days):
@@ -47,20 +48,25 @@ def calculate_score (review_score, nb_of_orders, latest_order):
 
 
 
-def get_restaurant_name(restaurants, restaurant_id):
+def get_restaurant_name(restaurants, restaurant_id, token):
+    print('aaaa')
+    print(restaurant_id)
+    restaurant= Restaurants.by_id( restaurant_id, token)
+    #print(restaurant["name"])
+    #print(restaurant_id)
 
     for restaurant in restaurants:
         if restaurant_id == restaurant["_id"]:
             return restaurant["name"]
 
 
-def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, restaurant_id):
-
+def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, restaurant_id, token):
+    print('bbbb')
     review_score = get_review_score(reviews, customer_id, restaurant_id)
     nb_of_orders = get_nb_of_orders(orders, customer_id, restaurant_id)
     latest_order = get_latest_order(orders, customer_id, restaurant_id)
     word_score = calculate_score(review_score, nb_of_orders, latest_order)
-    name = get_restaurant_name(restaurants, restaurant_id)
+    name = get_restaurant_name(restaurants, restaurant_id, token)
     print(name)
     if name:
        t.insert(name, word_score, restaurant_id)
@@ -72,29 +78,33 @@ def get_recommended_restaurant_from_trie(t, restaurant_prefix):
         return False
     return recommended_restaurant_id["restaurantId"]
 
-def update_trie(t, restaurants , reviews, orders, customer_id):
+def update_trie(t, restaurants , reviews, orders, customer_id, token):
+   print(customer_id)
 
    for order in orders:
         if customer_id == order["userId"]:
-            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order["restaurantId"])
+            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order["restaurantId"],  token)
    return
 
 
-def final(reviews, restaurants, orders, customer_id, restaurant_prefix):
-    customer_id = ObjectId(customer_id)
+def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
+    '''print(reviews)
+    print('*')
+    print(restaurants)
+    print('*')
+    print(orders)
+    print('*')'''
 
-    #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Dietrich-Ho
-    #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Gut
-    #http://127.0.0.1:5000/search/restaurant/5e8d959a9220ac402a589b58/Ferry
+    #http://127.0.0.1:5000/search/restaurant/5e8c4f351842ba322c5c13ec/Rest
 
     t = Trie()
-    update_trie(t, restaurants, reviews, orders, customer_id)
+    update_trie(t, restaurants, reviews, orders, customer_id, token)
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
 
     if restaurant_id == False:
         value = "Recommendation starting with given prefix not found"
     else:
-        value = get_restaurant_name(restaurants, restaurant_id)
+        value = get_restaurant_name(restaurants, restaurant_id, token)
     recommendations = {
         "name_recommended_restaurant": value
     }
