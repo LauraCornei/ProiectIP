@@ -28,7 +28,6 @@ class Reviews(object):
             reviewsCollection = Reviews.by_provider_id(restaurant['_id'], token)
 
             for review in reviewsCollection:
-                review['providerID'] = restaurant['_id']
                 all_reviews.append(review)
 
         return all_reviews
