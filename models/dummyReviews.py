@@ -4,7 +4,8 @@
 dummy_reviews = {
     '5eb16d673a637d28884dc226': [{
         "_id": "5eaad4b646eaba38437e1f18",
-        "reviewer.userID": "5eb16fdf4afbf654966cb68d",
+        "reviewerId": "5eb16fdf4afbf654966cb68d",
+        "providerId": "5eb16d673a637d28884dc226",
         "score": 6,
         "description": "I am not a robot.",
         "timeCreated": "2020-04-30T13:37:58.552Z",
@@ -14,7 +15,8 @@ dummy_reviews = {
       },
       {
         "_id": "5ea431720596f84b44be104f",
-        "reviewer.userID": "5eb175539dff1b3844a84ab8",
+        "reviewerId": "5eb175539dff1b3844a84ab8",
+        "providerId": "5eb16d673a637d28884dc226",
         "reviewer": "John Doe",
         "score": 5,
         "description": "Thanks, I hate it.",
@@ -26,7 +28,8 @@ dummy_reviews = {
     ],
     '5eb175094afbf654966cb690': [{
         "_id": "5eaad4b646eaba38437e1f18",
-        "reviewer.userID": "5eb16fdf4afbf654966cb68d",
+        "reviewerId": "5eb16fdf4afbf654966cb68d",
+        "providerId": "5eb175094afbf654966cb690",
         "score": 6,
         "description": "I am not a robot.",
         "timeCreated": "2020-04-30T13:37:58.552Z",
@@ -36,7 +39,8 @@ dummy_reviews = {
       },
       {
         "_id": "5ea431720596f84b44be104f",
-        "reviewer.userID": "5eb175539dff1b3844a84ab8",
+        "reviewerId": "5eb175539dff1b3844a84ab8",
+        "providerId": "5eb175094afbf654966cb690",
         "reviewer": "John Doe",
         "score": 5,
         "description": "Thanks, I hate it.",

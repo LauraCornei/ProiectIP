@@ -1,5 +1,5 @@
-REWIEVER_ID = "reviewer.userID"
-PROVIDER_ID = "providerID"
+REWIEVER_ID = "reviewerId"
+PROVIDER_ID = "providerId"
 SCORE = "score" 
 ID = "_id" 
 
