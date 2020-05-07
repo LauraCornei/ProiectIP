@@ -48,7 +48,7 @@ class Trie:
     def get_max_from_subtree(self, p):
         answer=dict({
             "score": p.score,
-            "restaurant_id": p.restaurant_id
+            "restaurantId": p.restaurant_id
         })
         for index in range(0 , 127):
             if p.children[index]:
