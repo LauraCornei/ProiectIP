@@ -73,3 +73,4 @@ def final(restaurant, orders, foods):
     result = {k: v for k, v in sorted(recommendations.items(), key=lambda item: item[1], reverse=True)}
     return list(result.keys())[:10]
     # return recommendations
+    # ruta de test: http://127.0.0.1:5000/recommendations/food/5eb16d673a637d28884dc226 7 mai 2020
