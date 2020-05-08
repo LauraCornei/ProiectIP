@@ -27,10 +27,10 @@ def get_customer_food_dict(customer_id, orders):
                 continue
             for item in order['items']:
                 #speram ca am ales id bun items (2 optiuni: _id, id)
-                if item["_id"] not in customer_foods:
-                    customer_foods[item["_id"]] = 1
+                if item["id"] not in customer_foods:
+                    customer_foods[item["id"]] = 1
                 else:
-                  customer_foods[item["_id"]] += 1
+                  customer_foods[item["id"]] += 1
     return customer_foods
 
 
@@ -71,7 +71,6 @@ def get_recommended_foods(similar_customers_foods, similar_customers_ordered):
 
 
 def final(customer_id, restaurant_id, orders):
-    print(orders)
     restaurant_orders = filter_orders(orders, restaurant_id)
     customers_orders = {}
     for order in restaurant_orders:
@@ -81,6 +80,9 @@ def final(customer_id, restaurant_id, orders):
             customers_orders[order['userId']] = get_customer_food_dict(order['userId'],
                                                                        restaurant_orders)
     customers_similarities = {}
+    #print(type(customers_orders))
+    #print(type(customer_id))
+    print(customers_orders)
     if customer_id not in customers_orders:
         print('nu apare')
         return []
@@ -109,3 +111,4 @@ def final(customer_id, restaurant_id, orders):
 
 
 #http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299
+# http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd/5e8c4f351842ba322c5c13ec nu mai da lista vida 8/5/2020

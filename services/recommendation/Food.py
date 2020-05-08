@@ -5,9 +5,6 @@ from bson import ObjectId
 
 
 def recommendForRestaurant(restaurant_id, customer_id, token):
-    #customer_id = ObjectId(customer_id)
-    #restaurant_id = ObjectId(restaurant_id)
-    foods_id = final(customer_id, restaurant_id, Orders.all(token))
-    #food_data = map(lambda e: Foods.by_id(foods_id,'1223'), foods_id)
-    #return food_data
-    return foods_id
+    foods_ids = final(customer_id, restaurant_id, Orders.all(token))
+    foods_data = map(lambda e: Foods.by_id(e, token), foods_ids)
+    return foods_data
