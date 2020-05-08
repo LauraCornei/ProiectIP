@@ -1,7 +1,7 @@
 
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5eb16d673a637d28884dc226?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA
-
+import Constants
 
 def create_bar_plot(food_label, quantity):
     import numpy as np
@@ -22,7 +22,6 @@ def create_bar_plot(food_label, quantity):
 
     x = food_label
     y = quantity
-    
 
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT))
     plt.title('Food per restaurant statistic', fontsize=TEXT_FONT_SIZE, fontweight='bold')

@@ -1,1 +1,16 @@
-MY_CONSTANT_ONE = 50
+color_1 = "#a71d31"  # red
+color_2 = "#386150"  # green
+color_3 = "#2b2633"  # black
+color_4 = "#453d52"  # light-black
+color_5 = "#dbdbdb"
+NUMBER_OF_CUSTOMERS = 10
+NUMBER_OF_FOODS = 10
+REWIEVER_ID = "reviewerId"
+PROVIDER_ID = "providerId"
+RESTAURANT_ID = "restaurantId"
+REVIEWER_ID = "reviewerId"
+USER_ID = "userId"
+SCORE = "score"
+ID = "_id"
+FFIELD = "category"
+ORDER_DATE ="orderDate"

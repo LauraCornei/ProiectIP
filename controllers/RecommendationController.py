@@ -11,19 +11,19 @@ class RecommendationController(FlaskView):
     representations = {'application/json': output_json}
     secret = 'agfbkgfdakjhabagdf'
 
+    def get_customer_id(self, token):
+        decoded = decode(token.split(' ')[1], self.secret)
+        return decoded['_id']
+
     @route('restaurant')
     def restaurant(self):
         token = request.headers.get('Authorization')
-        decoded = decode(token.split(' ')[1], self.secret)
-        customer_id = decoded['_id']
-        return Restaurant.main(customer_id, token)
+        return Restaurant.main(self.get_customer_id(token), token)
 
     @route('asd/<restaurant_id>')
     def food(self, restaurant_id):
         token = request.headers.get('Authorization')
-        decoded = decode(token.split(' ')[1], self.secret)
-        customer_id = decoded['_id']
-        return Food.recommendForRestaurant(restaurant_id, customer_id, token)
+        return Food.recommendForRestaurant(restaurant_id, self.get_customer_id(token), token)
 
     # recomanda mancaruri pt un restaurant
     @route('food/<restaurant_id>')
@@ -36,9 +36,7 @@ class RecommendationController(FlaskView):
     @route('restaurant_by_food')
     def restaurant_by_food(self):
         token = request.headers.get('Authorization')
-        decoded = decode(token.split(' ')[1], self.secret)
-        customer_id = decoded['_id']
-        return RestaurantByFood.main(customer_id, token)
+        return RestaurantByFood.main(self.get_customer_id(token), token)
 
     @route('stats/orders_per_hour/<restaurant_id>')
     def orders_per_hour_per_restaurant(self, restaurant_id):

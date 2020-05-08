@@ -5,7 +5,6 @@ from models.Restaurants import Restaurants
 from algorithms.trie import Trie
 import scipy.integrate as integrate
 import datetime
-
 import Constants
 
 from pymongo import MongoClient
@@ -14,15 +13,15 @@ from bson import ObjectId
 def get_nb_of_orders(orders, customer_id, restaurant_id):
     nb_of_orders =0
     for order in orders:
-        if customer_id == order["userId"] and restaurant_id == order["restaurantId"]:
+        if customer_id == order[Constants.USER_ID] and restaurant_id == order[Constants.RESTAURANT_ID]:
             nb_of_orders=nb_of_orders +1
     return nb_of_orders
 
 def get_review_score(reviews, customer_id, restaurant_id):
     score = 3
     for review in reviews:
-      if customer_id == review["userId"] and restaurant_id == review["restaurantId"]:
-         score= review["score"]
+      if customer_id == review[Constants.USER_ID] and restaurant_id == review[Constants.RESTAURANT_ID]:
+         score= review[Constants.SCORE]
     return score
 
 def get_latest_order(orders, customer_id, restaurant_id):
@@ -33,7 +32,7 @@ def get_latest_order(orders, customer_id, restaurant_id):
         print(order["orderDate"])
         order_date= datetime.datetime.strptime("2008-09-03T20:56:35.450686Z", "%Y-%m-%dT%H:%M:%S.%fZ").date()
 
-        if customer_id == order["userId"] and restaurant_id == order["restaurantId"]:
+        if customer_id == order[Constants.USER_ID] and restaurant_id == order[Constants.RESTAURANT_ID]:
             if(latest_order> (current_date-order_date).days):
                 latest_order=(current_date-order_date).days
     return latest_order
@@ -52,11 +51,8 @@ def calculate_score (review_score, nb_of_orders, latest_order):
 
 
 def get_restaurant_name(restaurants, restaurant_id, token):
-    print('aaaa')
-    print(restaurant_id)
     restaurant= Restaurants.by_id( restaurant_id, token)
-    #print(restaurant["name"])
-    #print(restaurant_id)
+
 
     for restaurant in restaurants:
         if restaurant_id == restaurant["_id"]:
@@ -64,7 +60,6 @@ def get_restaurant_name(restaurants, restaurant_id, token):
 
 
 def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, restaurant_id, token):
-    print('bbbb')
     review_score = get_review_score(reviews, customer_id, restaurant_id)
     nb_of_orders = get_nb_of_orders(orders, customer_id, restaurant_id)
     latest_order = get_latest_order(orders, customer_id, restaurant_id)
@@ -79,27 +74,23 @@ def get_recommended_restaurant_from_trie(t, restaurant_prefix):
     recommended_restaurant_id=t.special_search(restaurant_prefix)
     if recommended_restaurant_id == False:
         return False
-    return recommended_restaurant_id["restaurantId"]
+    return recommended_restaurant_id[Constants.RESTAURANT_ID]
 
 def update_trie(t, restaurants , reviews, orders, customer_id, token):
    print(customer_id)
 
    for order in orders:
-        if customer_id == order["userId"]:
-            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order["restaurantId"],  token)
+        if customer_id == order[Constants.USER_ID]:
+            insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order[Constants.RESTAURANT_ID],  token)
    return
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
-    '''print(reviews)
-    print('*')
-    print(restaurants)
-    print('*')
-    print(orders)
-    print('*')'''
+
 
     #http://127.0.0.1:5000/search/restaurant/Rest
     #token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
+
     t = Trie()
     update_trie(t, restaurants, reviews, orders, customer_id, token)
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
@@ -115,3 +106,5 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
 
 
 
+#http://127.0.0.1:5000/search/restaurant/Rest
+#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
