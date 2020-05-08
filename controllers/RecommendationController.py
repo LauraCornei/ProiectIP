@@ -4,19 +4,25 @@ from flask_classful import FlaskView, route
 from hooks.json_response import output_json
 from flask import Response
 from flask import request
+from jwt import decode
 
 
 class RecommendationController(FlaskView):
     representations = {'application/json': output_json}
+    secret = 'agfbkgfdakjhabagdf'
 
-    @route('restaurant/<customer_id>')
-    def restaurant(self, customer_id):
+    @route('restaurant')
+    def restaurant(self):
         token = request.headers.get('Authorization')
+        decoded = decode(token, self.secret)
+        customer_id = decoded['_id']
         return Restaurant.main(customer_id, token)
 
-    @route('asd/<restaurant_id>/<customer_id>')
-    def food(self, restaurant_id, customer_id):
+    @route('asd/<restaurant_id>')
+    def food(self, restaurant_id):
         token = request.headers.get('Authorization')
+        decoded = decode(token, self.secret)
+        customer_id = decoded['_id']
         return Food.recommendForRestaurant(restaurant_id, customer_id, token)
 
     # recomanda mancaruri pt un restaurant
@@ -27,9 +33,11 @@ class RecommendationController(FlaskView):
 
     # recomanda <=10 restaurante care au specialitati asemanatoare
     # cu cele ale restaurantul fav de clientul din input
-    @route('restaurant_by_food/<customer_id>')
-    def restaurant_by_food(self, customer_id):
+    @route('restaurant_by_food')
+    def restaurant_by_food(self):
         token = request.headers.get('Authorization')
+        decoded = decode(token, self.secret)
+        customer_id = decoded['_id']
         return RestaurantByFood.main(customer_id, token)
 
     @route('stats/orders_per_hour/<restaurant_id>')
