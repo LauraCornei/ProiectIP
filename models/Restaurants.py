@@ -2,6 +2,7 @@ from bson import ObjectId
 import json
 import requests
 
+
 class Restaurants(object):
     @staticmethod
     def all(token):
