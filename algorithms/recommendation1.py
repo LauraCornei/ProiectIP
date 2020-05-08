@@ -88,6 +88,9 @@ def update_trie(t, restaurants , reviews, orders, customer_id, token):
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
 
 
+    #http://127.0.0.1:5000/search/restaurant/Rest
+    #token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
+
     t = Trie()
     update_trie(t, restaurants, reviews, orders, customer_id, token)
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
