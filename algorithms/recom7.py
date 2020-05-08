@@ -1,7 +1,7 @@
 from models.Restaurants import Restaurants
 
-# http://127.0.0.1:5000/recommendations/restaurant_by_food/5eb16fdf4afbf654966cb68d
-# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTk4YTIzNzk3YWVhMTM5YzJiOTk1OTIiLCJpYXQiOjE1ODgyNTgxMTZ9.1GCgbuMH_Pi9kNtIR7QTqrH7EIcW86rbjU_Fe1HYSVk
+# http://127.0.0.1:5000/recommendations/restaurant_by_food
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI
 # Bearer Token(Authorization)
 
 REVIEWER_ID = "reviewerId"
@@ -9,7 +9,6 @@ PROVIDER_ID = "providerId"
 FFIELD = "category"
 SCORE = "score"
 ID = "_id"
-
 
 def get_fav_res(customer, reviews):
     max_review = -1

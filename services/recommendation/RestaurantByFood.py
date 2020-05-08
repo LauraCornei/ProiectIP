@@ -15,4 +15,5 @@ def main(customer_id, token):
         return "This customer ain't around!"
 
     restaurants_id = filter_res(Customers.by_id(customer_id, token), Reviews.all(token), token)
+    print( restaurants_id )
     return restaurants_id

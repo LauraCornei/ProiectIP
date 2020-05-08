@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+from models.Foods import Foods
 client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
 db = client['proiectip']
 
@@ -53,7 +53,7 @@ def get_restaurant_clients(restaurant, orders):
 
 
 # am sters foods de la parametri
-def final(restaurant, orders, foods):
+def final(restaurant, orders):
     recommendations = {}
     clients = get_restaurant_clients(restaurant, orders)
     # restaurant_menu = get_restaurant_menu(restaurant, foods)
@@ -71,6 +71,8 @@ def final(restaurant, orders, foods):
                 recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[userId]
 
     result = {k: v for k, v in sorted(recommendations.items(), key=lambda item: item[1], reverse=True)}
+    print(list(result.keys())[:10])
+    # return ['5eb173d3d6fb9132c43218a2']
     return list(result.keys())[:10]
     # return recommendations
     # ruta de test: http://127.0.0.1:5000/recommendations/food/5eb16d673a637d28884dc226 7 mai 2020

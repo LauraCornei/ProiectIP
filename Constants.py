@@ -1,0 +1,1 @@
+MY_CONSTANT_ONE = 50
