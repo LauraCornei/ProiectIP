@@ -1,4 +1,7 @@
-import Constants
+REVIEWER_ID = "reviewerId"
+PROVIDER_ID = "providerId"
+SCORE = "score" 
+ID = "_id" 
 
 def get_preferred_restaurants(customer, reviews):
     preferences = []
@@ -37,6 +40,7 @@ def final(customer, reviews, restaurants):
         for review in reviews:
             if review[Constants.SCORE] > 3.5 and review[Constants.PROVIDER_ID] == restaurant[Constants.ID]:
                 customer_cluster.append(review[Constants.REWIEVER_ID])
+        
         customer_clusters.append(customer_cluster)
         top = get_cluster_top(customer_cluster, reviews)
         tops.append(top)
