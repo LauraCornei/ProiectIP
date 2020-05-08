@@ -45,6 +45,13 @@ const data = [
 
 const API_URL = 'http://localhost:5000/';
 
+const ALG_TYPES = {
+    recom7: 'restaurant_by_food',
+    recommend_food_for_restaurants : 'food',
+    recommendations_restaurants : 'restaurant',
+    restaurant_food_recommendation : 'recommendations/asd',
+}
+
 const MEDIA_BREAKPOINTS = {
     LG: 1500,
     MD: 780,
@@ -90,13 +97,21 @@ window.app = new Vue({
 
     methods: {
         async getUserIdRecomendation() {
-            const recommendationsArray = await this.getRecommedations(getParamValue('user_id'));
+            const recommendationsArray = await this.getRecommedations(getParamValue('token'), getParamValue('provider_id'), getParamValue('alg_type') );
             this.rawData = recommendationsArray;
         },
 
-        getRecommedations(userId) {
+        getRecommedations(token, provider_id, alg_type) {
+            if(!ALG_TYPES[alg_type])
+                throw new Error("alg_type not found");
+            
+            let path = '';
+            if(provider_id)
+                path += provider_id;
+              
+            
             return fetch(
-                `${API_URL}recommendations/restaurant_by_food/${userId}`
+                `${API_URL}recommendations/${ALG_TYPES[alg_type]}/${path}` , {headers:{Authorization:token}}
             ).then((res) => res.json());
         },
 
