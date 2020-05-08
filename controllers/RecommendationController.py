@@ -14,14 +14,14 @@ class RecommendationController(FlaskView):
     @route('restaurant')
     def restaurant(self):
         token = request.headers.get('Authorization')
-        decoded = decode(token, self.secret)
+        decoded = decode(token.split(' ')[1], self.secret)
         customer_id = decoded['_id']
         return Restaurant.main(customer_id, token)
 
     @route('asd/<restaurant_id>')
     def food(self, restaurant_id):
         token = request.headers.get('Authorization')
-        decoded = decode(token, self.secret)
+        decoded = decode(token.split(' ')[1], self.secret)
         customer_id = decoded['_id']
         return Food.recommendForRestaurant(restaurant_id, customer_id, token)
 
@@ -36,7 +36,7 @@ class RecommendationController(FlaskView):
     @route('restaurant_by_food')
     def restaurant_by_food(self):
         token = request.headers.get('Authorization')
-        decoded = decode(token, self.secret)
+        decoded = decode(token.split(' ')[1], self.secret)
         customer_id = decoded['_id']
         return RestaurantByFood.main(customer_id, token)
 

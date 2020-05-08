@@ -5,6 +5,9 @@ from models.Restaurants import Restaurants
 from algorithms.trie import Trie
 import scipy.integrate as integrate
 import datetime
+
+import Constants
+
 from pymongo import MongoClient
 from bson import ObjectId
 

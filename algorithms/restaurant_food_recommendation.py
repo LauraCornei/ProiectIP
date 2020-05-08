@@ -81,8 +81,6 @@ def final(customer_id, restaurant_id, orders):
             customers_orders[order['userId']] = get_customer_food_dict(order['userId'],
                                                                        restaurant_orders)
     customers_similarities = {}
-    #print(type(customers_orders))
-    #print(type(customer_id))
     if customer_id not in customers_orders:
         print('nu apare')
         return []
