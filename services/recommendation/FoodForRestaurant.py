@@ -15,6 +15,6 @@ def main(restaurant_id, token):
         if 'userId' in order:
             orders_with_userid.append(order)
     # foods_names = final(Restaurants.by_id(id=restaurant_id, token=token), orders_with_userid, Foods.all(token))
-    # foods_data = map(lambda e: Foods.by_id(e), foods_id)
-    foods_names = final(Restaurants.by_id(id=restaurant_id, token=token), orders_with_userid, [])
-    return foods_names
+    foods_ids = final(Restaurants.by_id(id=restaurant_id, token=token), orders_with_userid)
+    foods_data = map(lambda e: Foods.by_id(e, token), foods_ids)
+    return foods_data

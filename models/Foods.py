@@ -19,8 +19,8 @@ class Foods(object):
 
     @staticmethod
     def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/providers/' + id
+        url = 'http://159.65.247.164:3002/api/courses/'+id
         headers = {"Authorization": "Bearer " + token}
-        restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        restaurantsCollection = restaurantsCollection['data']['provider']
-        return restaurantsCollection
+        course = json.loads(requests.get(url, headers=headers).text)
+        course = course['data']
+        return course
