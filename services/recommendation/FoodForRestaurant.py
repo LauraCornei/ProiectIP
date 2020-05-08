@@ -5,8 +5,7 @@ from models.Foods import Foods
 from models.Orders import Orders
 
 
-def main(restaurant_id):
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
+def main(restaurant_id, token):
     # print(Restaurants.by_id(id=restaurant_id, token=token))
     # print(Orders.all(token))
     # print(Foods.all(token))

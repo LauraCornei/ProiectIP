@@ -17,31 +17,30 @@ class RecommendationController(FlaskView):
     @route('asd/<restaurant_id>/<customer_id>')
     def food(self, restaurant_id, customer_id):
         token = request.headers.get('Authorization')
-        return Food.recommendForRestaurant(restaurant_id, customer_id)
+        return Food.recommendForRestaurant(restaurant_id, customer_id, token)
 
     # recomanda mancaruri pt un restaurant
     @route('food/<restaurant_id>')
     def food_for_restaurant(self, restaurant_id):
-        return FoodForRestaurant.main(restaurant_id)
+        token = request.headers.get('Authorization')
+        return FoodForRestaurant.main(restaurant_id, token)
 
     # ??? todo add comment
     @route('restaurant_by_food/<customer_id>')
     def restaurant_by_food(self, customer_id):
-        return RestaurantByFood.main(customer_id)
+        token = request.headers.get('Authorization')
+        return RestaurantByFood.main(customer_id, token)
 
     @route('stats/orders_per_hour/<restaurant_id>')
     def orders_per_hour_per_restaurant(self, restaurant_id):
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
-
+        token = request.args.get("token")
         return Response(NumberOfOrdersPerHour.number_of_orders_by_restaurant(restaurant_id, token),
                         mimetype="image/svg+xml")
 
     @route('stats/orders_per_hour')
     def orders_per_hour(self):
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
-
+        token = request.args.get("token")
         return Response(NumberOfOrdersPerHour.number_of_orders(token), mimetype="image/svg+xml")
-
 
 
     # parameters:
@@ -49,7 +48,7 @@ class RecommendationController(FlaskView):
     # show_count = number of shows
     @route('stats/food_per_restaurant/<restaurant_id>')
     def food_per_restaurant(self, restaurant_id):
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
+        token = request.args.get("token")
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')
@@ -63,7 +62,7 @@ class RecommendationController(FlaskView):
     # show_count = number of shows
     @route('stats/food_all_restaurants')
     def food_all_restaurants(self):
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgzMjc1MDh9.PbCHEKVkf0vfq-An6Ocw98ey4KOhPER3LxPJ4hix32Q"
+        token = request.args.get("token")
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')

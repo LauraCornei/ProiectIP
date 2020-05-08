@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-# http://127.0.0.1:5000/recommendations/stats/customers_per_hours
+# http://127.0.0.1:5000/recommendations/stats/orders_per_hour
 
 
 def get_hour_of(order):
