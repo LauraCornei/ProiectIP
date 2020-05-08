@@ -54,7 +54,6 @@ def get_restaurant_clients(restaurant, orders):
 def final(restaurant, orders):
     recommendations = {}
     clients = get_restaurant_clients(restaurant, orders)
-    # restaurant_menu = get_restaurant_menu(restaurant, foods)
     restaurant_menu = restaurant['details']['menu']['courses']
     restaurant_courses_ids = []
     for course in restaurant_menu:
