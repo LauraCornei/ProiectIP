@@ -1,13 +1,9 @@
 import Constants
-REVIEWER_ID = "reviewerId"
-PROVIDER_ID = "providerId"
-SCORE = "score" 
-ID = "_id" 
 
 def get_preferred_restaurants(customer, reviews):
     preferences = []
     for review in reviews:
-        if review[Constants.REWIEVER_ID] == customer and review[Constants.SCORE] > 3.5:
+        if review[Constants.REVIEWER_ID] == customer and review[Constants.SCORE] > 3.5:
             preferences.append(review[Constants.PROVIDER_ID])
     return preferences
 
