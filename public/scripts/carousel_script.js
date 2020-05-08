@@ -102,6 +102,7 @@ window.app = new Vue({
         },
 
         getRecommedations(token, provider_id, alg_type) {
+            console.log(alg_type);
             if(!ALG_TYPES[alg_type])
                 throw new Error("alg_type not found");
             
