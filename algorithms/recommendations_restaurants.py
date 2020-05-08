@@ -1,4 +1,4 @@
-REWIEVER_ID = "reviewerId"
+REVIEWER_ID = "reviewerId"
 PROVIDER_ID = "providerId"
 SCORE = "score" 
 ID = "_id" 
@@ -6,7 +6,7 @@ ID = "_id"
 def get_preferred_restaurants(customer, reviews):
     preferences = []
     for review in reviews:
-        if review[REWIEVER_ID] == customer and review[SCORE] > 3.5:
+        if review[REVIEWER_ID] == customer and review[SCORE] > 3.5:
             preferences.append(review[PROVIDER_ID])
     return preferences
 
@@ -41,7 +41,7 @@ def final(customer, reviews, restaurants):
         customer_cluster = []
         for review in reviews:
             if review[SCORE] > 3.5 and review[PROVIDER_ID] == restaurant[ID]:
-                customer_cluster.append(review[REWIEVER_ID])
+                customer_cluster.append(review[REVIEWER_ID])
         customer_clusters.append(customer_cluster)
         top = get_cluster_top(customer_cluster, reviews)
         tops.append(top)

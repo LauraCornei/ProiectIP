@@ -7,21 +7,30 @@ def create_bar_plot(food_label, quantity):
     import numpy as np
     import matplotlib.pyplot as plt
 
+    COLOR_RED = "#a71d31"      
+    COLOR_GREEN = "#386150"  
+    COLOR_BLACK = "#2b2633"  
+    COLOR_BLACK_LIGHT = "#453d52"  
+    COLOR_GRAY = "#dbdbdb"
+    FIG_WIDTH = 14
+    FIG_HEIGHT = 8
+    TEXT_FONT_SIZE = 18
+    PADDING = 0.08
+    ALPHA = 0.95
+    MARGIN_LR = 0
+    MARGIN_TB = 0.2 
+
     x = food_label
     y = quantity
-    color_1 = "#a71d31"  # red
-    color_2 = "#386150"  # green
-    color_3 = "#2b2633"  # black
-    color_4 = "#453d52"  # light-black
-    color_5 = "#dbdbdb"
+    
 
-    fig, ax = plt.subplots(figsize=(14, 8))
-    plt.title('Food per restaurant statistic', fontsize=18, fontweight='bold')
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT))
+    plt.title('Food per restaurant statistic', fontsize=TEXT_FONT_SIZE, fontweight='bold')
 
     width = 0.85
     ind = np.arange(len(y))
 
-    ax.barh(ind, y, width, color=[color_1, color_2, color_3], alpha=0.95)
+    ax.barh(ind, y, width, color=[COLOR_RED, COLOR_GREEN, COLOR_BLACK], alpha=ALPHA)
     ax.set_yticks(ind + width / 2)
     ax.set_yticklabels(x, minor=False)
 
@@ -29,15 +38,15 @@ def create_bar_plot(food_label, quantity):
     for i, v in enumerate(y):
         vmax = max(vmax, v)
     for i, v in enumerate(y):
-        ax.text(max(v + 0.5, vmax / 5), i - 0.08, str(v), color='black', fontweight='bold')
+        ax.text(max(v + 0.5, vmax / 5), i - PADDING, str(v), color='black', fontweight='bold')
 
     for i, v in enumerate(x):
-        ax.text(0.2, i - 0.08, v, color=color_5, fontweight='bold')
+        ax.text(0.2, i - PADDING, v, color=COLOR_GRAY, fontweight='bold')
 
     ax.xaxis.set_ticks_position('bottom')
-    ax.tick_params(axis='x', colors=color_4, labelsize=8)
+    ax.tick_params(axis='x', colors=COLOR_BLACK_LIGHT, labelsize=8)
     ax.set_yticks([])
-    ax.margins(0, 0.02)
+    ax.margins(MARGIN_LR, MARGIN_TB)
     ax.grid(which='major', axis='x', linestyle='dashed')
     ax.set_axisbelow(True)
     plt.box(False)

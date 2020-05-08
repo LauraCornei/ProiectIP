@@ -98,7 +98,13 @@ window.app = new Vue({
     methods: {
         async getUserIdRecomendation() {
             const recommendationsArray = await this.getRecommedations(getParamValue('token'), getParamValue('provider_id'), getParamValue('alg_type') );
-            this.rawData = recommendationsArray;
+            
+            this.rawData = recommendationsArray.map(e => {
+                return {
+                    ...e,
+                    image: e.details.images[0]
+                }
+            });
         },
 
         getRecommedations(token, provider_id, alg_type) {
@@ -108,11 +114,11 @@ window.app = new Vue({
             
             let path = '';
             if(provider_id)
-                path += provider_id;
+                path += '/' + provider_id;
               
             
             return fetch(
-                `${API_URL}recommendations/${ALG_TYPES[alg_type]}/${path}` , {headers:{Authorization:token}}
+                `${API_URL}recommendations/${ALG_TYPES[alg_type]}${path}` , {headers:{Authorization:'Bearer ' + token}}
             ).then((res) => res.json());
         },
 
