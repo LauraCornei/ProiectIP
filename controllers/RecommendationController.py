@@ -25,7 +25,8 @@ class RecommendationController(FlaskView):
         token = request.headers.get('Authorization')
         return FoodForRestaurant.main(restaurant_id, token)
 
-    # ??? todo add comment
+    # recomanda <=10 restaurante care au specialitati asemanatoare
+    # cu cele ale restaurantul fav de clientul din input
     @route('restaurant_by_food/<customer_id>')
     def restaurant_by_food(self, customer_id):
         token = request.headers.get('Authorization')
