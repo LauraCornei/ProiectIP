@@ -1,10 +1,4 @@
-# from pymongo import MongoClient
-#
-# client = MongoClient("mongodb+srv://test:proiectip@cluster0-cirwn.mongodb.net/test?retryWrites=true&w=majority")
-# db = client['proiectip']
-
-NUMBER_OF_CUSTOMERS = 10
-NUMBER_OF_FOODS = 10
+import Constants
 from bson import ObjectId
 
 
@@ -61,15 +55,6 @@ def get_recommended_foods(similar_customers_foods, similar_customers_ordered):
         return recommended_foods_ids[:10]
 
 
-"""
-   pt similaritatea intre 2 customeri:
-       1: cate feluri comune de mancare apar intre 2 dicitonare pt customer (chei)
-       2: data ultimei comenzi
-       3: pretu
-       4: frecventa
-   """
-
-
 def final(customer_id, restaurant_id, orders):
     restaurant_orders = filter_orders(orders, restaurant_id)
     customers_orders = {}
@@ -80,8 +65,6 @@ def final(customer_id, restaurant_id, orders):
             customers_orders[order['userId']] = get_customer_food_dict(order['userId'],
                                                                        restaurant_orders)
     customers_similarities = {}
-    #print(type(customers_orders))
-    #print(type(customer_id))
     print(customers_orders)
     if customer_id not in customers_orders:
         print('nu apare')
@@ -92,23 +75,15 @@ def final(customer_id, restaurant_id, orders):
 
     similar_customers_ordered = {k: v for k, v in
                                  sorted(customers_similarities.items(), key=lambda item: item[1], reverse=True)}
-    first_similar_customers = list(similar_customers_ordered.items())[:NUMBER_OF_CUSTOMERS]
+    first_similar_customers = list(similar_customers_ordered.items())[:Constants.NUMBER_OF_CUSTOMERS]
     similar_customers_foods = {}
     for customer_id in first_similar_customers:
         similar_customers_foods[customer_id[0]] = customers_orders[customer_id[0]]
     print(get_recommended_foods(similar_customers_foods, similar_customers_ordered))
     return get_recommended_foods(similar_customers_foods, similar_customers_ordered)
 
-# orders_collection = db['orders']
-# orders = list(orders_collection.find())
-# restaurantsCollection = db['restaurants']
-# restaurants = list(restaurantsCollection.find())
-# customersCollection = db['customers']
-# customers = list(customersCollection.find())
-#
-# recommended_foods = final(customers[0]['_id'], restaurants[0]['_id'], orders)
-# print(recommended_foods)
 
 
 #http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299
 # http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd/5e8c4f351842ba322c5c13ec nu mai da lista vida 8/5/2020
+# http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd cu token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms

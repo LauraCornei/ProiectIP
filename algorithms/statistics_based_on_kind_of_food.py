@@ -1,7 +1,7 @@
 
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5e958949564a0055b294ce83/desc/false/-1
 # http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5eb16d673a637d28884dc226?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA
-
+import Constants
 
 def create_bar_plot(food_label, quantity):
     import numpy as np
@@ -9,11 +9,6 @@ def create_bar_plot(food_label, quantity):
 
     x = food_label
     y = quantity
-    color_1 = "#a71d31"  # red
-    color_2 = "#386150"  # green
-    color_3 = "#2b2633"  # black
-    color_4 = "#453d52"  # light-black
-    color_5 = "#dbdbdb"
 
     fig, ax = plt.subplots(figsize=(14, 8))
     plt.title('Food per restaurant statistic', fontsize=18, fontweight='bold')
@@ -21,7 +16,7 @@ def create_bar_plot(food_label, quantity):
     width = 0.85
     ind = np.arange(len(y))
 
-    ax.barh(ind, y, width, color=[color_1, color_2, color_3], alpha=0.95)
+    ax.barh(ind, y, width, color=[Constants.color_1, Constants.color_2, Constants.color_3], alpha=0.95)
     ax.set_yticks(ind + width / 2)
     ax.set_yticklabels(x, minor=False)
 
@@ -32,10 +27,10 @@ def create_bar_plot(food_label, quantity):
         ax.text(max(v + 0.5, vmax / 5), i - 0.08, str(v), color='black', fontweight='bold')
 
     for i, v in enumerate(x):
-        ax.text(0.2, i - 0.08, v, color=color_5, fontweight='bold')
+        ax.text(0.2, i - 0.08, v, color=Constants.color_5, fontweight='bold')
 
     ax.xaxis.set_ticks_position('bottom')
-    ax.tick_params(axis='x', colors=color_4, labelsize=8)
+    ax.tick_params(axis='x', colors=Constants.color_4, labelsize=8)
     ax.set_yticks([])
     ax.margins(0, 0.02)
     ax.grid(which='major', axis='x', linestyle='dashed')
