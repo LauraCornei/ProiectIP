@@ -22,5 +22,7 @@ class Foods(object):
         url = 'http://159.65.247.164:3002/api/courses/'+id
         headers = {"Authorization": "Bearer " + token}
         course = json.loads(requests.get(url, headers=headers).text)
+        if 'data' not in course:
+            return "the item id : "+id+ " from the order api does not appear in the courses api"
         course = course['data']
         return course
