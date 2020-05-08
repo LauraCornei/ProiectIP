@@ -10,12 +10,9 @@ from models.Foods import Foods
 
 
 def main(customer_id, token):
-    print("was")
     x = Customers.by_id(customer_id, token)
-    print(x)
     if x is None:
-        return "This customer shiran!"
+        return "This customer ain't around!"
 
-    restaurants_id = filter_res(Customers.by_id(customer_id, token), Reviews.all(token), Foods.all(token), Restaurants.all(token))
-    # restaurants_data = map(lambda e: Restaurants.by_id(e, token), restaurants_id)
-    return restaurants_id  # restaurants_data
+    restaurants_id = filter_res(Customers.by_id(customer_id, token), Reviews.all(token), token)
+    return restaurants_id
