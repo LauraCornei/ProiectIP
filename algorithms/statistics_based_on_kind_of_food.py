@@ -50,15 +50,15 @@ def get_statistics_per_restaurant(restaurant_id, orders, sort_order, show_count)
     tick_label = []
     height = []
     for order in orders:
-        for item in order['items']:
+        for item in order["items"]:
             if restaurant_id == 0 or order["restaurantId"] == restaurant_id:
-                food_dict[item['item']["product"]] = 0
-                food_name_by_id[item['item']["product"]] = item['item']["product"]
+                food_dict[item["items"]["product"]] = 0
+                food_name_by_id[item["items"]["product"]] = item["items"]["product"]
 
     for order in orders:
-        for item in order['items']:
+        for item in order["items"]:
             if restaurant_id == 0 or order["restaurantId"] == restaurant_id:
-                food_dict[food_name_by_id[item['item']["product"]]] += item['item']["quantity"]
+                food_dict[food_name_by_id[item["items"]["product"]]] += item["items"]["quantity"]
 
     sorted_food_dict = {}
     if sort_order == "asc":

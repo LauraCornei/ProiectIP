@@ -11,10 +11,12 @@ class RecommendationController(FlaskView):
 
     @route('restaurant/<customer_id>')
     def restaurant(self, customer_id):
-        return Restaurant.main(customer_id)
+        token = request.headers.get('Authorization')
+        return Restaurant.main(customer_id, token)
 
     @route('asd/<restaurant_id>/<customer_id>')
     def food(self, restaurant_id, customer_id):
+        token = request.headers.get('Authorization')
         return Food.recommendForRestaurant(restaurant_id, customer_id)
 
     # recomanda mancaruri pt un restaurant
