@@ -20,18 +20,23 @@ def get_restaurant_menu(restaurant, foods):
     return menu
 
 
-# returneaza un dictionar cu numele si de cate ori a fost comandata de catre customer fiecare fel de mancare
-# care nu apare in meniul restaurantului
-def get_customer_other_foods(customer_id, orders, foods, restaurant_menu):
+
+def get_customer_other_course_ids(userId, orders, restaurant_courses_ids):
     customer_other_foods = {}
     for order in orders:
-        if order['customer_id'] == customer_id:
-            food = get_food_by_id(order['food_id'], foods)
-            if food['name'] not in restaurant_menu:
-                if food['name'] not in customer_other_foods:
-                    customer_other_foods[food['name']] = 1
-                else:
-                    customer_other_foods[food['name']] += 1
+        if order['userId'] == userId:
+            for item in order['items']:
+                if item['id'] not in restaurant_courses_ids:
+                    if item['id'] not in customer_other_foods:
+                        customer_other_foods[item['id']] = 1
+                    else:
+                        customer_other_foods[item['id']] += 1
+            # food = get_food_by_id(order['food_id'], foods)
+            # if food['name'] not in restaurant_menu:
+            #     if food['name'] not in customer_other_foods:
+            #         customer_other_foods[food['name']] = 1
+            #     else:
+            #         customer_other_foods[food['name']] += 1
     return customer_other_foods
 
 
@@ -39,29 +44,33 @@ def get_customer_other_foods(customer_id, orders, foods, restaurant_menu):
 def get_restaurant_clients(restaurant, orders):
     clients = {}
     for order in orders:
-        if order['restaurant_id'] == restaurant['_id']:
-            if order['customer_id'] not in clients:
-                clients[order['customer_id']] = 1
+        if order['restaurantId'] == restaurant['_id']:
+            if order['userId'] not in clients:
+                clients[order['userId']] = 1
             else:
-                clients[order['customer_id']] += 1
+                clients[order['userId']] += 1
     return clients
 
 
+# am sters foods de la parametri
 def final(restaurant, orders, foods):
     recommendations = {}
     clients = get_restaurant_clients(restaurant, orders)
-    restaurant_menu = get_restaurant_menu(restaurant, foods)
-    for customer_id in clients:
-        customer_other_foods = get_customer_other_foods(customer_id, orders, foods, restaurant_menu)
+    # restaurant_menu = get_restaurant_menu(restaurant, foods)
+    restaurant_menu = restaurant['details']['menu']['courses']
+    restaurant_courses_ids = []
+    for course in restaurant_menu:
+        restaurant_courses_ids.append(course['_id'])
+    # print(restaurant_menu)
+    for userId in clients:
+        customer_other_foods = get_customer_other_course_ids(userId, orders, restaurant_courses_ids)
         for food in customer_other_foods:
             if food not in recommendations:
-                recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[customer_id]
+                recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[userId]
             else:
-                recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[customer_id]
+                recommendations[food] = 1 + 0.2 * customer_other_foods[food] * clients[userId]
 
     result = {k: v for k, v in sorted(recommendations.items(), key=lambda item: item[1], reverse=True)}
     return list(result.keys())[:10]
     # return recommendations
-
-
-
+    # ruta de test: http://127.0.0.1:5000/recommendations/food/5eb16d673a637d28884dc226 7 mai 2020
