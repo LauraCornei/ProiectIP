@@ -23,3 +23,7 @@ ID = "_id"
 FFIELD = "category"
 ORDER_DATE ="orderDate"
 NAME= "name"
+
+AUTHORIZATION = 'Authorization'
+SECRET = 'agfbkgfdakjhabagdf'
+TOKEN = 'token'

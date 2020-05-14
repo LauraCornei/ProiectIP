@@ -5,48 +5,48 @@ from hooks.json_response import output_json
 from flask import Response
 from flask import request
 from jwt import decode
+from Constants import AUTHORIZATION, SECRET, TOKEN
 
 
 class RecommendationController(FlaskView):
     representations = {'application/json': output_json}
-    secret = 'agfbkgfdakjhabagdf'
 
     def get_customer_id(self, token):
-        decoded = decode(token.split(' ')[1], self.secret)
+        decoded = decode(token.split(' ')[1], SECRET)
         return decoded['_id']
 
     @route('restaurant')
     def restaurant(self):
-        token = request.headers.get('Authorization')
+        token = request.headers.get(AUTHORIZATION)
         return Restaurant.main(self.get_customer_id(token), token)
 
     @route('asd/<restaurant_id>')
     def food(self, restaurant_id):
-        token = request.headers.get('Authorization')
+        token = request.headers.get(AUTHORIZATION)
         return Food.recommendForRestaurant(restaurant_id, self.get_customer_id(token), token)
 
     # recomanda mancaruri pt un restaurant
     @route('food/<restaurant_id>')
     def food_for_restaurant(self, restaurant_id):
-        token = request.headers.get('Authorization')
+        token = request.headers.get(AUTHORIZATION)
         return FoodForRestaurant.main(restaurant_id, token)
 
     # recomanda <=10 restaurante care au specialitati asemanatoare
     # cu cele ale restaurantul fav de clientul din input
     @route('restaurant_by_food')
     def restaurant_by_food(self):
-        token = request.headers.get('Authorization')
+        token = request.headers.get(AUTHORIZATION)
         return RestaurantByFood.main(self.get_customer_id(token), token)
 
     @route('stats/orders_per_hour/<restaurant_id>')
     def orders_per_hour_per_restaurant(self, restaurant_id):
-        token = request.args.get("token")
+        token = request.args.get(TOKEN)
         return Response(NumberOfOrdersPerHour.number_of_orders_by_restaurant(restaurant_id, token),
                         mimetype="image/svg+xml")
 
     @route('stats/orders_per_hour')
     def orders_per_hour(self):
-        token = request.args.get("token")
+        token = request.args.get(TOKEN)
         return Response(NumberOfOrdersPerHour.number_of_orders(token), mimetype="image/svg+xml")
 
 
@@ -55,7 +55,7 @@ class RecommendationController(FlaskView):
     # show_count = number of shows
     @route('stats/food_per_restaurant/<restaurant_id>')
     def food_per_restaurant(self, restaurant_id):
-        token = request.args.get("token")
+        token = request.args.get(TOKEN)
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')
@@ -69,7 +69,7 @@ class RecommendationController(FlaskView):
     # show_count = number of shows
     @route('stats/food_all_restaurants')
     def food_all_restaurants(self):
-        token = request.args.get("token")
+        token = request.args.get(TOKEN)
         show_count = -1
         if 'show_count' in request.args:
             show_count = request.args.get('show_count')
