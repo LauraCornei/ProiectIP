@@ -87,3 +87,7 @@ def final(customer_id, restaurant_id, orders):
 #http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299
 # http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd/5e8c4f351842ba322c5c13ec nu mai da lista vida 8/5/2020
 # http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd cu token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
+
+
+#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViMTZmZGY0YWZiZjY1NDk2NmNiNjhkIn0.fUS-G5sTekJZhakqYKpoBXJ8Nc5vqrYcUPwWDO-0mL0
+# ruta: http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd
