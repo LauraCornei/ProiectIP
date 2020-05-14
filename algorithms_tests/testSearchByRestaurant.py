@@ -1,16 +1,15 @@
 import unittest
+import TestConstants
+import Constants
 from algorithms.search_by_restaurant import final
 from models.Orders import Orders
 from models.Restaurants import Restaurants
 from models.Reviews import Reviews
 from jwt import decode
 
-import TestConstants
-import Constants
-
 class TestSearchByRestaurant(unittest.TestCase):
 
-    #
+    #verif corectitudine output
     def test_recommendation_output(self):
         token = TestConstants.REST_FOOD_RECOMM_TOKEN
         decoded = decode(token, Constants.SECRET)

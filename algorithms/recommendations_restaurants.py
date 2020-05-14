@@ -1,6 +1,5 @@
 import Constants
 
-
 def get_preferred_restaurants(customer, reviews):
     preferences = []
     for review in reviews:

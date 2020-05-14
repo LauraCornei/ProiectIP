@@ -9,7 +9,7 @@ class Restaurants(object):
         url = 'http://159.65.247.164:3002/api/providers'
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        restaurantsCollection = restaurantsCollection["data"]["providers"]
+        restaurantsCollection = restaurantsCollection["data"]["provider"]
         return restaurantsCollection
 
     @staticmethod
@@ -18,5 +18,7 @@ class Restaurants(object):
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
         if(restaurantsCollection["success"]):
-          restaurantsCollection = restaurantsCollection['data']["providers"]
+          print(restaurantsCollection["data"])
+          if(restaurantsCollection["data"]):
+             restaurantsCollection = restaurantsCollection["data"]["provider"]
         return restaurantsCollection
