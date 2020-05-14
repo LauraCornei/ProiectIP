@@ -57,10 +57,10 @@ def get_recommended_foods(similar_customers_foods, similar_customers_ordered):
 
 def final(customer_id, restaurant_id, orders):
 
-    if len(customer_id) != 24:
+    if len(customer_id) != Constants.OBJECT_ID_LENGTH:
         raise ValueError("the customer id must be 24 characters long")
 
-    if len(restaurant_id) != 24:
+    if len(restaurant_id) != Constants.OBJECT_ID_LENGTH:
         raise ValueError("the restaurant id must be 24 characters long")
 
     restaurant_orders = filter_orders(orders, restaurant_id)

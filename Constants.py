@@ -27,3 +27,5 @@ NAME= "name"
 AUTHORIZATION = 'Authorization'
 SECRET = 'agfbkgfdakjhabagdf'
 TOKEN = 'token'
+
+OBJECT_ID_LENGTH = 24

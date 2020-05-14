@@ -20,7 +20,7 @@ def get_nb_of_orders(orders, customer_id, restaurant_id):
 def get_review_score(reviews, customer_id, restaurant_id):
     score = 3
     for review in reviews:
-      if customer_id == review[Constants.USER_ID] and restaurant_id == review[Constants.RESTAURANT_ID]:
+      if customer_id == review[Constants.REVIEWER_ID] and restaurant_id == review[Constants.PROVIDER_ID]:
          score= review[Constants.SCORE]
     return score
 
@@ -77,8 +77,6 @@ def get_recommended_restaurant_from_trie(t, restaurant_prefix):
     return recommended_restaurant_id[Constants.RESTAURANT_ID]
 
 def update_trie(t, restaurants , reviews, orders, customer_id, token):
-   print(customer_id)
-
    for order in orders:
         if customer_id == order[Constants.USER_ID]:
             insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order[Constants.RESTAURANT_ID],  token)
@@ -86,6 +84,10 @@ def update_trie(t, restaurants , reviews, orders, customer_id, token):
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
+
+    if len(customer_id) != Constants.OBJECT_ID_LENGTH:
+        raise ValueError("the customer id must be 24 characters long")
+
     t = Trie()
     update_trie(t, restaurants, reviews, orders, customer_id, token)
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
