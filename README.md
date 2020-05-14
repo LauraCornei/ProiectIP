@@ -436,7 +436,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 ### GET
 
-Returns for <customer_id> the name of the restaurant that matches <restaurant_prefix> based on different criteria such as the number of reviews/orders received.
+Returns for <customer_id> the name of the restaurant that matches <restaurant_prefix> based on different criteria such as the number of reviews/orders that have been received.
 
 **URL parameters**:
 
