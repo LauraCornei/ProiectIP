@@ -141,7 +141,7 @@ Recommends for <customer_id> a restaurant based on the reviews made by the other
 }
 ```
 
-## /recommendations/asd/<restaurant_id>
+## /recommendations/food-for-restaurant/<restaurant_id>
 
 
 ### GET
@@ -205,7 +205,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 }
 ```
 
-## /recommendations/restaurant_by_food
+## /recommendations/restaurant-by-food
 
 ### GET
 
@@ -334,7 +334,7 @@ Recommends for <customer_id> a list of <=10 restaurants that have at least one s
 ```
 
 
-## /recommendations/stats/food_per_restaurant/<restaurant_id>
+## /recommendations/stats/food-per-restaurant/<restaurant_id>
 
 ### GET
 
@@ -365,7 +365,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 ![alt text](https://github.com/killagann/ran/blob/master/f1.svg?raw=true)
 
-## /recommendations/stats/food_all_restaurants
+## /recommendations/stats/food-all-restaurants
 
 ### GET
 
@@ -388,7 +388,7 @@ Returns a svg with the number of orders for every dish from all the restaurants.
 
 ![alt text](https://github.com/killagann/ran/blob/master/f2.svg?raw=true)
 
-## /recommendations/stats/orders_per_hour
+## /recommendations/stats/orders-per-hour
 
 ### GET
 
@@ -406,7 +406,7 @@ Returns a svg with the number of orders per hour for all restaurants.
 
 ![alt text](https://github.com/killagann/ran/blob/master/o1.svg?raw=true)
 
-## /recommendations/stats/orders_per_hour/<restaurant_id>
+## /recommendations/stats/orders-per-hour/<restaurant_id>
 
 ### GET
 
