@@ -91,15 +91,18 @@ def pick_course_from_restaurant(restaurant_id, token):
     return restaurant_courses[random_index]['_id']
 
 
-def add_to_cart(token, restaurant_id):
+def add_to_cart(token, restaurant_id, s):
     course_id = pick_course_from_restaurant(restaurant_id, token)
     url = 'http://159.65.247.164:3000/api/v1/cart/add-product/' + course_id
     headers = {"Authorization": "Bearer " + token}
     print("folosesc tokenul: ", token)
     print("adaug la cart ")
     print("url-ul e ", url)
-    x = requests.get(url, headers=headers)
+    x = s.get(url, headers=headers)
     print(x.text)
+    url = "http://159.65.247.164:3000/api/v1/cart/session"
+    # x = s.get(url, headers=headers)
+    # print("cartul are in el: ", x.text)
 
 
 def get_provider_id_by_email(email, token):
@@ -109,7 +112,7 @@ def get_provider_id_by_email(email, token):
             return restaurant['_id']
 
 
-def create_order_for_user(user_dict, login_response):
+def create_order_for_user(user_dict, login_response, s):
     fake = Faker()
     token = login_response["token"]
     headers = {"Authorization": "Bearer " + token,
@@ -133,21 +136,23 @@ def create_order_for_user(user_dict, login_response):
                  "restaurantId": provider_id
                  }
         for i in range(nr_of_courses_in_order):
-            add_to_cart(token, order['restaurantId'])
-        # url = "http://159.65.247.164:3000/api/v1/cart"
-        # request_data = {
-        #     "userId": login_response["user"]["_id"]
-        # }
+            add_to_cart(token, order['restaurantId'], s)
+        url = "http://159.65.247.164:3000/api/v1/cart/session"
+        x = s.get(url, headers=headers)
+        print("cartul are in el: ", x.text)
+        url = "http://159.65.247.164:3000/api/v1/cart"
+        request_data = {
+            "userId": login_response["user"]["_id"]
+        }
         encoder = json.JSONEncoder()
-        # print("url-ul e ", url)
-        # print("headerurile sunt ", headers)
-        # print("body ul e ", encoder.encode(request_data))
-        # exit(0)
-        # x = requests.post(url, headers=headers, data=encoder.encode(request_data))
-        # print("in cart se afla la adaugare : ", x.text)
+        print("url-ul e ", url)
+        print("headerurile sunt ", headers)
+        print("body ul e ", encoder.encode(request_data))
+        x = s.post(url, headers=headers, data=encoder.encode(request_data))
+        print("in cart se afla la adaugare : ", x.text)
         url = "http://159.65.247.164:3000/api/v1/orders"
         print("encodarea de la order e ", encoder.encode(order))
-        x = requests.post(url, headers=headers, data=encoder.encode(order))
+        x = s.post(url, headers=headers, data=encoder.encode(order))
         print("am adaugat in orders, speram ca are items ", x.text)
 
 
@@ -157,17 +162,18 @@ def create_orders():
         login_url = 'http://159.65.247.164:3002/api/users/login'
         encoder = json.JSONEncoder()
         for user in users:
+            s = requests.Session()
             print("sunt la userul ", user)
             login_data = {"email": user["email"], "password": user["password"]}
             headers = {"Content-type": "application/json"}
             login_data = encoder.encode(login_data)
-            response = json.loads(requests.post(login_url, data=login_data, headers=headers).text)
+            response = json.loads(s.post(login_url, data=login_data, headers=headers).text)
             print("am primit response-ul: ", response)
             if response["success"]:
                 nr_of_orders = random.randint(3, 5)
                 for i in range(nr_of_orders):
                     print("creez orderul nr", i)
-                    create_order_for_user(user, response)
+                    create_order_for_user(user, response, s)
 
 
 print("am porit")

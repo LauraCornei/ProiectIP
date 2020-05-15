@@ -19,10 +19,10 @@ def get_customer_food_dict(customer_id, orders):
             if Constants.ITEMS not in order:
                 continue
             for item in order[Constants.ITEMS]:
-                if item[Constants.ID] not in customer_foods:
-                    customer_foods[item[Constants.ID]] = 1
+                if item['id'] not in customer_foods:
+                    customer_foods[item['id']] = 1
                 else:
-                    customer_foods[item[Constants.ID]] += 1
+                    customer_foods[item['id']] += 1
     return customer_foods
 
 
