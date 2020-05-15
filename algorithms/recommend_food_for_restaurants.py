@@ -23,11 +23,11 @@ def get_customer_other_course_ids(user_id, orders, restaurant_courses_ids):
     for order in orders:
         if order[Constants.USER_ID] == user_id:
             for item in order[Constants.ITEMS]:
-                if item[Constants.ID] not in restaurant_courses_ids:
-                    if item[Constants.ID] not in customer_other_foods:
-                        customer_other_foods[item[Constants.ID]] = 1
+                if item['id'] not in restaurant_courses_ids:
+                    if item['id'] not in customer_other_foods:
+                        customer_other_foods[item['id']] = 1
                     else:
-                        customer_other_foods[item[Constants.ID]] += 1
+                        customer_other_foods[item['id']] += 1
             # food = get_food_by_id(order['food_id'], foods)
             # if food['name'] not in restaurant_menu:
             #     if food['name'] not in customer_other_foods:
