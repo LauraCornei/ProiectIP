@@ -12,11 +12,12 @@ class TestRestaurantRecommendations(unittest.TestCase):
 
     #verif corectitudine algoritm
     def test_recommendation_output(self):
-        token= TestConstants.REST_RECOMM_TOKEN
+        token = TestConstants.REST_RECOMM_TOKEN
         decoded = decode(token, Constants.SECRET)
         customer_id = decoded['_id']
+
         restaurant_id = final(Customers.by_id(customer_id, token), Reviews.all(token), Restaurants.all(token))
-        self.assertEqual("5eb17a5b251c5187bd97251a",restaurant_id)
+        self.assertNotEqual({}, restaurant_id)
 
     # verif ca customer_id sa aiba structura unui object id (lungime 24)
     def test_raise_exception(self):
@@ -27,3 +28,5 @@ class TestRestaurantRecommendations(unittest.TestCase):
         #self.assertRaises(ValueError, final, customer_id, Reviews.all(token), Restaurants.all(token))
         self.assertRaises(ValueError, final, '1234', Reviews.all(token), Restaurants.all(token))
 
+#http://127.0.0.1:5000/recommendations/restaurant
+#eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI

@@ -48,9 +48,3 @@ class TestSearchByRestaurant(unittest.TestCase):
         decoded = decode(token, Constants.SECRET)
         customer_id_from_token = decoded['_id']
         self.assertEqual(customer_id,customer_id_from_token)
-
-
-#http://127.0.0.1:5000/search/restaurant/R
-#restaurant_id:  5ebcf11126e32517c46effff
-#user_id:  5ebce91a26e32517c46effed
-#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViY2U5MWEyNmUzMjUxN2M0NmVmZmVkIn0.eu0f5Vv_h8OYaslYyXKdb_2Rl8hv9FPnH3dXXEQzykQ
