@@ -221,118 +221,113 @@ Recommends for <customer_id> a list of <=10 restaurants that have at least one s
 **Returned data example**:
 
 ```JSON
-[
+{
+  "success": "true",
+  "data": [
     {
-        "role": "Provider",
-        "confirmed": true,
-        "_id": "5eb16d673a637d28884dc226",
-        "name": "Restaurant TEST",
-        "email": "restaurantTEST@gmail.com",
-        "__v": 5,
-        "emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmQ2NzNhNjM3ZDI4ODg0ZGMyMjYiLCJpYXQiOjE1ODg2ODYxODN9.nJhLti7CUCPjww4bizJ8-sp55g_9zChELtuoMMxdCrQ",
-        "details": {
-            "location": {
-                "latitude": 70,
-                "longitude": 0,
-                "adress": "str. BUna"
-            },
-            "images": [
-                "http://localhost:4000/images/fb336c14-2a81-4ab1-a86e-471d79b55b1d.png",
-                "http://localhost:4000/images/f0d350da-d374-4f7a-8121-69619cb17173.png",
-                "http://localhost:4000/images/5ad03d31-c548-4a66-b0b1-f870bf928de5.png",
-                "http://localhost:4000/images/45cd80f0-d88e-4ed4-a797-7341a0042092.png",
-                "http://localhost:4000/images/8d2b118e-37e7-4ad0-8032-48e414e74c29.png",
-                "http://localhost:4000/images/6b033d17-e6e2-4c4d-b2a4-5f0d53eb174f.png",
-                "http://localhost:4000/images/c5065a34-cf84-44f5-88b9-bceb71049343.png"
-            ],
-            "specials": [
-                "Greek Food",
-                "Burger"
-            ],
-            "commandsQueue": [
-                ""
-            ],
-            "reservationsQueue": [
-                ""
-            ],
-            "_id": "5eb17156251c5187bd95ff83",
-            "userId": "5eb16d673a637d28884dc226",
-            "CUI": "RO123456789010",
-            "__v": 0,
-            "description": "However, the most important aspect of any restaurant is the quality of food and service, and we are justifiably proud of both.Our menu is based on the principles of using the high quality raw local ingredients, along with the best of ingredients imported from around the world, freshly cooked and presented by our head chef Matt Clarke and his team with care and attention.",
-            "priceCategory": "Expensive",
-            "rating": 10,
-            "capacity": 100,
-            "type": "Restaurant",
-            "menu": {
-                "_id": "5eb17156251c5187bd95fff4",
-                "providerId": "5eb17156251c5187bd95ff83",
-                "__v": 0,
-                "courses": [
-                    {
-                        "category": [],
-                        "ingredients": [],
-                        "allergenes": [],
-                        "_id": "5eb5704c341f5a1988b126a1",
-                        "name": "Pizza",
-                        "price": 20
-                    }
-                ]
-            },
-            "schedule": {
-                "_id": "5eb17157251c5187bd960008",
-                "providerId": "5eb17156251c5187bd95ff83",
-                "__v": 0,
-                "schedule": [
-                    {
-                        "_id": "5eb173d3d6fb9132c43218a5",
-                        "day": "luni",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218a6",
-                        "day": "marti",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218a7",
-                        "day": "miercuri",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218a8",
-                        "day": "joi",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218a9",
-                        "day": "vineri",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218aa",
-                        "day": "sambata",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    },
-                    {
-                        "_id": "5eb173d3d6fb9132c43218ab",
-                        "day": "duminica",
-                        "startHour": "10 am",
-                        "endHour": "5 pm"
-                    }
-                ]
-            },
-            "id": "5eb17156251c5187bd95ff83"
+      "role": "Provider",
+      "confirmed": true,
+      "_id": "5eb175094afbf654966cb690",
+      "name": "Gimmy Restaurant",
+      "email": "gimmy_restaurant@gmail.com",
+      "__v": 1,
+      "emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNzUwOTRhZmJmNjU0OTY2Y2I2OTAiLCJpYXQiOjE1ODg2ODgxMzd9.Pea0iTISyAny4IEluMMcvZxrbODpTRheIjhy88yK4tg",
+      "details": {
+        "location": {
+          "latitude": 53.5,
+          "longitude": 43.2
         },
-        "id": "5eb16d673a637d28884dc226"
+        "images": [
+          "https://d2fdt3nym3n14p.cloudfront.net/venue/1360/gallery/3022/conversions/sole8-big.jpg",
+          "https://d2fdt3nym3n14p.cloudfront.net/venue/1360/gallery/3023/conversions/sole3-big.jpg"
+        ],
+        "specials": [
+          "pizza",
+          "pasta"
+        ],
+        "commandsQueue": [
+          "",
+          "cccccccccccc",
+          "5ead3934340c241a2014b4b8",
+          "5ead4f803f29fe06b727b88a"
+        ],
+        "reservationsQueue": [
+          "",
+          "bbbbbbbbbbbb",
+          "5ead38cf340c241a2014b4b7"
+        ],
+        "_id": "5eb17a5b251c5187bd97251a",
+        "userId": "5eb175094afbf654966cb690",
+        "CUI": "ER563KIDO34",
+        "__v": 0,
+        "description": "A place with good food and nice vibes.",
+        "priceCategory": "Medium",
+        "rating": 4.5,
+        "capacity": 57,
+        "type": "Canteen",
+        "menu": {
+          "_id": "5eb17a5c251c5187bd97253d",
+          "providerId": "5eb17a5b251c5187bd97251a",
+          "__v": 0,
+          "courses": [
+            {
+              "category": [
+                "pizza"
+              ],
+              "ingredients": [
+                "onion",
+                "salami",
+                "mushrooms",
+                "eggs",
+                "cheese"
+              ],
+              "allergenes": [
+                "eggs",
+                "milk"
+              ],
+              "_id": "5eb17a5c6f436666294bc420",
+              "name": "house pizza",
+              "price": 30,
+              "image": "https://img.favpng.com/7/18/21/shashlik-pizza-dish-main-course-restaurant-png-favpng-6qHVKG4NM94QxrdHUWzwj75y5.jpg"
+            },
+            {
+              "category": [
+                "pasta"
+              ],
+              "ingredients": [
+                "onion",
+                "salami",
+                "tomatoes",
+                "eggs",
+                "cheese"
+              ],
+              "allergenes": [
+                "eggs",
+                "milk"
+              ],
+              "_id": "5eb17a5c6f436666294bc421",
+              "name": "house pasta",
+              "price": 25,
+              "image": "https://img.favpng.com/7/18/21/shashlik-pizza-dish-main-course-restaurant-png-favpng-6qHVKG4NM94QxrdHUWzwj75y5.jpg"
+            }
+          ]
+        },
+        "schedule": {
+          "_id": "5eb17a5c251c5187bd972551",
+          "providerId": "5eb17a5b251c5187bd97251a",
+          "__v": 0,
+          "schedule": [
+            {
+              "_id": "5eb17a5c6f436666294bc422"
+            }
+          ]
+        },
+        "id": "5eb17a5b251c5187bd97251a"
+      },
+      "id": "5eb175094afbf654966cb690"
     }
-]
+  ]
+}
 ```
 
 
