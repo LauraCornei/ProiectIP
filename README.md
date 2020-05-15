@@ -151,7 +151,7 @@ Recommends for <customer_id> a dish from <restuarant_id>.
 **URL parameter**:
 
 The ID of the restaurant should be specified in the URL:  
-`.../recommendations/asd/5e9494aadd757435187a6dbd`  
+`.../recommendations/food-for-restaurant/5e9494aadd757435187a6dbd`  
 The <restaurant_id> should be the 24-character hex-strings corresponding to the `providerId`.
 
 **Return codes**:
@@ -160,7 +160,7 @@ The <restaurant_id> should be the 24-character hex-strings corresponding to the 
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd`
+ `http://127.0.0.1:5000/recommendations/food-for-restaurant/5e9494aadd757435187a6dbd`
  `token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms`
  
 **Returned data example**:
@@ -217,7 +217,7 @@ Recommends for <customer_id> a list of <=10 restaurants that have at least one s
 -   400 - There was a problem fetching data
 
 **Usage example**:  
-`http://127.0.0.1:5000/recommendations/restaurant_by_food`
+`http://127.0.0.1:5000/recommendations/restaurant-by-food`
 `token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI`
 
 
@@ -343,7 +343,7 @@ Returns a svg with the number of orders for every dish from <restaurant_id>.
 **URL parameter**:
 
 The ID of the restaurant should be specified in the URL:  
-`.../recommendations/stats/food_per_restaurant/5eb16d673a637d28884dc226?...`  
+`.../recommendations/stats/food-per-restaurant/5eb16d673a637d28884dc226?...`  
 The <restaurant_id> should be the 24-character hex-string corresponding to the `providerId`.
 
 **Query parameters**:
@@ -359,7 +359,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 **Usage example**:  
 
-`http://127.0.0.1:5000/recommendations/stats/food_per_restaurant/5eb16d673a637d28884dc226?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+`http://127.0.0.1:5000/recommendations/stats/food-per-restaurant/5eb16d673a637d28884dc226?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
@@ -382,7 +382,7 @@ Returns a svg with the number of orders for every dish from all the restaurants.
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/stats/food_all_restaurants?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+ `http://127.0.0.1:5000/recommendations/stats/food-all-restaurants?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
@@ -400,7 +400,7 @@ Returns a svg with the number of orders per hour for all restaurants.
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/stats/orders_per_hour?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+ `http://127.0.0.1:5000/recommendations/stats/orders-per-hour?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
@@ -415,7 +415,7 @@ Returns a svg with the number of orders per hour for <restaurant_id>.
 **URL parameter**:
 
 The ID of the restaurant should be specified in the URL:  
-`.../recommendations/stats/orders_per_hour/5eb16d673a637d28884dc226?...`  
+`.../recommendations/stats/orders-per-hour/5eb16d673a637d28884dc226?...`  
 The <restaurant_id> should be the 24-character hex-string corresponding to the `providerId`.
 
 **Return codes**:
@@ -424,7 +424,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/stats/orders_per_hour/5eb16d673a637d28884dc226?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+ `http://127.0.0.1:5000/recommendations/stats/orders-per-hour/5eb16d673a637d28884dc226?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
