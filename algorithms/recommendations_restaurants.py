@@ -31,6 +31,8 @@ def get_recommendations(customer, customer_clusters, tops):
 
 
 def final(customer, reviews, restaurants):
+    if len(customer) != Constants.OBJECT_ID_LENGTH:
+        raise ValueError("the customer id must be 24 characters long")
     tops = []
     customer_clusters = []
     for restaurant in restaurants:
