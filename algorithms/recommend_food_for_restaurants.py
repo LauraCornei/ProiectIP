@@ -72,3 +72,4 @@ def final(restaurant, orders):
 
 
 # ruta de test: http://127.0.0.1:5000/recommendations/food/5eb16d673a637d28884dc226 7 mai 2020
+# http://127.0.0.1:5000/recommendations/food/5e9494aadd757435187a6dbd
