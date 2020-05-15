@@ -20,7 +20,7 @@ class RecommendationController(FlaskView):
         token = request.headers.get(AUTHORIZATION)
         return Restaurant.main(self.get_customer_id(token), token)
 
-    @route('asd/<restaurant_id>')
+    @route('food-for-restaurant/<restaurant_id>')
     def food(self, restaurant_id):
         token = request.headers.get(AUTHORIZATION)
         return Food.recommendForRestaurant(restaurant_id, self.get_customer_id(token), token)
@@ -33,27 +33,26 @@ class RecommendationController(FlaskView):
 
     # recomanda <=10 restaurante care au specialitati asemanatoare
     # cu cele ale restaurantul fav de clientul din input
-    @route('restaurant_by_food')
+    @route('restaurant-by-food')
     def restaurant_by_food(self):
         token = request.headers.get(AUTHORIZATION)
         return RestaurantByFood.main(self.get_customer_id(token), token)
 
-    @route('stats/orders_per_hour/<restaurant_id>')
+    @route('stats/orders-per-hour/<restaurant_id>')
     def orders_per_hour_per_restaurant(self, restaurant_id):
         token = request.args.get(TOKEN)
         return Response(NumberOfOrdersPerHour.number_of_orders_by_restaurant(restaurant_id, token),
                         mimetype="image/svg+xml")
 
-    @route('stats/orders_per_hour')
+    @route('stats/orders-per-hour')
     def orders_per_hour(self):
         token = request.args.get(TOKEN)
         return Response(NumberOfOrdersPerHour.number_of_orders(token), mimetype="image/svg+xml")
 
-
     # parameters:
     # order = "asc"/"desc"
     # show_count = number of shows
-    @route('stats/food_per_restaurant/<restaurant_id>')
+    @route('stats/food-per-restaurant/<restaurant_id>')
     def food_per_restaurant(self, restaurant_id):
         token = request.args.get(TOKEN)
         show_count = -1
@@ -67,7 +66,7 @@ class RecommendationController(FlaskView):
     # parameters:
     # order = "asc"/"desc"
     # show_count = number of shows
-    @route('stats/food_all_restaurants')
+    @route('stats/food-all-restaurants')
     def food_all_restaurants(self):
         token = request.args.get(TOKEN)
         show_count = -1

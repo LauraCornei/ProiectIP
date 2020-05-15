@@ -46,4 +46,7 @@ AUTHORIZATION = 'Authorization'
 SECRET = 'agfbkgfdakjhabagdf'
 TOKEN = 'token'
 
+FALSE = False
+ERROR = "error"
+
 OBJECT_ID_LENGTH = 24
