@@ -28,7 +28,7 @@ def get_latest_order(orders, customer_id, restaurant_id):
     current_date = datetime.date.today()
 
     for order in orders:
-        print(order[Constants.ORDER_DATE])
+        #print(order[Constants.ORDER_DATE])
         order_date = datetime.datetime.strptime("2008-09-03T20:56:35.450686Z", "%Y-%m-%dT%H:%M:%S.%fZ").date()
 
         if customer_id == order[Constants.USER_ID] and restaurant_id == order[Constants.RESTAURANT_ID]:

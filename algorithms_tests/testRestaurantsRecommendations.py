@@ -26,7 +26,7 @@ class TestRestaurantRecommendations(unittest.TestCase):
         customer_id = decoded['_id']
         print(customer_id)
         #self.assertRaises(ValueError, final, customer_id, Reviews.all(token), Restaurants.all(token))
-        self.assertRaises(ValueError, final, '1234', Reviews.all(token), Restaurants.all(token))
+        self.assertRaises(ValueError, final, {"_id":'1234'}, Reviews.all(token), Restaurants.all(token))
 
 #http://127.0.0.1:5000/recommendations/restaurant
 #eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI
