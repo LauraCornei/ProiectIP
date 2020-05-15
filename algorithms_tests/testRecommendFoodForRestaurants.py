@@ -17,7 +17,7 @@ class TestRestaurantFoodRecommendation(unittest.TestCase):
     def test_recommendation_output(self):
         token = TestConstants.REST_FOOD_FOR_REST_TOKEN
         orders = Orders.all(token)
-        restaurant_id ="5e9494aadd757435187a6dbd"
+        restaurant_id ="5ebcf11126e32517c46effff"
         self.assertNotEquals({}, final(restaurant_id, orders))
 
 

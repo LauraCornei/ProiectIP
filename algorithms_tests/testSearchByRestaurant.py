@@ -14,13 +14,32 @@ class TestSearchByRestaurant(unittest.TestCase):
         token = TestConstants.REST_FOOD_RECOMM_TOKEN
         decoded = decode(token, Constants.SECRET)
         customer_id = decoded['_id']
-        restaurant_prefix = "Rest"
+        restaurant_prefix = "R"
         orders = Orders.all(token)
         reviews= Reviews.by_customer_id(customer_id, token)
         restaurants = Restaurants.all(token)
 
-        self.assertEquals({ "name_recommended_restaurant": "Recommendation starting with given prefix not found"},
+        self.assertEquals({
+          "data": {
+            "name_recommended_restaurant": "Ramonita"
+          },
+          "success": "true"
+        },
         final(reviews, restaurants, orders, customer_id, restaurant_prefix, token))
+
+        # verif corectitudine output
+
+    def test_recommendation_output(self):
+        token = TestConstants.REST_FOOD_RECOMM_TOKEN
+        decoded = decode(token, Constants.SECRET)
+        customer_id = decoded['_id']
+        restaurant_prefix = "L"
+        orders = Orders.all(token)
+        reviews = Reviews.by_customer_id(customer_id, token)
+        restaurants = Restaurants.all(token)
+
+        self.assertEquals({"name_recommended_restaurant": "Recommendation starting with given prefix not found"},
+                          final(reviews, restaurants, orders, customer_id, restaurant_prefix, token))
 
     #verif corectitudine functie de decodare
     def test_decoding(self):
