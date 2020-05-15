@@ -124,16 +124,31 @@ def create_order_for_user(user_dict, login_response):
         provider_email = providers[provider_index]['email']
         provider_id = get_provider_id_by_email(provider_email, token)
         nr_of_courses_in_order = random.randint(1, 3)
+        order = {"userId": login_response["user"]["_id"],
+                 "email": login_response["user"]["email"],
+                 "userFirstName": name[0],
+                 "userLastName": name[1],
+                 "phoneNumber": "0748973012",
+                 "paymentMethod": "cash",
+                 "restaurantId": provider_id
+                 }
         for i in range(nr_of_courses_in_order):
-            order = {"userId": login_response["user"]["_id"],
-                     "email": login_response["user"]["email"],
-                     "userFirstName": name[0],
-                     "userLastName": name[1],
-                     "phoneNumber": "0748973012",
-                     "paymentMethod": "cash",
-                     "restaurantId": provider_id
-                     }
             add_to_cart(token, order['restaurantId'])
+        # url = "http://159.65.247.164:3000/api/v1/cart"
+        # request_data = {
+        #     "userId": login_response["user"]["_id"]
+        # }
+        encoder = json.JSONEncoder()
+        # print("url-ul e ", url)
+        # print("headerurile sunt ", headers)
+        # print("body ul e ", encoder.encode(request_data))
+        # exit(0)
+        # x = requests.post(url, headers=headers, data=encoder.encode(request_data))
+        # print("in cart se afla la adaugare : ", x.text)
+        url = "http://159.65.247.164:3000/api/v1/orders"
+        print("encodarea de la order e ", encoder.encode(order))
+        x = requests.post(url, headers=headers, data=encoder.encode(order))
+        print("am adaugat in orders, speram ca are items ", x.text)
 
 
 def create_orders():
@@ -153,7 +168,6 @@ def create_orders():
                 for i in range(nr_of_orders):
                     print("creez orderul nr", i)
                     create_order_for_user(user, response)
-
 
 
 print("am porit")
