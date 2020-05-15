@@ -1,6 +1,5 @@
 from algorithms.recommend_food_for_restaurants import final
 from models.Restaurants import Restaurants
-from models.Reviews import Reviews
 from models.Foods import Foods
 from models.Orders import Orders
 import Constants
