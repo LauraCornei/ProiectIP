@@ -17,5 +17,6 @@ class Customers(object):
         headers = {"Authorization": "Bearer " + token}
         customersCollection = json.loads(requests.get(url, headers=headers).text)
         customersCollection = customersCollection[Constants.DATA][Constants.USER]
-
+        print("ASJDOISAJDOISJAIOUDHASIUHDGIUSAHIDUHAS")
+        print(customersCollection)
         return customersCollection

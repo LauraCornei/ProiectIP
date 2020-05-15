@@ -19,7 +19,7 @@ class Restaurants(object):
         if restaurantsCollection[Constants.SUCCESS]:
             if restaurantsCollection[Constants.DATA]:
                 restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDER]
-        print(restaurantsCollection)
+
         if Constants.SUCCESS in restaurantsCollection:
             if restaurantsCollection[Constants.SUCCESS] == Constants.FALSE:
                 raise AttributeError("Restaurant not found")
