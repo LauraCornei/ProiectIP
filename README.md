@@ -456,11 +456,11 @@ The <restaurant_prefix> should be a valid prefix of the string corresponding to 
 
 ```JSON
 {
-    "success": true,
-    "data": [
+  "success": true,
+  "data": [
     {
-  	"name_recommended_restaurant": "Recommendation starting with given prefix not found"
-	}
-]
+      "name_recommended_restaurant": "Recommendation starting with given prefix not found"
+    }
+  ]
 }
 ```
