@@ -1,6 +1,6 @@
 import json
 import requests
-from models.Restaurants import Restaurants
+import Constants
 from models.dummyReviews import dummy_reviews
 
 
@@ -17,7 +17,7 @@ class Reviews(object):
         url = 'http://159.65.247.164:3003/api/reviews'
         headers = {"Authorization": "Bearer " + token}
         reviewsCollection = json.loads(requests.get(url, headers=headers).text)
-        reviewsCollection = reviewsCollection['data']['reviews']
+        reviewsCollection = reviewsCollection[Constants.DATA][Constants.REVIEWS]
 
         return reviewsCollection
 
@@ -25,16 +25,16 @@ class Reviews(object):
     def by_provider_id(provider_id, token):
         return dummy_reviews[provider_id]
 
-    # selectare toare reviewurile dupa reviewerId
+    # selectare toate reviewurile dupa reviewerId
     def by_customer_id(customer_id, token):
         url = 'http://159.65.247.164:3003/api/reviews'
         headers = {"Authorization": "Bearer " + token}
         reviewsCollection = json.loads(requests.get(url, headers=headers).text)
-        reviewsCollection = reviewsCollection['data']['reviews']
+        reviewsCollection = reviewsCollection[Constants.DATA][Constants.REVIEWS]
 
         review_by_customer_id = []
         for review in reviewsCollection:
-            if (review['reviewerId'] == customer_id):
+            if review[Constants.REVIEWER_ID] == customer_id:
                 review_by_customer_id.append(review)
 
         return review_by_customer_id

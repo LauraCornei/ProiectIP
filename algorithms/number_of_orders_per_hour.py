@@ -5,26 +5,16 @@ import Constants
 
 
 def get_hour_of(order):
-    digit1 = order[Constants.ORDER_DATE][11:12]
-    digit2 = order[Constants.ORDER_DATE][12:13]
-    digit1 = int(digit1)
-    digit2 = int(digit2)
-    ind = digit1*10+digit2
+    ind = int(order[Constants.ORDER_DATE][11:13])
     return ind
 
 
+# not used
 def get_min_of(order):
-    digit1 = order[Constants.ORDER_DATE][11:12]
-    digit2 = order[Constants.ORDER_DATE][12:13]
-    digit1 = int(digit1)
-    digit2 = int(digit2)
+    digit_h = int(order[Constants.ORDER_DATE][11:13])
+    digit_m = int(order[Constants.ORDER_DATE][14:16])
 
-    digit1_m = order[Constants.ORDER_DATE][14:15]
-    digit2_m = order[Constants.ORDER_DATE][15:16]
-    digit1_m = int(digit1_m)
-    digit2_m = int(digit2_m)
-
-    ind = (digit1*10+digit2)*60+(digit1_m*10+digit2_m)
+    ind = digit_h*60+digit_m
     return ind
 
 
@@ -37,6 +27,7 @@ def calc_no_orders_hours(orders):
 
 
 def main_hours(orders):
+    print(orders)
     fig, ax = plt.subplots()
     hours = [0] * 24
     for ind in range(0, 24):

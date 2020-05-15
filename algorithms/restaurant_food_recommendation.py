@@ -1,11 +1,10 @@
 import Constants
-from bson import ObjectId
 
 
 def filter_orders(orders, restaurant_id):
     restaurant_orders = []
     for order in orders:
-        if order['restaurantId'] == restaurant_id:
+        if order[Constants.RESTAURANT_ID] == restaurant_id:
             restaurant_orders.append(order)
     return restaurant_orders
 
@@ -13,18 +12,17 @@ def filter_orders(orders, restaurant_id):
 def get_customer_food_dict(customer_id, orders):
     customer_foods = {}
     for order in orders:
-        if 'userId' not in order:
+        if Constants.USER_ID not in order:
             continue
 
-        if order['userId'] == customer_id:
-            if 'items' not in order:
+        if order[Constants.USER_ID] == customer_id:
+            if Constants.ITEMS not in order:
                 continue
-            for item in order['items']:
-                #speram ca am ales id bun items (2 optiuni: _id, id)
-                if item["id"] not in customer_foods:
-                    customer_foods[item["id"]] = 1
+            for item in order[Constants.ITEMS]:
+                if item[Constants.ID] not in customer_foods:
+                    customer_foods[item[Constants.ID]] = 1
                 else:
-                  customer_foods[item["id"]] += 1
+                    customer_foods[item[Constants.ID]] += 1
     return customer_foods
 
 
@@ -66,11 +64,11 @@ def final(customer_id, restaurant_id, orders):
     restaurant_orders = filter_orders(orders, restaurant_id)
     customers_orders = {}
     for order in restaurant_orders:
-        if 'userId' not in order:
+        if Constants.USER_ID not in order:
             continue
-        if order['userId'] not in customers_orders:
-            customers_orders[order['userId']] = get_customer_food_dict(order['userId'],
-                                                                       restaurant_orders)
+        if order[Constants.USER_ID] not in customers_orders:
+            customers_orders[order[Constants.USER_ID]] = get_customer_food_dict(order[Constants.USER_ID],
+                                                                                restaurant_orders)
     customers_similarities = {}
     print(customers_orders)
     if customer_id not in customers_orders:
@@ -89,12 +87,10 @@ def final(customer_id, restaurant_id, orders):
     print(get_recommended_foods(similar_customers_foods, similar_customers_ordered))
     return get_recommended_foods(similar_customers_foods, similar_customers_ordered)
 
-
-
-#http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299
+# http://127.0.0.1:5000/recommendations/asd/5e8b6ecd5935d8350c6c2c2a/5ea2b9ea988c7b32c419f299
 # http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd/5e8c4f351842ba322c5c13ec nu mai da lista vida 8/5/2020
 # http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd cu token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
 
 
-#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViMTZmZGY0YWZiZjY1NDk2NmNiNjhkIn0.fUS-G5sTekJZhakqYKpoBXJ8Nc5vqrYcUPwWDO-0mL0
+# token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViMTZmZGY0YWZiZjY1NDk2NmNiNjhkIn0.fUS-G5sTekJZhakqYKpoBXJ8Nc5vqrYcUPwWDO-0mL0
 # ruta: http://127.0.0.1:5000/recommendations/asd/5e9494aadd757435187a6dbd

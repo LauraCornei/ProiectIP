@@ -1,7 +1,6 @@
-from bson import ObjectId
 import json
 import requests
-
+import Constants
 
 class Restaurants(object):
     @staticmethod
@@ -9,7 +8,7 @@ class Restaurants(object):
         url = 'http://159.65.247.164:3002/api/providers'
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        restaurantsCollection = restaurantsCollection["data"]["provider"]
+        restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDERS]
         return restaurantsCollection
 
     @staticmethod
@@ -17,8 +16,7 @@ class Restaurants(object):
         url = 'http://159.65.247.164:3002/api/providers/' + id
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        if(restaurantsCollection["success"]):
-          print(restaurantsCollection["data"])
-          if(restaurantsCollection["data"]):
-             restaurantsCollection = restaurantsCollection["data"]["provider"]
+        if restaurantsCollection[Constants.SUCCESS]:
+            if restaurantsCollection[Constants.DATA]:
+                restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDER]
         return restaurantsCollection

@@ -1,4 +1,4 @@
-from algorithms.recom7 import filter_res
+from algorithms.recommend_restaurants import filter_res
 from models.Customers import Customers
 from models.Restaurants import Restaurants
 from models.Reviews import Reviews

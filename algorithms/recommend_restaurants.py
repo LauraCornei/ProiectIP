@@ -65,10 +65,10 @@ def filter_res(customer, reviews, token):
     filtered_res = []
 
     res_body = Restaurants.by_id(fav_res, token)
-    menu_fav = res_body["details"]["specials"]
+    menu_fav = res_body[Constants.DETAILS][Constants.SPECIALS]
 
     for provider in res_top:
-        spec = provider["details"]["specials"]
+        spec = provider[Constants.DETAILS][Constants.SPECIALS]
         for item in menu_fav:
             if spec.count(item):
                 filtered_res.append(provider[Constants.ID])

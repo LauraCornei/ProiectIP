@@ -11,19 +11,37 @@ ALPHA = 0.95
 MARGIN_TB = 0
 MARGIN_LR = 0.2 
 
+DATA = "data"
+USER = "user"
+USERS = "users"
+COURSES_FILTERED = "coursesFiltred"
+ORDERS = "orders"
+PROVIDERS = "providers"
+PROVIDER = "provider"
+SUCCESS = "success"
+REVIEWS = "reviews"
+
 NUMBER_OF_CUSTOMERS = 10
 NUMBER_OF_FOODS = 10
-REWIEVER_ID = "reviewerId"
 PROVIDER_ID = "providerId"
+
 RESTAURANT_ID = "restaurantId"
+
+MENU = "menu"
+ITEM = "item"
+ITEMS = "items"
+PRODUCT = "product"
+QUANTITY = "quantity"
+COURSES = "courses"
 REVIEWER_ID = "reviewerId"
 USER_ID = "userId"
 SCORE = "score"
 ID = "_id"
-FFIELD = "category"
-ORDER_DATE ="orderDate"
-NAME= "name"
-
+FIELD = "category"
+ORDER_DATE = "orderDate"
+NAME = "name"
+DETAILS = "details"
+SPECIALS = "specials"
 AUTHORIZATION = 'Authorization'
 SECRET = 'agfbkgfdakjhabagdf'
 TOKEN = 'token'

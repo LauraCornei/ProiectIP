@@ -1,34 +1,33 @@
-from pymongo import MongoClient
-from models.Foods import Foods
-from Constants import USER_ID
+import Constants
+
 
 def get_food_by_id(food_id, foods):
     for food in foods:
-        if food['_id'] == food_id:
+        if food[Constants.ID] == food_id:
             return food
     return -1
 
 
 # returneaza o lista cu numele mancarurilor disponibile la restaurant
+# not used
 def get_restaurant_menu(restaurant, foods):
     menu = []
     for food in foods:
-        if food['restaurant_id'] == restaurant['_id']:
+        if food[Constants.RESTAURANT_ID] == restaurant[Constants.ID]:
             menu.append(food['name'])
     return menu
 
 
-
-def get_customer_other_course_ids(userId, orders, restaurant_courses_ids):
+def get_customer_other_course_ids(user_id, orders, restaurant_courses_ids):
     customer_other_foods = {}
     for order in orders:
-        if order[USER_ID] == userId:
-            for item in order['items']:
-                if item['id'] not in restaurant_courses_ids:
-                    if item['id'] not in customer_other_foods:
-                        customer_other_foods[item['id']] = 1
+        if order[Constants.USER_ID] == user_id:
+            for item in order[Constants.ITEMS]:
+                if item[Constants.ID] not in restaurant_courses_ids:
+                    if item[Constants.ID] not in customer_other_foods:
+                        customer_other_foods[item[Constants.ID]] = 1
                     else:
-                        customer_other_foods[item['id']] += 1
+                        customer_other_foods[item[Constants.ID]] += 1
             # food = get_food_by_id(order['food_id'], foods)
             # if food['name'] not in restaurant_menu:
             #     if food['name'] not in customer_other_foods:
@@ -42,11 +41,11 @@ def get_customer_other_course_ids(userId, orders, restaurant_courses_ids):
 def get_restaurant_clients(restaurant, orders):
     clients = {}
     for order in orders:
-        if order['restaurantId'] == restaurant['_id']:
-            if order[USER_ID] not in clients:
-                clients[order[USER_ID]] = 1
+        if order[Constants.RESTAURANT_ID] == restaurant[Constants.ID]:
+            if order[Constants.USER_ID] not in clients:
+                clients[order[Constants.USER_ID]] = 1
             else:
-                clients[order[USER_ID]] += 1
+                clients[order[Constants.USER_ID]] += 1
     return clients
 
 
@@ -54,10 +53,10 @@ def get_restaurant_clients(restaurant, orders):
 def final(restaurant, orders):
     recommendations = {}
     clients = get_restaurant_clients(restaurant, orders)
-    restaurant_menu = restaurant['details']['menu']['courses']
+    restaurant_menu = restaurant[Constants.DETAILS][Constants.MENU][Constants.COURSES]
     restaurant_courses_ids = []
     for course in restaurant_menu:
-        restaurant_courses_ids.append(course['_id'])
+        restaurant_courses_ids.append(course[Constants.ID])
     # print(restaurant_menu)
     for userId in clients:
         customer_other_foods = get_customer_other_course_ids(userId, orders, restaurant_courses_ids)

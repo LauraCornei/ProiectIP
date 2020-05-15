@@ -1,7 +1,7 @@
 # from db import ordersCollection
 import json
 import requests
-
+import Constants
 
 class Orders(object):
     @staticmethod
@@ -10,11 +10,11 @@ class Orders(object):
         headers = {"Authorization": "Bearer " + token}
 
         ordersCollection = json.loads(requests.get(url, headers=headers).text)
-        ordersCollection = ordersCollection['data']['orders']
+        ordersCollection = ordersCollection[Constants.DATA][Constants.ORDERS]
 
         orders_with_userid = []
         for order in ordersCollection:
-            if 'userId' in order:
+            if Constants.USER_ID in order:
                 orders_with_userid.append(order)
 
         return orders_with_userid
