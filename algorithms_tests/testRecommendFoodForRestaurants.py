@@ -21,3 +21,5 @@ class TestRestaurantFoodRecommendation(unittest.TestCase):
         self.assertNotEquals({}, final(restaurant_id, orders))
 
 
+#127.0.0.1:5000/recommendations/food/5ebcf11126e32517c46effff
+#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI
