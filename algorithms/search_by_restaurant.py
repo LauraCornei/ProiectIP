@@ -1,6 +1,5 @@
 import math
-
-# from models.Restaurants import Restaurants
+from models.Restaurants import Restaurants
 from algorithms.trie import Trie
 import scipy.integrate as integrate
 import datetime
@@ -99,8 +98,10 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
         value = "Recommendation starting with given prefix not found"
     else:
         value = get_restaurant_name(restaurants, restaurant_id, token)
+        restaurant = Restaurants.by_id(restaurant_id, token)
+        print(restaurant)
     recommendations = {
-        "name_recommended_restaurant": value
+        "name_recommended_restaurant": restaurant
     }
     return recommendations
 
