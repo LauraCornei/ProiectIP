@@ -27,8 +27,7 @@ Recommends for <customer_id> a restaurant based on the reviews made by the other
 
 **Usage example**:  
 `http://127.0.0.1:5000/recommendations/restaurant`
-`token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI`
- 
+
 **Returned data example**:
 
 ```JSON
@@ -143,10 +142,9 @@ Recommends for <customer_id> a restaurant based on the reviews made by the other
 
 ## /recommendations/food-for-restaurant/<restaurant_id>
 
-
 ### GET
 
-Recommends for <customer_id> a dish from <restuarant_id>.
+Recommends for <customer_id> dishes from <restuarant_id>.
 
 **URL parameter**:
 
@@ -160,17 +158,173 @@ The <restaurant_id> should be the 24-character hex-strings corresponding to the 
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/food-for-restaurant/5e9494aadd757435187a6dbd`
- `token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms`
+ `http://127.0.0.1:5000/recommendations/food-for-restaurant/5ebcf11126e32517c46effff`
  
 **Returned data example**:
 
 ```JSON
 {
-    "success": true,
-    "data": {
-    []
-    }
+    "success": "true",
+    "data": [
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0058",
+                "name": "Barbecue Ribs",
+                "category": [],
+                "price": 17,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/04/Palak-Paneer-PTR.jpg",
+                "ingredients": [
+                    "Avocado Spread",
+                    "Cornichons",
+                    "File Powder",
+                    "Pork",
+                    "Longan"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0054",
+                "name": "Pasta Carbonara",
+                "category": [],
+                "price": 21,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2018/06/Bombay-Green-Chutney-Sandwich-PictureTheRecipe.jpg",
+                "ingredients": [
+                    "Potatoes",
+                    "Buckwheat",
+                    "Artichoke",
+                    "Radish"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0056",
+                "name": "Bruschette with Tomato",
+                "category": [],
+                "price": 34,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Firecracker-Shrimp-small1.jpg",
+                "ingredients": [
+                    "Hummus",
+                    "Currants",
+                    "Chives"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0055",
+                "name": "Seafood Paella",
+                "category": [],
+                "price": 34,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Mastic",
+                    "Warehou",
+                    "Annatto Seed",
+                    "Asian Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003a",
+                "name": "Philadelphia Maki",
+                "category": [],
+                "price": 32,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/04/Palak-Paneer-PTR.jpg",
+                "ingredients": [
+                    "Enoki Mushrooms",
+                    "Anchovies",
+                    "Honey",
+                    "Green Tea Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f0039",
+                "name": "Kebab",
+                "category": [],
+                "price": 27,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Peaches",
+                    "Lamb",
+                    "Butternut Pumpkin"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0059",
+                "name": "Meatballs with Sauce",
+                "category": [],
+                "price": 16,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/01/Rogan-Josh-by-PictureTheRecipe.jpg",
+                "ingredients": [
+                    "Fish Stock",
+                    "Green Tea",
+                    "Asian Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003c",
+                "name": "Cauliflower Penne",
+                "category": [],
+                "price": 31,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Firecracker-Shrimp-small1.jpg",
+                "ingredients": [
+                    "Nashi Pear",
+                    "Malt Vinegar",
+                    "Butternut Pumpkin",
+                    "Cinnamon",
+                    "Rye"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f0052",
+                "name": "Pork Sausage Roll",
+                "category": [],
+                "price": 28,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2017/09/Hay-Js-Bistro-Review-Rack-of-Lamb-by-PictureTheRecipe.jpg",
+                "ingredients": [
+                    "Rice Syrup",
+                    "Oat Flour",
+                    "Guava"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36e26e32517c46f0037",
+                "name": "Philadelphia Maki",
+                "category": [],
+                "price": 23,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/04/Palak-Paneer-PTR.jpg",
+                "ingredients": [
+                    "Enoki Mushrooms",
+                    "Anchovies",
+                    "Honey",
+                    "Green Tea Noodles"
+                ],
+                "allergenes": []
+            }
+        ]
+    ]
 }
 ```
 
@@ -192,16 +346,174 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/food/5eb16d673a637d28884dc226`
+ `http://127.0.0.1:5000/recommendations/food/5ebcf11126e32517c46effff`
 
 **Returned data example**:
 
 ```JSON
 {
-    "success": true,
-    "data": {
-        []
-    }
+    "success": "true",
+    "data": [
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f0039",
+                "name": "Kebab",
+                "category": [],
+                "price": 27,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Peaches",
+                    "Lamb",
+                    "Butternut Pumpkin"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003a",
+                "name": "Philadelphia Maki",
+                "category": [],
+                "price": 32,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/04/Palak-Paneer-PTR.jpg",
+                "ingredients": [
+                    "Enoki Mushrooms",
+                    "Anchovies",
+                    "Honey",
+                    "Green Tea Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003c",
+                "name": "Cauliflower Penne",
+                "category": [],
+                "price": 31,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Firecracker-Shrimp-small1.jpg",
+                "ingredients": [
+                    "Nashi Pear",
+                    "Malt Vinegar",
+                    "Butternut Pumpkin",
+                    "Cinnamon",
+                    "Rye"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f005d",
+                "name": "Pappardelle alla Bolognese",
+                "category": [],
+                "price": 22,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Firecracker-Shrimp-small1.jpg",
+                "ingredients": [
+                    "Limes",
+                    "Cucumber",
+                    "Hot Smoked Salmon",
+                    "Hummus",
+                    "Kenchur"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f005b",
+                "name": "Kebab",
+                "category": [],
+                "price": 23,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Peaches",
+                    "Lamb",
+                    "Butternut Pumpkin"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf37226e32517c46f005c",
+                "name": "Chicken Fajitas",
+                "category": [],
+                "price": 15,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/01/Football-Pizza-Pockets-Final-2-small-.jpg",
+                "ingredients": [
+                    "Potatoes",
+                    "Peaches",
+                    "Radish"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003d",
+                "name": "Tacos",
+                "category": [],
+                "price": 19,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/01/Chicken-65-Wings-Indian-Masala-Wings-PictureTheRecipe.jpg",
+                "ingredients": [
+                    "Kokam",
+                    "Shark",
+                    "Polenta",
+                    "Corn Syrup",
+                    "Rice Syrup"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36e26e32517c46f0037",
+                "name": "Philadelphia Maki",
+                "category": [],
+                "price": 23,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2020/04/Palak-Paneer-PTR.jpg",
+                "ingredients": [
+                    "Enoki Mushrooms",
+                    "Anchovies",
+                    "Honey",
+                    "Green Tea Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36f26e32517c46f003b",
+                "name": "Seafood Paella",
+                "category": [],
+                "price": 18,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Mastic",
+                    "Warehou",
+                    "Annatto Seed",
+                    "Asian Noodles"
+                ],
+                "allergenes": []
+            }
+        ],
+        [
+            {
+                "_id": "5ebcf36e26e32517c46f0033",
+                "name": "Kebab",
+                "category": [],
+                "price": 24,
+                "image": "http://picturetherecipe.com/wp-content/uploads/2012/07/Shepherds-Pie-Final-small.jpg",
+                "ingredients": [
+                    "Peaches",
+                    "Lamb",
+                    "Butternut Pumpkin"
+                ],
+                "allergenes": []
+            }
+        ]
+    ]
 }
 ```
 
@@ -209,7 +521,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 ### GET
 
-Recommends for <customer_id> a list of <=10 restaurants that have at least one speciality in common with one of the restaurants preferred by <customer_id>(id est, one that has received a score>5).
+Recommends for <customer_id> a list of <=10 restaurants that have at least one speciality in common with one of the restaurants preferred by <customer_id>(id est, one that has received a score>6).
 
 **Return codes**:
 
@@ -218,8 +530,6 @@ Recommends for <customer_id> a list of <=10 restaurants that have at least one s
 
 **Usage example**:  
 `http://127.0.0.1:5000/recommendations/restaurant-by-food`
-`token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWIxNmZkZjRhZmJmNjU0OTY2Y2I2OGQiLCJpYXQiOjE1ODgyMzc0NTZ9.OG3o5XPIDDGlyFusinKVN11w27b5JYCSwLMl9XhYHeI`
-
 
 **Returned data example**:
 
@@ -359,7 +669,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 **Usage example**:  
 
-`http://127.0.0.1:5000/recommendations/stats/food-per-restaurant/5eb16d673a637d28884dc226?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+`http://127.0.0.1:5000/recommendations/stats/food-per-restaurant/5ebcf11126e32517c46effff?order=asc&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
@@ -424,7 +734,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 -   400 - There was a problem fetching data
 
 **Usage example**:  
- `http://127.0.0.1:5000/recommendations/stats/orders-per-hour/5eb16d673a637d28884dc226?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
+ `http://127.0.0.1:5000/recommendations/stats/orders-per-hour/5ebcf11126e32517c46effff?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
 
 **Returned data example**:
 
@@ -448,19 +758,15 @@ The <restaurant_prefix> should be a valid prefix of the string corresponding to 
 -   400 - There was a problem fetching data
 
 **Usage example**:  
-`http://127.0.0.1:5000/search/restaurant/Rest`
-`token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms`
+`http://127.0.0.1:5000/search/restaurant/R`
 
- 
 **Returned data example**:
 
 ```JSON
 {
-  "success": true,
-  "data": [
-    {
-      "name_recommended_restaurant": "Recommendation starting with given prefix not found"
-    }
-  ]
+  "success": "true",
+  "data": {
+    "name_recommended_restaurant": "Ramonita"
+  }
 }
 ```
