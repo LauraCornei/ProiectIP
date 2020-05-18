@@ -1,5 +1,5 @@
 import unittest
-import TestConstants
+import algorithms_tests.TestConstants as TestConstants
 import Constants
 from algorithms.recommendations_restaurants import final
 from models.Customers import Customers
@@ -17,7 +17,8 @@ class TestRestaurantRecommendations(unittest.TestCase):
         customer_id = decoded['_id']
 
         restaurant_id = final(Customers.by_id(customer_id, token), Reviews.all(token), Restaurants.all(token))
-        self.assertNotEqual({}, restaurant_id)
+        print(restaurant_id)
+        self.assertEqual(TestConstants.REST_RECOMM_OUTPUT, restaurant_id)
 
     # verif ca customer_id sa aiba structura unui object id (lungime 24)
     def test_raise_exception(self):
