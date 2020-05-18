@@ -1,35 +1,17 @@
 import json
 import requests
 from faker import Faker
-# from models.Restaurants import Restaurants
 import random
+import Constants
 
 import json
 import requests
 
 
-class Restaurants(object):
-    @staticmethod
-    def all(token):
-        url = 'http://159.65.247.164:3002/api/providers'
-        headers = {"Authorization": "Bearer " + token}
-        restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        restaurantsCollection = restaurantsCollection['data']['providers']
-        return restaurantsCollection
-
-    @staticmethod
-    def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/providers/' + id
-        headers = {"Authorization": "Bearer " + token}
-        restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
-        restaurantsCollection = restaurantsCollection['data']['provider']
-        return restaurantsCollection
-
-
 def create_clients():
     with open('resources/users.json') as json_file:
-        users = json.load(json_file)["users"]
-        url = 'http://159.65.247.164:3002/api/users/register'
+        users = json.load(json_file)[Constants.USERS]
+        url = Constants.URL_REGISTER
 
         headers = {"Content-type": "application/json"}
         for user in users:
@@ -42,8 +24,8 @@ def create_clients():
 
 def create_providers():
     with open('resources/providers.json') as json_file:
-        providers = json.load(json_file)["providers"]
-        url = 'http://159.65.247.164:3002/api/users/register'
+        providers = json.load(json_file)[Constants.URL_PROVIDERS]
+        url = Constants.URL_REGISTER
         headers = {"Content-type": "application/json"}
         for provider in providers:
             encoder = json.JSONEncoder()
@@ -59,9 +41,9 @@ def create_providers_profile():
 
     provider_count = 0
     with open('resources/providers.json') as json_file:
-        providers = json.load(json_file)["providers"]
-        login_url = 'http://159.65.247.164:3002/api/users/login'
-        profile_url = 'http://159.65.247.164:3002/api/users/profile'
+        providers = json.load(json_file)[Constants.PROVIDERS]
+        login_url = Constants.URL_LOGIN
+        profile_url = Constants.URL_PROFILE
 
         encoder = json.JSONEncoder()
         for provider in providers:
@@ -70,8 +52,6 @@ def create_providers_profile():
             login_data = encoder.encode(login_data)
             print(login_data)
             response = json.loads(requests.post(login_url, data=login_data, headers=headers).text)
-            print(response["success"])
-            print(response["success"] == True)
             if response["success"] == True:
                 token = response["token"]
                 print(token)
@@ -174,6 +154,24 @@ def create_orders():
                 for i in range(nr_of_orders):
                     print("creez orderul nr", i)
                     create_order_for_user(user, response, s)
+
+class Restaurants(object):
+    @staticmethod
+    def all(token):
+        url = Constants.URL_PROVIDERS
+        headers = {"Authorization": "Bearer " + token}
+        restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
+        restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDERS]
+        return restaurantsCollection
+
+    @staticmethod
+    def by_id(id, token):
+        url = Constants.URL_PROVIDERS + '/' + id
+        headers = {"Authorization": "Bearer " + token}
+        restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
+        restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDER]
+        return restaurantsCollection
+
 
 
 print("am porit")

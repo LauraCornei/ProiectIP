@@ -50,3 +50,8 @@ FALSE = False
 ERROR = "error"
 
 OBJECT_ID_LENGTH = 24
+
+URL_PROVIDERS = 'http://159.65.247.164:3002/api/providers'
+URL_REGISTER = 'http://159.65.247.164:3002/api/users/register'
+URL_LOGIN = 'http://159.65.247.164:3002/api/users/login'
+URL_PROFILE = 'http://159.65.247.164:3002/api/users/profile'
