@@ -521,7 +521,7 @@ The <restaurant_id> should be the 24-character hex-string corresponding to the `
 
 ### GET
 
-Recommends for <customer_id> a list of <=10 restaurants that have at least one speciality in common with one of the restaurants preferred by <customer_id>(id est, one that has received a score>6).
+Recommends for <customer_id> a list of <=10 restaurants that have at least one speciality in common with one of the restaurants preferred by <customer_id>(id est, one that has received a score>3).
 
 **Return codes**:
 
