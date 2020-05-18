@@ -12,9 +12,7 @@ def number_of_orders(token):
 
 
 def number_of_orders_by_restaurant(restaurant_id, token):
-    # to do: ia doar orders.byRestaurant(restaurant_id)
-    fig = main_hours(Orders.all(token))
+    fig = main_hours(Orders.by_res_id(restaurant_id, token))
     output = io.BytesIO()
     FigureCanvasSVG(fig).print_svg(output)
     return output.getvalue()
-
