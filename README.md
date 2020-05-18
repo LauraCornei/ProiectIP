@@ -685,6 +685,7 @@ Returns a svg with the number of orders for every dish from all the restaurants.
 
 -   order - asc/desc(after which the orders count for each dish is displayed)
 -   show_count - int(how many dishes are shown)
+-   token
 
 **Return codes**:
 
@@ -703,6 +704,10 @@ Returns a svg with the number of orders for every dish from all the restaurants.
 ### GET
 
 Returns a svg with the number of orders per hour for all restaurants.
+
+**Query parameters**:
+
+-   token
 
 **Return codes**:
 
@@ -727,6 +732,10 @@ Returns a svg with the number of orders per hour for <restaurant_id>.
 The ID of the restaurant should be specified in the URL:  
 `.../recommendations/stats/orders-per-hour/5eb16d673a637d28884dc226?...`  
 The <restaurant_id> should be the 24-character hex-string corresponding to the `providerId`.
+
+**Query parameters**:
+
+-   token
 
 **Return codes**:
 
