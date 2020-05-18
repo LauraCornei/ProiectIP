@@ -1,5 +1,5 @@
 # Recommendations API
-
+Project structure derived from: https://github.com/EusebiuAndrei/trial
 ## Response structure
 
 The structure of the API responses' body is as follows:
