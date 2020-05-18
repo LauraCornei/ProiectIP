@@ -721,34 +721,6 @@ Returns a svg with the number of orders per hour for all restaurants.
 
 ![alt text](https://github.com/killagann/ran/blob/master/o1.svg?raw=true)
 
-## /recommendations/stats/orders-per-hour/<restaurant_id>
-
-### GET
-
-Returns a svg with the number of orders per hour for <restaurant_id>.
-
-**URL parameter**:
-
-The ID of the restaurant should be specified in the URL:  
-`.../recommendations/stats/orders-per-hour/5eb16d673a637d28884dc226?...`  
-The <restaurant_id> should be the 24-character hex-string corresponding to the `providerId`.
-
-**Query parameter**:
-
--   token
-
-**Return codes**:
-
--   200 - OK
--   400 - There was a problem fetching data
-
-**Usage example**:  
- `http://127.0.0.1:5000/recommendations/stats/orders-per-hour/5ebcf11126e32517c46effff?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWFhOTQ2ODMwYThmMTI5OGQ0ZmMyZjgiLCJpYXQiOjE1ODgyMzc0NTZ9.Ll2HDuN79KKWr5OoQTiZVWBemyDqdo3kDz74Bvi6lOA`
-
-**Returned data example**:
-
-![alt text](https://github.com/killagann/ran/blob/master/o2.svg?raw=true)
-
 ## search/restaurant/<restaurant_prefix>
 
 ### GET
