@@ -10,7 +10,11 @@ from jwt import decode
 class TestSearchByRestaurant(unittest.TestCase):
 
     #verif corectitudine output
+<<<<<<< Updated upstream
     def test_recommendation_output1(self):
+=======
+    def test_recommendation_output(self):
+>>>>>>> Stashed changes
         token = TestConstants.SEARCH_BY_REST_TOKEN
         decoded = decode(token, Constants.SECRET)
         customer_id = decoded['_id']
@@ -21,8 +25,22 @@ class TestSearchByRestaurant(unittest.TestCase):
         self.assertEqual("5ebcf11126e32517c46effff",
         final(reviews, restaurants, orders, customer_id, restaurant_prefix, token)["name_recommended_restaurant"]["id"])
 
+<<<<<<< Updated upstream
     # verif corectitudine output
     def test_recommendation_output2(self):
+=======
+        self.assertEquals({
+          "data": {
+            "name_recommended_restaurant": "Ramonita"
+          },
+          "success": "true"
+        },
+        final(reviews, restaurants, orders, customer_id, restaurant_prefix, token))
+
+        # verif corectitudine output
+
+    def test_recommendation_output(self):
+>>>>>>> Stashed changes
         token = TestConstants.SEARCH_BY_REST_TOKEN
         decoded = decode(token, Constants.SECRET)
         customer_id = decoded['_id']
