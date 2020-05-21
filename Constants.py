@@ -1,7 +1,7 @@
-COLOR_RED = "#a71d31"      
-COLOR_GREEN = "#386150"  
-COLOR_BLACK = "#2b2633"  
-COLOR_BLACK_LIGHT = "#453d52"  
+COLOR_RED = "#a71d31"
+COLOR_GREEN = "#386150"
+COLOR_BLACK = "#2b2633"
+COLOR_BLACK_LIGHT = "#453d52"
 COLOR_GRAY = "#dbdbdb"
 FIG_WIDTH = 14
 FIG_HEIGHT = 6
@@ -9,7 +9,7 @@ TEXT_FONT_SIZE = 18
 PADDING = 0.05
 ALPHA = 0.95
 MARGIN_TB = 0
-MARGIN_LR = 0.2 
+MARGIN_LR = 0.2
 
 DATA = "data"
 USER = "user"
@@ -45,8 +45,18 @@ SPECIALS = "specials"
 AUTHORIZATION = 'Authorization'
 SECRET = 'agfbkgfdakjhabagdf'
 TOKEN = 'token'
+EMAIL = 'email'
 
 FALSE = False
 ERROR = "error"
 
 OBJECT_ID_LENGTH = 24
+
+URL_PROVIDERS = 'http://159.65.247.164:3002/api/providers'
+URL_REGISTER = 'http://159.65.247.164:3002/api/users/register'
+URL_LOGIN = 'http://159.65.247.164:3002/api/users/login'
+URL_PROFILE = 'http://159.65.247.164:3002/api/users/profile'
+URL_CART = 'http://159.65.247.164:3000/api/v1/cart'
+URL_ADD_PRODUCT = 'http://159.65.247.164:3000/api/v1/cart/add-product/'
+URL_CART_SESSION = 'http://159.65.247.164:3000/api/v1/cart/session'
+URL_ORDERS = 'http://159.65.247.164:3000/api/v1/orders'
