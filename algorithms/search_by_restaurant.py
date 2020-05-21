@@ -96,7 +96,8 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
 
     if not restaurant_id:
-        value = "Recommendation starting with given prefix not found"
+        raise Exception("Recommendation starting with given prefix not found")
+        #restaurant = "Recommendation starting with given prefix not found"
     else:
         value = get_restaurant_name(restaurants, restaurant_id, token)
         restaurant = Restaurants.by_id(restaurant_id, token)
