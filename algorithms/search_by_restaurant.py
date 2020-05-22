@@ -58,42 +58,64 @@ def get_restaurant_name(restaurants, restaurant_id, token):
             return restaurant[Constants.NAME]
 
 
-def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, restaurant_id, token):
+def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, restaurant_id, token, rest_array):
     review_score = get_review_score(reviews, customer_id, restaurant_id)
     nb_of_orders = get_nb_of_orders(orders, customer_id, restaurant_id)
     latest_order = get_latest_order(orders, customer_id, restaurant_id)
     word_score = calculate_score(review_score, nb_of_orders, latest_order)
+
     name = get_restaurant_name(restaurants, restaurant_id, token)
-
-    print(name)
     if name:
-        t.insert(name, word_score, restaurant_id)
-    return
+     rest_array.append(restaurant_id)
+    #if name:
+        #t.insert(name, word_score, restaurant_id)
+    #return
 
 
-def get_recommended_restaurant_from_trie(t, restaurant_prefix):
-    recommended_restaurant_id = t.special_search(restaurant_prefix)
-    if not recommended_restaurant_id:
+def get_recommended_restaurants_from_trie(t, restaurant_prefix):
+    restaurants_array = t.special_search(restaurant_prefix)
+    print(restaurants_array)
+    return restaurants_array
+    '''if not recommended_restaurant_id:
         return False
-    return recommended_restaurant_id[Constants.RESTAURANT_ID]
+    return recommended_restaurant_id[Constants.RESTAURANT_ID]'''
 
 
-def update_trie(t, restaurants, reviews, orders, customer_id, token):
+def update_trie(t, restaurants, reviews, orders, customer_id, token, rest_array):
     for order in orders:
         if customer_id == order[Constants.USER_ID]:
             insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, order[Constants.RESTAURANT_ID],
-                                      token)
+                                      token, rest_array)
     return
 
 
 def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
-
+    rest_array = []
     if len(customer_id) != Constants.OBJECT_ID_LENGTH:
         raise ValueError("the customer id must be 24 characters long")
-
     t = Trie()
-    update_trie(t, restaurants, reviews, orders, customer_id, token)
-    restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
+    update_trie(t, restaurants, reviews, orders, customer_id, token, rest_array)
+
+    final_result = []
+    for rest in rest_array:
+        name=get_restaurant_name(restaurants, rest, token)
+        if name.startswith(restaurant_prefix):
+            print(name)
+            restaurant = Restaurants.by_id(rest, token)
+            final_result.append(restaurant)
+
+    if len(final_result) == 0:
+        raise Exception("Recommendation starting with given prefix not found")
+    else:
+     recommendations = {
+            "name_recommended_restaurant": final_result
+     }
+
+    return final_result
+
+
+
+    '''restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
 
     if not restaurant_id:
         raise Exception("Recommendation starting with given prefix not found")
@@ -105,7 +127,7 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     recommendations = {
         "name_recommended_restaurant": restaurant
     }
-    return recommendations
+    return recommendations'''
 
 
 
