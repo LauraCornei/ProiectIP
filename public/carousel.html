@@ -44,12 +44,16 @@
                 class="card-style"
               >
                 <b-card-text>
-                  {{ carouselItem.description }}
+                  {{ carouselItem.description_one }}
+                </b-card-text>
+                <b-card-text>
+                  {{ carouselItem.description_two }}
                 </b-card-text>
 
                 <template v-slot:footer>
                   <div class="text-center">
-                    <b-button pill href="#">See more</b-button>
+                    <b-badge>Best for you</b-badge>
+                    <!-- <b-button pill href="#">See more</b-button> -->
                   </div>
                 </template>
                 
