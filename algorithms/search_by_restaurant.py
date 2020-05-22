@@ -64,6 +64,7 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
     latest_order = get_latest_order(orders, customer_id, restaurant_id)
     word_score = calculate_score(review_score, nb_of_orders, latest_order)
     name = get_restaurant_name(restaurants, restaurant_id, token)
+
     print(name)
     if name:
         t.insert(name, word_score, restaurant_id)
@@ -95,7 +96,8 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
 
     if not restaurant_id:
-        value = "Recommendation starting with given prefix not found"
+        raise Exception("Recommendation starting with given prefix not found")
+        #restaurant = "Recommendation starting with given prefix not found"
     else:
         value = get_restaurant_name(restaurants, restaurant_id, token)
         restaurant = Restaurants.by_id(restaurant_id, token)
@@ -108,4 +110,10 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
 
 
 # http://127.0.0.1:5000/search/restaurant/Rest
+# token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
+
+# restaurant_id : 5ebcf11126e32517c46effff
+# nume restaurant: Ramonita
+# http://127.0.0.1:5000/search/restaurant/R
+# http://127.0.0.1:5000/search/restaurant/L
 # token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms

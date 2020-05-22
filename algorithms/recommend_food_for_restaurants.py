@@ -52,6 +52,7 @@ def get_restaurant_clients(restaurant, orders):
 # am sters foods de la parametri
 def final(restaurant, orders):
 
+
     if len(restaurant[Constants.ID]) != Constants.OBJECT_ID_LENGTH:
         raise ValueError("the customer id must be 24 characters long")
 

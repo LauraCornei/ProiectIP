@@ -13,23 +13,23 @@ class TestRestaurantFoodRecommendation(unittest.TestCase):
         self.assertRaises(ValueError, final, "1234", "5eb16fdf4afbf654966cb68d", Orders.all("1234"))
         #self.assertRaises(ValueError, final, "5eb16fdf4afbf654966cb68d", "5eb16fdf4afbf654966cb68d", Orders.all("1234"))
 
-    # verif output diferit de lista vida
+    # verif output corect
     def test_recommendation_output(self):
-        token = TestConstants.SEARCH_BY_REST_TOKEN
+        token = TestConstants.REST_FOOD_RECOMM_TOKEN
         orders = Orders.all(token)
         decoded = decode(token, Constants.SECRET)
         customer_id = decoded['_id']
         restaurant_id = "5ebcf11126e32517c46effff"
-        self.assertNotEquals({}, final(customer_id, restaurant_id, orders))
+        self.assertEqual(TestConstants.REST_FOOD_RECOMM_OUTPUT, final(customer_id, restaurant_id, orders))
 
     #verif output diferit de lista vida
     def test_recommendation_output(self):
-        token = TestConstants.SEARCH_BY_REST_TOKEN
+        token = TestConstants.REST_FOOD_RECOMM_TOKEN
         orders = Orders.all(token)
         customer_id = "5eb16fdf4afbf654966cb68d"
         restaurant_id ="5e9494aadd757435187a6dbd"
-        self.assertNotEquals({}, final(customer_id, restaurant_id, orders))
+        self.assertNotEqual({}, final(customer_id, restaurant_id, orders))
 
 
 #http://127.0.0.1:5000/recommendations/food-for-restaurant/5ebcf11126e32517c46effff
-#eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViY2U5MWEyNmUzMjUxN2M0NmVmZmVkIn0.eu0f5Vv_h8OYaslYyXKdb_2Rl8hv9FPnH3dXXEQzykQ
+#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiX2lkIjoiNWViY2U5MWEyNmUzMjUxN2M0NmVmZmVkIn0.eu0f5Vv_h8OYaslYyXKdb_2Rl8hv9FPnH3dXXEQzykQ

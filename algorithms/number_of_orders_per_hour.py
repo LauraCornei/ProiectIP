@@ -36,6 +36,6 @@ def main_hours(orders):
     no_orders = calc_no_orders_hours(orders)
 
     ax.plot(hours, no_orders)
-    ax.set(xlabel='Time of order (hours)', ylabel='No of orders ', title='Number of orders pe hour')
+    ax.set(xlabel='Time of order (hours)', ylabel='No of orders ', title='Number of orders per hour')
     ax.grid()
     return fig
