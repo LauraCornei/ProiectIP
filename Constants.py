@@ -52,11 +52,14 @@ ERROR = "error"
 
 OBJECT_ID_LENGTH = 24
 
-URL_PROVIDERS = 'http://159.65.247.164:3002/api/providers'
-URL_REGISTER = 'http://159.65.247.164:3002/api/users/register'
-URL_LOGIN = 'http://159.65.247.164:3002/api/users/login'
-URL_PROFILE = 'http://159.65.247.164:3002/api/users/profile'
-URL_CART = 'http://159.65.247.164:3000/api/v1/cart'
-URL_ADD_PRODUCT = 'http://159.65.247.164:3000/api/v1/cart/add-product/'
-URL_CART_SESSION = 'http://159.65.247.164:3000/api/v1/cart/session'
-URL_ORDERS = 'http://159.65.247.164:3000/api/v1/orders'
+URL_REVIEWS = 'https://ip-i-r-api.herokuapp.com/api/reviews'
+URL_COURSES = 'https://ip-accounts.herokuapp.com/api/courses'
+URL_USERS = 'https://ip-accounts.herokuapp.com/api/users'
+URL_PROVIDERS = 'https://ip-accounts.herokuapp.com/api/providers'
+URL_REGISTER = 'https://ip-accounts.herokuapp.com/api/users/register'
+URL_LOGIN = 'https://ip-accounts.herokuapp.com/api/users/login'
+URL_PROFILE = 'https://ip-accounts.herokuapp.com/api/users/profile'
+URL_CART = 'https://orderip.herokuapp.com/api/v1/cart'
+URL_ADD_PRODUCT = 'https://orderip.herokuapp.com/api/v1/cart/add-product/'
+URL_CART_SESSION = 'https://orderip.herokuapp.com/api/v1/cart/session'
+URL_ORDERS = 'https://orderip.herokuapp.com/api/v1/orders'
