@@ -67,30 +67,78 @@ window.app = new Vue({
             alg_type = getParamValue('alg_type');
 
             const recommendationsArray = await this.getRecommedations(token, provider_id, alg_type);
-
+            console.log(recommendationsArray);
             if(provider_id){
                 this.rawData = recommendationsArray.data.map(e => {
                     return e[0];
                 }
                 ).map(e => {
-                    return {
-                        ...e,
-                        name: e.name,
-                        image: e.image,
-                        description_one: "Category: " + e.category[0],
-                        description_two: "Price: " + e.price
-                    }
+                    if(e.category != null && e.image != null)
+                        return {
+                            ...e,
+                            name: e.name,
+                            image: e.image,
+                            description_one: "Category: " + e.category[0],
+                            description_two: "Price: " + e.price
+                        }
+                    else if(e.category == null && e.image != null)
+                        return {
+                            ...e,
+                            name: e.name,
+                            image: e.image,
+                            description_one: "Price: " + e.price
+                        }
+                    else if(e.category != null && e.image == null){
+                         return{
+                            ...e,
+                            name: e.name,
+                            image: "./css/img/no_img.png",
+                            description_one: "Category: " + e.category[0],
+                            description_two: "Price: " + e.price
+                         }
+                     }
+                     else 
+                        return{
+                            ...e,
+                            name: e.name,
+                            image: "./css/img/no_img.png",
+                            description_two: "Price: " + e.price
+                        }
                 });
             }
             else{
                 this.rawData = recommendationsArray.data.map(e => {
-                    return {
-                        ...e,
-                        name: e.name,
-                        image: e.details.images[0],
-                        description_one: "Special: " + e.details.specials[0],
-                        description_two: "Rating: " + e.details.rating
-                    }
+                    if(e.details.specials != null && e.details.images != null)
+                        return {
+                            ...e,
+                            name: e.name,
+                            image: e.details.images[0],
+                            description_one: "Special: " + e.details.specials[0],
+                            description_two: "Rating: " + e.details.rating
+                        }
+
+                    else if(e.details.specials != null && e.details.images == null)
+                        return{
+                            ...e,
+                            name: e.name,
+                            image: "./css/img/no_img.png",
+                            description_one: "Special: " + e.details.specials[0],
+                            description_two: "Rating: " + e.details.rating
+                        }
+                    else if(e.details.specials == null && e.details.images != null)
+                        return{
+                            ...e,
+                            name: e.name,
+                            image: e.details.images[0],
+                            description_one: "Rating: " + e.details.rating
+                        }
+                    else if(e.details.specials == null && e.details.images == null)
+                        return{
+                            ...e,
+                            name: e.name,
+                            image: "./css/img/no_img.png",
+                            description_one: "Rating: " + e.details.rating
+                        }
                 });
             }
 
