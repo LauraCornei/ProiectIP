@@ -6,7 +6,7 @@ import Constants
 class Foods(object):
     @staticmethod
     def all(token):
-        url = 'http://159.65.247.164:3002/api/courses'
+        url = Constants.URL_COURSES
         headers = {"Authorization": "Bearer " + token}
         coursesCollection = json.loads(requests.get(url, headers=headers).text)
         coursesCollection = coursesCollection[Constants.DATA][Constants.COURSES_FILTERED]
@@ -20,7 +20,7 @@ class Foods(object):
 
     @staticmethod
     def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/courses/'+id
+        url = Constants.URL_COURSES + '/' + id
         headers = {"Authorization": "Bearer " + token}
         course = json.loads(requests.get(url, headers=headers).text)
         if Constants.DATA not in course:

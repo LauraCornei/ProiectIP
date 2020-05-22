@@ -6,14 +6,14 @@ import Constants
 class Customers(object):
     @staticmethod
     def all(token):
-        url = 'http://159.65.247.164:3002/api/users'
+        url = Constants.URL_USERS
         headers = {"Authorization": "Bearer " + token}
         customersCollection = json.loads(requests.get(url, headers=headers).text)
         customersCollection = customersCollection[Constants.DATA][Constants.USERS]
         return customersCollection
 
     def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/users/' + id
+        url = Constants.URL_USERS + '/' + id
         headers = {"Authorization": "Bearer " + token}
         customersCollection = json.loads(requests.get(url, headers=headers).text)
         customersCollection = customersCollection[Constants.DATA][Constants.USER]

@@ -14,7 +14,7 @@ class Reviews(object):
     #     return reviewsCollection
     @staticmethod
     def all(token):
-        url = 'http://159.65.247.164:3003/api/reviews'
+        url = Constants.URL_REVIEWS
         headers = {"Authorization": "Bearer " + token}
         reviewsCollection = json.loads(requests.get(url, headers=headers).text)
         reviewsCollection = reviewsCollection[Constants.DATA][Constants.REVIEWS]
@@ -27,7 +27,7 @@ class Reviews(object):
 
     # selectare toate reviewurile dupa reviewerId
     def by_customer_id(customer_id, token):
-        url = 'http://159.65.247.164:3003/api/reviews'
+        url = Constants.URL_REVIEWS
         headers = {"Authorization": "Bearer " + token}
         reviewsCollection = json.loads(requests.get(url, headers=headers).text)
         reviewsCollection = reviewsCollection[Constants.DATA][Constants.REVIEWS]

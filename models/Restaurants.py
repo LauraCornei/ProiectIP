@@ -5,7 +5,7 @@ import Constants
 class Restaurants(object):
     @staticmethod
     def all(token):
-        url = 'http://159.65.247.164:3002/api/providers'
+        url = Constants.URL_PROVIDERS
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
         restaurantsCollection = restaurantsCollection[Constants.DATA][Constants.PROVIDERS]
@@ -13,7 +13,7 @@ class Restaurants(object):
 
     @staticmethod
     def by_id(id, token):
-        url = 'http://159.65.247.164:3002/api/providers/' + id
+        url = Constants.URL_PROVIDERS + '/' + id
         headers = {"Authorization": "Bearer " + token}
         restaurantsCollection = json.loads(requests.get(url, headers=headers).text)
         if restaurantsCollection[Constants.SUCCESS]:
