@@ -8,7 +8,7 @@ const data = [
     },
 ];
 
-const API_URL = 'http://127.0.0.1:5000/';
+const API_URL = 'http://159.65.247.164/';
 
 const ALG_TYPES = {
     recom7: 'restaurant-by-food',
