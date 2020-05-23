@@ -46,6 +46,7 @@ AUTHORIZATION = 'Authorization'
 SECRET = 'agfbkgfdakjhabagdf'
 TOKEN = 'token'
 EMAIL = 'email'
+DICT_REST_ID = "rest_id"
 
 FALSE = False
 ERROR = "error"

@@ -60,7 +60,7 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
 
     name = get_restaurant_name(restaurants, restaurant_id, token)
     if name:
-     rest_array.append({'rest_id': restaurant_id, 'score': word_score})
+     rest_array.append({Constants.DICT_REST_ID : restaurant_id, Constants.SCORE: word_score})
 
 
 def get_recommended_restaurants_from_trie(t, restaurant_prefix):
@@ -82,23 +82,18 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     t = Trie()
     update_trie(t, restaurants, reviews, orders, customer_id, token, rest_array)
 
-    rest_array = sorted(rest_array, key=lambda k: k['score'])
+    rest_array = sorted(rest_array, key=lambda k: k[Constants.SCORE])
     final_result = []
     for rest in rest_array:
-        name=get_restaurant_name(restaurants, rest['rest_id'], token)
+        name=get_restaurant_name(restaurants, rest[Constants.DICT_REST_ID], token)
         print(name)
         if name.startswith(restaurant_prefix):
             print(name)
-            restaurant = Restaurants.by_id(rest['rest_id'], token)
+            restaurant = Restaurants.by_id(rest[Constants.DICT_REST_ID], token)
             final_result.append(restaurant)
 
     if len(final_result) == 0:
         raise Exception("Recommendation starting with given prefix not found")
-    else:
-     recommendations = {
-            "name_recommended_restaurant": final_result
-     }
-
     return final_result
 
 
