@@ -27,7 +27,6 @@ def get_latest_order(orders, customer_id, restaurant_id):
     current_date = datetime.date.today()
 
     for order in orders:
-        #print(order[Constants.ORDER_DATE])
         order_date = datetime.datetime.strptime("2008-09-03T20:56:35.450686Z", "%Y-%m-%dT%H:%M:%S.%fZ").date()
 
         if customer_id == order[Constants.USER_ID] and restaurant_id == order[Constants.RESTAURANT_ID]:
@@ -48,11 +47,6 @@ def calculate_score(review_score, nb_of_orders, latest_order):
 
 
 def get_restaurant_name(restaurants, restaurant_id, token):
-    # var1
-    # restaurant = Restaurants.by_id(restaurant_id, token)
-    # return restaurant[Constants.NAME]
-
-    # var2
     for restaurant in restaurants:
         if restaurant_id == restaurant[Constants.ID]:
             return restaurant[Constants.NAME]
@@ -66,7 +60,7 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
 
     name = get_restaurant_name(restaurants, restaurant_id, token)
     if name:
-     rest_array.append(restaurant_id)
+     rest_array.append({'rest_id': restaurant_id, 'score': word_score})
 
 
 def get_recommended_restaurants_from_trie(t, restaurant_prefix):
@@ -88,13 +82,14 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     t = Trie()
     update_trie(t, restaurants, reviews, orders, customer_id, token, rest_array)
 
+    rest_array = sorted(rest_array, key=lambda k: k['score'])
     final_result = []
     for rest in rest_array:
-        name=get_restaurant_name(restaurants, rest, token)
+        name=get_restaurant_name(restaurants, rest['rest_id'], token)
         print(name)
         if name.startswith(restaurant_prefix):
             print(name)
-            restaurant = Restaurants.by_id(rest, token)
+            restaurant = Restaurants.by_id(rest['rest_id'], token)
             final_result.append(restaurant)
 
     if len(final_result) == 0:
