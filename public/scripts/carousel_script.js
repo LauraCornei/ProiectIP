@@ -8,7 +8,7 @@ const data = [
     },
 ];
 
-const API_URL = 'http://159.65.247.164/';
+const API_URL = 'http://127.0.0.1:5000/';
 
 const ALG_TYPES = {
     recom7: 'restaurant-by-food',
@@ -67,8 +67,8 @@ window.app = new Vue({
             alg_type = getParamValue('alg_type');
 
             const recommendationsArray = await this.getRecommedations(token, provider_id, alg_type);
-            console.log(recommendationsArray);
-            if(provider_id){
+            console.log(recommendationsArray.success);
+            if(provider_id && recommendationsArray.success != 'false'){
                 this.rawData = recommendationsArray.data.map(e => {
                     return e[0];
                 }
@@ -106,7 +106,7 @@ window.app = new Vue({
                         }
                 });
             }
-            else{
+            else if (!provider_id && recommendationsArray.success != 'false'){
                 this.rawData = recommendationsArray.data.map(e => {
                     if(e.details.specials != null && e.details.images != null)
                         return {
@@ -140,6 +140,9 @@ window.app = new Vue({
                             description_one: "Rating: " + e.details.rating
                         }
                 });
+            }
+            else {
+                this.rawData = []; 
             }
 
         },
