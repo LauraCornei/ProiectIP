@@ -19,7 +19,7 @@ class TestSearchByRestaurant(unittest.TestCase):
         reviews= Reviews.by_customer_id(customer_id, token)
         restaurants = Restaurants.all(token)
         self.assertEqual("5ebcf11126e32517c46effff",
-        final(reviews, restaurants, orders, customer_id, restaurant_prefix, token)["name_recommended_restaurant"]["id"])
+        final(reviews, restaurants, orders, customer_id, restaurant_prefix, token)[0]["id"])
 
     def test_recommendation_output2(self):
         token = TestConstants.SEARCH_BY_REST_TOKEN
@@ -32,7 +32,7 @@ class TestSearchByRestaurant(unittest.TestCase):
 
 
         self.assertEqual("5ebcf11126e32517c46f0000",
-        final(reviews, restaurants, orders, customer_id, restaurant_prefix, token)["name_recommended_restaurant"]["id"])
+        final(reviews, restaurants, orders, customer_id, restaurant_prefix, token)[0]["id"])
 
     #verif corectitudine functie de decodare
     def test_decoding(self):

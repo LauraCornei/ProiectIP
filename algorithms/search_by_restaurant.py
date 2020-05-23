@@ -67,19 +67,11 @@ def insert_restaurant_in_trie(t, restaurants, reviews, orders, customer_id, rest
     name = get_restaurant_name(restaurants, restaurant_id, token)
     if name:
      rest_array.append(restaurant_id)
-    #if name:
-        #t.insert(name, word_score, restaurant_id)
-    #return
 
 
 def get_recommended_restaurants_from_trie(t, restaurant_prefix):
     restaurants_array = t.special_search(restaurant_prefix)
-    print(restaurants_array)
     return restaurants_array
-    '''if not recommended_restaurant_id:
-        return False
-    return recommended_restaurant_id[Constants.RESTAURANT_ID]'''
-
 
 def update_trie(t, restaurants, reviews, orders, customer_id, token, rest_array):
     for order in orders:
@@ -99,6 +91,7 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     final_result = []
     for rest in rest_array:
         name=get_restaurant_name(restaurants, rest, token)
+        print(name)
         if name.startswith(restaurant_prefix):
             print(name)
             restaurant = Restaurants.by_id(rest, token)
@@ -114,28 +107,15 @@ def final(reviews, restaurants, orders, customer_id, restaurant_prefix, token):
     return final_result
 
 
-
-    '''restaurant_id = get_recommended_restaurant_from_trie(t, restaurant_prefix)
-
-    if not restaurant_id:
-        raise Exception("Recommendation starting with given prefix not found")
-        #restaurant = "Recommendation starting with given prefix not found"
-    else:
-        value = get_restaurant_name(restaurants, restaurant_id, token)
-        restaurant = Restaurants.by_id(restaurant_id, token)
-        print(restaurant)
-    recommendations = {
-        "name_recommended_restaurant": restaurant
-    }
-    return recommendations'''
-
-
-
 # http://127.0.0.1:5000/search/restaurant/Rest
 # token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
 
-# restaurant_id : 5ebcf11126e32517c46effff
+# user_Id : 5ebcf11126e32517c46effff
 # nume restaurant: Ramonita
 # http://127.0.0.1:5000/search/restaurant/R
 # http://127.0.0.1:5000/search/restaurant/L
 # token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThjNGYzNTE4NDJiYTMyMmM1YzEzZWMiLCJpYXQiOjE1ODgyMzc0NTZ9.pMNWm-7sQNgGM7EDQPdaSFX8a7eZSRWkzEJlD0BYMms
+
+# user_Id=5ebce91a26e32517c46effed
+# http://127.0.0.1:5000/search/restaurant/R
+# token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiX2lkIjoiNWViY2U5MWEyNmUzMjUxN2M0NmVmZmVkIiwiaWF0IjoxNTE2MjM5MDIyfQ.hoDBa28u_XYyP20B0uXAABAzdyosH1wPoRL8gJTyNhw
