@@ -1,0 +1,15 @@
+name: Deploy to production
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    # Job name is Greeting
+    name: Deploy
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install runtime dependencies
+        run: sudo apt-get update && sudo apt install sshpass -y
+      - name: Run remote script
+        run: sshpass -p iprec2020 ssh -o StrictHostKeyChecking=no -t root@159.65.247.164 "sh run.sh"
