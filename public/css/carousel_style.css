@@ -59,7 +59,7 @@
   .card-body {
     font-family: Pacifico;
     color: black;
-    height: 150px;
+    height: 200px;
   }
   
   .card-style {
@@ -73,21 +73,16 @@
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  
-  .btn-secondary {
-    background-color: var(--card-button-color);
-    border: var(--card-button-color);
-    color: white;
+
+  .badge{
+    font-size: 100%;
   }
-  
-  .btn-secondary:hover {
-    background-color: var(--card-button-color-hover);
+
+  .badge-secondary{
+    background-color: var(--color-palette-dark-red);
   }
-  
-  .rounded-pill {
-    border-radius: 0.25rem !important;
-  }
-  
+
+
   @media screen and (min-width: 1500px) {
     .card-style {
       width: 20%;
