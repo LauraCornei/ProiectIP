@@ -1,5 +1,3 @@
-import json
-import requests
 from faker import Faker
 import random
 import Constants

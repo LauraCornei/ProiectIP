@@ -27,7 +27,7 @@ def get_recommendations(customer, customer_clusters, tops):
         if customer in customer_cluster:
             top = tops[customer_clusters.index(customer_cluster)]
             recommendations.append(list(top.keys())[-1])
-    return recommendations
+    return list(set(recommendations))
 
 
 def final(customer, reviews, restaurants):
