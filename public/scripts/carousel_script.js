@@ -8,7 +8,7 @@ const data = [
     },
 ];
 
-const API_URL = 'http://159.65.247.164/';
+const API_URL = 'https://still-anchorage-92193.herokuapp.com/';
 
 const ALG_TYPES = {
     recom7: 'restaurant-by-food',
