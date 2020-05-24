@@ -1,10 +1,10 @@
 const data = [
     {
         id: 0,
-        name:'',
-        image:'',
-        description_one: '',
-        description_two: ''
+        name:'Gimmy Restaurant',
+        image:'./css/img/no_img.png',
+        description_one: 'pizza',
+        description_two: '4.5'
     },
 ];
 
