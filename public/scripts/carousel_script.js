@@ -117,7 +117,7 @@ window.app = new Vue({
                             description_two: "Rating: " + e.details.rating
                         }
 
-                    else if(e.details.specials != null && e.details.images == null)
+                    else if(e.details.specials != null && (e.details.images == null || e.details.images.length == 0))
                         return{
                             ...e,
                             name: e.name,
@@ -132,7 +132,7 @@ window.app = new Vue({
                             image: e.details.images[0],
                             description_one: "Rating: " + e.details.rating
                         }
-                    else if(e.details.specials == null && e.details.images == null)
+                    else if(e.details.specials == null && (e.details.images == null || e.details.images.length == 0))
                         return{
                             ...e,
                             name: e.name,
