@@ -108,7 +108,7 @@ window.app = new Vue({
             }
             else if (!provider_id && recommendationsArray.success != 'false'){
                 this.rawData = recommendationsArray.data.map(e => {
-                    if(e.details.specials != null && e.details.images != null)
+                    if(e.details.specials != null && e.details.images != null && e.details.images.length != 0)
                         return {
                             ...e,
                             name: e.name,
